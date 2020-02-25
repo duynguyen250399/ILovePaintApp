@@ -1,0 +1,5 @@
+<div class="row" *ngFor = "let productChunk of productList">
+    <div class="col-lg-4" *ngFor = "let p of productChunk">
+        <app-product-display [product] = "p"></app-product-display>
+    </div>
+</div>
