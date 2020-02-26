@@ -1,0 +1,20 @@
+<div class="row m-5">
+    <div class="col-lg-4">
+        <h2 class="text-center my-3">{{product.name}}</h2>
+        <img src="{{product.image}}" alt="paint_product" class="w-100">
+    </div>
+    <div class="col-lg-8 p-5">
+        <ul>
+            <li>{{product.description}}</li>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">Weight</div>
+                </div>
+                <input type="text" class="form-control">
+            </div>
+            <li>Status: {{(product.quantity > 0) ? "Available" : "Unavailable"}}</li>
+            <li>Provider: <a href="#">{{product.provider.name}}</a></li>
+            <li>Category: <a href="#">{{product.category.name}}</a></li>
+        </ul>
+    </div>
+</div>

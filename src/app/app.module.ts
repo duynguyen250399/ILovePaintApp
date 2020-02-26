@@ -11,6 +11,8 @@ import { ContactComponent } from './contact/contact.component';
 import { ProductDisplayComponent } from './product-display/product-display.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductService } from './services/product.service';
+import { ProductOrderComponent } from './product-order/product-order.component';
+import { AddProductFormComponent } from './add-product-form/add-product-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { ProductService } from './services/product.service';
     AboutUsComponent,
     ContactComponent,
     ProductDisplayComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductOrderComponent,
+    AddProductFormComponent
   ],
   imports: [
     BrowserModule,
