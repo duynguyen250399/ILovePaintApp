@@ -15,6 +15,7 @@ import { ProductOrderComponent } from './product-order/product-order.component';
 import { AddProductFormComponent } from './add-product-form/add-product-form.component';
 import { ProviderService } from './services/provider.service';
 import { CategoryService } from './services/category.service';
+import { ProductManagerComponent } from './product-manager/product-manager.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CategoryService } from './services/category.service';
     ProductDisplayComponent,
     ProductListComponent,
     ProductOrderComponent,
-    AddProductFormComponent
+    AddProductFormComponent,
+    ProductManagerComponent
   ],
   imports: [
     BrowserModule,

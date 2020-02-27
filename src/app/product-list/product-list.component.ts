@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
+import { Product } from '../models/product.model';
 
 @Component({
   selector: 'app-product-list',
@@ -13,20 +14,19 @@ export class ProductListComponent implements OnInit {
   public productList = [];
 
   ngOnInit() {
-    let chunkSize = 3;
+    let chunkSize = 4;
     this.productService.getProductList()
-    .subscribe(data => {
+    .subscribe(data => {     
       // process product display data
-        let chunks = data as [];
+        let chunks : Product[] = data as Product[];     
         for(let i = 0; i < chunks.length; i += chunkSize){
-          if(i + chunkSize < chunks.length){
+          if(i + chunkSize <= chunks.length){
             this.productList.push(chunks.slice(i, i + chunkSize));
           }
         }
         let remainingElementIndex = chunks.length - (chunks.length % chunkSize);
        
-        this.productList.push(chunks.slice(remainingElementIndex, chunks.length))
-        console.log(this.productList);
+        this.productList.push(chunks.slice(remainingElementIndex, chunks.length))    
     });
   }
 

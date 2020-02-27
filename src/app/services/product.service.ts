@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Product } from '../models/product.model';
+import { DataConfig } from 'src/config/data';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +18,9 @@ export class ProductService {
 
   getProductById(id){
     return this.http.get(this.url + '/' + id);
+  }
+
+  createProduct(product: Product){
+    return this.http.post(DataConfig.baseUrl + '/products', product);
   }
 }
