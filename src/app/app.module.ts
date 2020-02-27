@@ -13,6 +13,8 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductService } from './services/product.service';
 import { ProductOrderComponent } from './product-order/product-order.component';
 import { AddProductFormComponent } from './add-product-form/add-product-form.component';
+import { ProviderService } from './services/provider.service';
+import { CategoryService } from './services/category.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { AddProductFormComponent } from './add-product-form/add-product-form.com
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ProductService],
+  providers: [ProductService, ProviderService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
