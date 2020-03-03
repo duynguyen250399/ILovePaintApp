@@ -1,0 +1,11 @@
+<div *ngIf = "productList.length > 0">
+    <div class="row" *ngFor = "let productChunk of productList">
+        <div class="col-lg-3" *ngFor = "let p of productChunk">
+            <app-product-display [product] = "p"></app-product-display>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-danger" *ngIf = "productList.length === 0">
+    There's no paint product
+</div>

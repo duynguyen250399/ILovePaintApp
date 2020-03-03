@@ -23,4 +23,8 @@ export class ProductService {
   createProduct(product: Product){
     return this.http.post(DataConfig.baseUrl + '/products', product);
   }
+
+  deleteProduct(id){
+    return this.http.delete(DataConfig.baseUrl + '/products/' + id);
+  }
 }
