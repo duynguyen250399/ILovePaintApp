@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,10 +15,12 @@ import { ProductOrderComponent } from './user-page/product-order/product-order.c
 import { AddProductFormComponent } from './add-product-form/add-product-form.component';
 import { ProviderService } from './services/provider.service';
 import { CategoryService } from './services/category.service';
-import { ProductManagerComponent } from './product-manager/product-manager.component';
+import { ProductManagerComponent } from './admin-page/product-manager/product-manager.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+import { AddProductDialogComponent } from './admin-page/add-product-dialog/add-product-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,14 +34,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AddProductFormComponent,
     ProductManagerComponent,
     UserPageComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    AddProductDialogComponent
+  ],
+  entryComponents: [
+    AddProductDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    MaterialModule
   ],
   providers: [ProductService, ProviderService, CategoryService],
   bootstrap: [AppComponent]

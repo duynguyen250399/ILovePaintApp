@@ -16,7 +16,8 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {
     let chunkSize = 4;
     this.productService.getProductList()
-    .subscribe(data => {     
+    .subscribe(data => {   
+  
       // process product display data
         let chunks : Product[] = data as Product[];     
         for(let i = 0; i < chunks.length; i += chunkSize){
@@ -27,6 +28,7 @@ export class ProductListComponent implements OnInit {
         let remainingElementIndex = chunks.length - (chunks.length % chunkSize);
        
         this.productList.push(chunks.slice(remainingElementIndex, chunks.length))    
+
     });
   }
 

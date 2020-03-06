@@ -5,7 +5,7 @@ import { AboutUsComponent } from './user-page/about-us/about-us.component';
 import { ProductListComponent } from './user-page/product-list/product-list.component';
 import { ProductOrderComponent } from './user-page/product-order/product-order.component';
 import { AddProductFormComponent } from './add-product-form/add-product-form.component';
-import { ProductManagerComponent } from './product-manager/product-manager.component';
+import { ProductManagerComponent } from './admin-page/product-manager/product-manager.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 

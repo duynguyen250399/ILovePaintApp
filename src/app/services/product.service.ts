@@ -9,11 +9,17 @@ import { DataConfig } from 'src/config/data';
 export class ProductService {
 
   private url = 'https://localhost:44385/api/products';
+  public productList: Product[];
 
   constructor(private http: HttpClient) { }
 
   getProductList(){
     return this.http.get(this.url);
+  }
+
+  refreshProductList(){
+    this.http.get(this.url)
+    .subscribe(data => this.productList = data as Product[]);
   }
 
   getProductById(id){

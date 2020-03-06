@@ -1,0 +1,59 @@
+<h3 class="m-3">Product Manager</h3>
+
+<div class="mb-3">
+    <button (click)="openAddProductDialog()" mat-raised-button color="warn">
+        Add Product
+        <mat-icon>add_circle_outline</mat-icon>
+    </button>
+</div>
+
+<div>
+    <mat-form-field class="w-50">
+        <mat-label>Filter Products</mat-label>
+        <input (keyup) = "filterProducts(filterInput.value)" type="text" matInput class="w-100" #filterInput>
+    </mat-form-field>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>No.</td>
+            <td>Product Name</td>
+            <td>Weight</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Provider</td>
+            <td>Category</td>
+            <td>Status</td>
+            <td colspan="2">Edit/Delete</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="!productService.productList">
+            <td colspan="9" class="text-center font-italic">
+                There's no product!
+            </td>
+        </tr>
+        <tr *ngFor="let product of productService.productList; index as i">
+            <td>{{i + 1}}</td>
+            <td>{{product?.name}}</td>
+            <td>{{product?.weight}}</td>
+            <td>{{product?.price}}</td>
+            <td>{{product?.quantity}}</td>
+            <td>{{product?.provider.name}}</td>
+            <td>{{product?.category.name}}</td>
+            <td [class.text-success]="product.status === 1" [class.text-danger]="product.status !== 1">
+                {{(product?.status === 1) ? "Available" : "Unavailable"}}</td>
+            <td>
+                <button mat-icon-button color="primary">
+                    <mat-icon>create</mat-icon>
+                </button>
+            </td>
+            <td>
+                <button mat-icon-button color="warn" (click) = "deleteProduct(product.id)">
+                    <mat-icon>delete_sweep</mat-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
