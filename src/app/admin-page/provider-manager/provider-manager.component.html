@@ -1,0 +1,50 @@
+<h3 class="m-3">Provider Manager</h3>
+
+<div class="mb-3">
+    <button mat-raised-button color="warn">
+        Add Provider
+        <mat-icon>add_circle_outline</mat-icon>
+    </button>
+</div>
+
+<div>
+    <mat-form-field class="w-50">
+        <mat-label>Filter Providers</mat-label>
+        <input type="text" matInput class="w-100" #filterInput>
+    </mat-form-field>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <td>No.</td>
+            <td>Name</td>
+            <td>Phone</td>
+            <td>Email</td>
+            <td colspan="2">Edit/Delete</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="!providerService.providerList">
+            <td colspan="9" class="text-center font-italic">
+                There's no provider!
+            </td>
+        </tr>
+        <tr *ngFor="let provider of providerService.providerList; index as i">
+            <td>{{i + 1}}</td>
+            <td>{{provider.name}}</td>
+            <td>{{provider.phone}}</td>
+            <td>{{provider.email}}</td>
+            <td>
+                <button mat-icon-button color="primary">
+                    <mat-icon>create</mat-icon>
+                </button>
+            </td>
+            <td>
+                <button mat-icon-button color="warn">
+                    <mat-icon>delete_sweep</mat-icon>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

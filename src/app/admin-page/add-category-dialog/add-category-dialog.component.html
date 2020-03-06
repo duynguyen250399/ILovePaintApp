@@ -1,0 +1,11 @@
+<div class="p-5">
+    <h3 class="text-center mb-5">Add new category</h3>
+    <mat-form-field>
+        <mat-label>Category Name</mat-label>
+        <input type="text" matInput [(ngModel)] = "categoryName">
+    </mat-form-field>
+    <div>
+        <button mat-dialog-close (click) = "addCategory()" class="d-block w-100" mat-raised-button color="primary">Submit</button>
+    </div>
+
+</div>

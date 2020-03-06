@@ -29,21 +29,25 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngIf="!productService.productList">
+        <tr *ngIf="!productService.productList || productService.productList.length === 0">
             <td colspan="9" class="text-center font-italic">
                 There's no product!
             </td>
         </tr>
         <tr *ngFor="let product of productService.productList; index as i">
             <td>{{i + 1}}</td>
-            <td>{{product?.name}}</td>
-            <td>{{product?.weight}}</td>
-            <td>{{product?.price}}</td>
-            <td>{{product?.quantity}}</td>
-            <td>{{product?.provider.name}}</td>
-            <td>{{product?.category.name}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.weight}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.quantity}}</td>
+            <td [class.text-warning] = "!product.provider">
+                {{(product.provider) ? product.provider.name : "Unknown"}}
+            </td>
+            <td [class.text-warning] = "!product.category">
+                {{(product.category) ? product.category.name : "Unknown"}}
+            </td>
             <td [class.text-success]="product.status === 1" [class.text-danger]="product.status !== 1">
-                {{(product?.status === 1) ? "Available" : "Unavailable"}}</td>
+                {{(product.status === 1) ? "Available" : "Unavailable"}}</td>
             <td>
                 <button mat-icon-button color="primary">
                     <mat-icon>create</mat-icon>

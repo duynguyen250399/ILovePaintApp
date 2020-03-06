@@ -1,0 +1,17 @@
+import { Component, OnInit } from '@angular/core';
+import { ProviderService } from 'src/app/services/provider.service';
+
+@Component({
+  selector: 'app-provider-manager',
+  templateUrl: './provider-manager.component.html',
+  styleUrls: ['./provider-manager.component.css']
+})
+export class ProviderManagerComponent implements OnInit {
+
+  constructor(private providerService: ProviderService) { }
+
+  ngOnInit() {
+    this.providerService.refreshProviderList();
+  }
+
+}

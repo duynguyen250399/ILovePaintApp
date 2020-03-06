@@ -1,8 +1,8 @@
 <mat-toolbar>
     <mat-toolbar-row>
         <div>
-            <button (click) = "sidenav.toggle()" mat-icon-button>
-                <mat-icon>menu</mat-icon>       
+            <button (click)="sidenav.toggle()" mat-icon-button>
+                <mat-icon>menu</mat-icon>
             </button>
             <span class="m-3">Admin Page</span>
         </div>
@@ -16,14 +16,22 @@
 </mat-toolbar>
 <mat-drawer-container>
     <mat-drawer #sidenav mode="over">
-        <div  class="text-center my-3">
+        <div class="text-center my-3">
             <a class="text-decoration-none dashboard" routerLink="/admin">Dashboard</a>
         </div>
         <mat-nav-list>
-            <a routerLink="/admin/product" mat-list-item><mat-icon class="mx-3">shopping_cart</mat-icon> 
-                Manage Products</a>
-            <a href="#" mat-list-item><mat-icon class="mx-3">account_box</mat-icon> 
-                Manage Accounts</a>
+            <a routerLink="/admin/product" mat-list-item>
+                <mat-icon class="mx-3">shopping_cart</mat-icon>
+                Manage Products
+            </a>
+            <a routerLink="/admin/category" mat-list-item>
+                <mat-icon class="mx-3">category</mat-icon>
+                Manage Categories
+            </a>
+            <a routerLink="/admin/provider" mat-list-item>
+                <mat-icon class="mx-3">contact_phone</mat-icon>
+                Manage Providers
+            </a>
         </mat-nav-list>
     </mat-drawer>
 

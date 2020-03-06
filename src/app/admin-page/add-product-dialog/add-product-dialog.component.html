@@ -41,14 +41,14 @@
                     <label for="">Provider</label>
                     <select formControlName="provider" class="form-control" name="" id="">
                         <option value="">Select Provider</option>
-                        <option value="{{provider.id}}" *ngFor="let provider of providerList">{{provider.name}}</option>
+                        <option value="{{provider.id}}" *ngFor="let provider of providerService.providerList">{{provider.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="">Category</label>
                     <select formControlName="category" class="form-control" name="" id="">
                         <option value="">Select Category</option>
-                        <option value="{{category.id}}" *ngFor="let category of categoryList">{{category.name}}</option>
+                        <option value="{{category.id}}" *ngFor="let category of categoryService.categoryList">{{category.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">

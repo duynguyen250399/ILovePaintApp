@@ -41,11 +41,8 @@ export class AddProductDialogComponent implements OnInit {
   })
 
   ngOnInit() {
-    this.providerService.getProviderList()
-      .subscribe(data => this.providerList = data as ProviderModel[]);
-
-    this.categoryService.getCategoryList()
-      .subscribe(data => this.categoryList = data as Category[]);
+    this.providerService.refreshProviderList();   
+    this.categoryService.refreshCategoryList();
   }
 
   addProduct(){   

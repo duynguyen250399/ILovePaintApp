@@ -2,19 +2,19 @@ import { Color } from './color.model';
 import { ProviderModel } from './provider.model';
 import { Category } from './category.model';
 
-export class Product {
-    id?: Number;
-    name: String;
-    description?: String;
-    price: Number;
-    weight: Number;
-    quantity: Number;
+export interface Product {
+    id?: number;
+    name: string;
+    description?: string;
+    price: number;
+    weight: number;
+    quantity: number;
     manufactureDate?: Date;
-    image?: String;
-    status: Number;
+    image?: string;
+    status: number;
     colors?: Color[];
     provider?: ProviderModel;
     category?: Category;
-    providerId: Number;
-    categoryId: Number;
+    providerId?: number;
+    categoryId?: number;
 }

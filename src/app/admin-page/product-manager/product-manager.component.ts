@@ -50,10 +50,13 @@ export class ProductManagerComponent implements OnInit {
     
     this.productService.productList.forEach(product => {
       let name: string = nonAccentVietnamese(product.name);
-      let provider: string = nonAccentVietnamese(product.provider.name);
-      let category: string = nonAccentVietnamese(product.category.name);
+      let provider = (product.provider) ? product.provider.name : "Unknown";
+      let category = (product.category) ? product.category.name : "Unknown";
+
+      let providerNonVietnamese: string = nonAccentVietnamese(provider);
+      let categoryNonVietnamese: string = nonAccentVietnamese(category);
       
-      if(name.includes(filterValue) || provider.includes(filterValue) || category.includes(filterValue)){
+      if(name.includes(filterValue) || providerNonVietnamese.includes(filterValue) || categoryNonVietnamese.includes(filterValue)){
         filterResult.push(product);
       }
     });

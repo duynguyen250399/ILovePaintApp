@@ -19,7 +19,9 @@ export class ProductService {
 
   refreshProductList(){
     this.http.get(this.url)
-    .subscribe(data => this.productList = data as Product[]);
+    .subscribe(data => {
+      this.productList = data as Product[];
+    });
   }
 
   getProductById(id){

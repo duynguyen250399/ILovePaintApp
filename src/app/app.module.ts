@@ -12,7 +12,6 @@ import { ProductDisplayComponent } from './user-page/product-display/product-dis
 import { ProductListComponent } from './user-page/product-list/product-list.component';
 import { ProductService } from './services/product.service';
 import { ProductOrderComponent } from './user-page/product-order/product-order.component';
-import { AddProductFormComponent } from './add-product-form/add-product-form.component';
 import { ProviderService } from './services/provider.service';
 import { CategoryService } from './services/category.service';
 import { ProductManagerComponent } from './admin-page/product-manager/product-manager.component';
@@ -21,6 +20,10 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { AddProductDialogComponent } from './admin-page/add-product-dialog/add-product-dialog.component';
+import { CategoryManagerComponent } from './admin-page/category-manager/category-manager.component';
+import { AddCategoryDialogComponent } from './admin-page/add-category-dialog/add-category-dialog.component';
+import { ProviderManagerComponent } from './admin-page/provider-manager/provider-manager.component';
+import { AddProviderDialogComponent } from './admin-page/add-provider-dialog/add-provider-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,14 +34,19 @@ import { AddProductDialogComponent } from './admin-page/add-product-dialog/add-p
     ProductDisplayComponent,
     ProductListComponent,
     ProductOrderComponent,
-    AddProductFormComponent,
     ProductManagerComponent,
     UserPageComponent,
     AdminPageComponent,
-    AddProductDialogComponent
+    AddProductDialogComponent,
+    CategoryManagerComponent,
+    AddCategoryDialogComponent,
+    ProviderManagerComponent,
+    AddProviderDialogComponent
   ],
   entryComponents: [
-    AddProductDialogComponent
+    AddProductDialogComponent,
+    AddCategoryDialogComponent,
+    AddProviderDialogComponent
   ],
   imports: [
     BrowserModule,

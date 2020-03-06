@@ -1,8 +1,8 @@
-export class ProviderModel {
-    id?: Number;
-    name: String;
-    phone: String;
-    address: String;
-    email: String;
-    image: String;
+export interface ProviderModel {
+    id?: number;
+    name: string;
+    phone: string;
+    address?: string;
+    email: string;
+    image?: string;
 }

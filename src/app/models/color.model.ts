@@ -1,6 +1,6 @@
 import { Product } from './product.model';
 
-export class Color {
+export interface Color {
     id: String;
     name: String;
     image: String;
