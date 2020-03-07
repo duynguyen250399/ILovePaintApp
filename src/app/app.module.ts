@@ -19,11 +19,13 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { AddProductDialogComponent } from './admin-page/add-product-dialog/add-product-dialog.component';
+import { AddProductDialogComponent } from './admin-page/product-manager/add-product-dialog/add-product-dialog.component';
 import { CategoryManagerComponent } from './admin-page/category-manager/category-manager.component';
-import { AddCategoryDialogComponent } from './admin-page/add-category-dialog/add-category-dialog.component';
+import { AddCategoryDialogComponent } from './admin-page/category-manager/add-category-dialog/add-category-dialog.component';
 import { ProviderManagerComponent } from './admin-page/provider-manager/provider-manager.component';
-import { AddProviderDialogComponent } from './admin-page/add-provider-dialog/add-provider-dialog.component';
+import { AddProviderDialogComponent } from './admin-page/provider-manager/add-provider-dialog/add-provider-dialog.component';
+import { EditProductDialogComponent } from './admin-page/product-manager/edit-product-dialog/edit-product-dialog.component';
+import { EditCategoryDialogComponent } from './admin-page/category-manager/edit-category-dialog/edit-category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,12 +43,16 @@ import { AddProviderDialogComponent } from './admin-page/add-provider-dialog/add
     CategoryManagerComponent,
     AddCategoryDialogComponent,
     ProviderManagerComponent,
-    AddProviderDialogComponent
+    AddProviderDialogComponent,
+    EditProductDialogComponent,
+    EditCategoryDialogComponent
   ],
   entryComponents: [
     AddProductDialogComponent,
     AddCategoryDialogComponent,
-    AddProviderDialogComponent
+    AddProviderDialogComponent,
+    EditProductDialogComponent,
+    EditCategoryDialogComponent
   ],
   imports: [
     BrowserModule,

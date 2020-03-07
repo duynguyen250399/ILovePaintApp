@@ -35,4 +35,13 @@ export class ProductService {
   deleteProduct(id){
     return this.http.delete(DataConfig.baseUrl + '/products/' + id);
   }
+
+  updateProduct(product: Product){
+   
+    this.http.put(DataConfig.baseUrl + '/products', product)
+    .subscribe(
+      data => this.refreshProductList(),
+      error => console.log(error)
+    )
+  }
 }

@@ -10,7 +10,8 @@
 <div>
     <mat-form-field class="w-50">
         <mat-label>Filter Products</mat-label>
-        <input (keyup) = "filterProducts(filterInput.value)" type="text" matInput class="w-100" #filterInput>
+        <input (keydown)="productService.refreshProductList()" (keyup)="filterProducts(filterInput.value)" type="text"
+            matInput class="w-100" #filterInput>
     </mat-form-field>
 </div>
 
@@ -40,21 +41,21 @@
             <td>{{product.weight}}</td>
             <td>{{product.price}}</td>
             <td>{{product.quantity}}</td>
-            <td [class.text-warning] = "!product.provider">
+            <td [class.text-warning]="!product.provider">
                 {{(product.provider) ? product.provider.name : "Unknown"}}
             </td>
-            <td [class.text-warning] = "!product.category">
+            <td [class.text-warning]="!product.category">
                 {{(product.category) ? product.category.name : "Unknown"}}
             </td>
             <td [class.text-success]="product.status === 1" [class.text-danger]="product.status !== 1">
                 {{(product.status === 1) ? "Available" : "Unavailable"}}</td>
             <td>
-                <button mat-icon-button color="primary">
+                <button (click) = "openEditProductDialog(product)" mat-icon-button color="primary">
                     <mat-icon>create</mat-icon>
                 </button>
             </td>
             <td>
-                <button mat-icon-button color="warn" (click) = "deleteProduct(product.id)">
+                <button mat-icon-button color="warn" (click)="deleteProduct(product.id)">
                     <mat-icon>delete_sweep</mat-icon>
                 </button>
             </td>

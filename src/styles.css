@@ -2,3 +2,7 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.editing-input{
+    background-color: rgba(201, 196, 196, 0.75) !important;
+}

@@ -19,9 +19,6 @@ export class AddProductDialogComponent implements OnInit {
   public categoryList : Category[];
   public success = false;
 
-  private selectedProvider : ProviderModel;
-  private selectedCategory: Category;
-
   constructor(private fb: FormBuilder,
     private providerService: ProviderService,
     private categoryService: CategoryService,

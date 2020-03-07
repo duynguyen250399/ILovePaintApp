@@ -45,4 +45,12 @@ export class CategoryService {
       error => console.log(error)
     )
   }
+
+  updateCategory(category){
+    this.http.put(DataConfig.baseUrl + '/categories', category)
+    .subscribe(
+      data => this.refreshCategoryList(),
+      error => console.log(error)
+    )
+  }
 }

@@ -1,7 +1,7 @@
 <h3 class="m-3">Provider Manager</h3>
 
 <div class="mb-3">
-    <button mat-raised-button color="warn">
+    <button (click) = "openAddProviderDialog()" mat-raised-button color="warn">
         Add Provider
         <mat-icon>add_circle_outline</mat-icon>
     </button>
@@ -10,7 +10,7 @@
 <div>
     <mat-form-field class="w-50">
         <mat-label>Filter Providers</mat-label>
-        <input type="text" matInput class="w-100" #filterInput>
+        <input (keydown) = "providerService.refreshProviderList()" (keyup) = "filterProviders(filterInput.value)" type="text" matInput class="w-100" #filterInput>
     </mat-form-field>
 </div>
 
@@ -41,7 +41,7 @@
                 </button>
             </td>
             <td>
-                <button mat-icon-button color="warn">
+                <button (click) = "deleteProvider(provider.id)" mat-icon-button color="warn">
                     <mat-icon>delete_sweep</mat-icon>
                 </button>
             </td>

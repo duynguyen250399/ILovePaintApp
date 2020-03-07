@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Edit category</h2>
+<mat-dialog-content class="w-100">
+    <form action="" [formGroup] = "editCategoryForm">
+        <div class="form-group">
+            <input type="hidden" formControlName="id">
+        </div>
+        <mat-form-field class="w-100">
+            <mat-label>Category Name</mat-label>
+            <input type="text" matInput formControlName="name">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-dialog-close (click) ="updateCategory()" class="d-block w-100" mat-raised-button color="primary">Submit</button>
+</mat-dialog-actions>

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
 import { nonAccentVietnamese } from 'src/helpers/helper';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { AddCategoryDialogComponent } from '../add-category-dialog/add-category-dialog.component';
+import { AddCategoryDialogComponent } from './add-category-dialog/add-category-dialog.component';
+import { EditCategoryDialogComponent } from './edit-category-dialog/edit-category-dialog.component';
 
 @Component({
   selector: 'app-category-manager',
@@ -48,10 +49,17 @@ export class CategoryManagerComponent implements OnInit {
     
   }
 
-  showAddCategoryDialog(){
+  openAddCategoryDialog(){
     let dialogConfig = new MatDialogConfig();
     dialogConfig.width = '50%';
     const dialogRef = this.dialog.open(AddCategoryDialogComponent);
+  }
+
+  openEditCategoryDialog(category){
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '50%';
+    dialogConfig.data = category;
+    this.dialog.open(EditCategoryDialogComponent, dialogConfig);
   }
 
 }

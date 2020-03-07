@@ -20,5 +20,23 @@ export class ProviderService {
     )
   }
 
+  addProvider(provider){
+    this.http.post(DataConfig.baseUrl + '/providers', provider)
+    .subscribe(
+      data =>{
+        this.refreshProviderList();
+      },
+      error => console.log(error)
+    )
+  }
+
+  deleteProvider(id){
+    this.http.delete(DataConfig.baseUrl + '/providers/' + id)
+    .subscribe(
+      data => this.refreshProviderList(),
+      error => console.log(error)
+    )
+  }
+
   
 }
