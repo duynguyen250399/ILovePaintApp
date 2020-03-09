@@ -1,0 +1,22 @@
+.pagination{
+    justify-content: center !important;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    right: 50%;
+}
+
+.page-link{
+    color: black !important;
+    cursor: pointer;
+}
+
+button:disabled{
+    background-color: rgba(222, 221, 221, 0.68) !important;
+    color: gray !important;
+}
+
+.active{
+    background-color: #26A7E2 !important;
+    color: white !important;
+}

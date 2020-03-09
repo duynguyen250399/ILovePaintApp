@@ -24,14 +24,7 @@ export class ProductManagerComponent implements OnInit {
 
   deleteProduct(id) {
     this.productService.deleteProduct(id)
-      .subscribe(
-        data => {
-          console.log('product deleted: ', data);
-          this.productService.productList = this.productService.productList
-            .filter(product => product.id !== id);
-        },
-        error => console.log(error)
-      )
+      
   }
 
   openAddProductDialog() {

@@ -11,6 +11,12 @@ export class ProductService {
   private url = 'https://localhost:44385/api/products';
   public productList: Product[];
 
+  public currentChunkIndex = 0;
+  public chunkSize = 5;
+  public pageItems = [];
+  public stopNext = false;
+  public stopPrev = true;
+
   constructor(private http: HttpClient) { }
 
   getProductList(){
@@ -21,6 +27,32 @@ export class ProductService {
     this.http.get(this.url)
     .subscribe(data => {
       this.productList = data as Product[];
+      let maxChunks = Math.ceil(this.productList.length / this.chunkSize);
+      if(this.pageItems.length > 0){
+        this.pageItems = [];
+      }
+      for(let i = 0; i < maxChunks; i++){
+        this.pageItems.push(i + 1);
+      }
+      if(maxChunks === 1){
+        this.stopNext = true;
+        this.stopPrev = true;
+      }
+
+      if(this.currentChunkIndex > 0){
+        this.currentChunkIndex = this.currentChunkIndex - 1;
+      }
+
+      if(this.currentChunkIndex <= 0){
+        this.stopPrev = true;
+        this.stopNext = false;
+      }
+     
+      if(this.currentChunkIndex >= this.pageItems.length - 1){
+        this.stopNext = false;
+        this.stopNext = true;
+      }
+
     });
   }
 
@@ -33,7 +65,13 @@ export class ProductService {
   }
 
   deleteProduct(id){
-    return this.http.delete(DataConfig.baseUrl + '/products/' + id);
+    this.http.delete(DataConfig.baseUrl + '/products/' + id)
+    .subscribe(
+      data => {   
+        this.refreshProductList();
+      },
+      error => console.log(error)
+    );
   }
 
   updateProduct(product: Product){
@@ -43,5 +81,43 @@ export class ProductService {
       data => this.refreshProductList(),
       error => console.log(error)
     )
+  }
+
+  getProductChunks(){
+    if(!this.productList){
+      return [];
+    }
+   
+    return this.productList
+    .slice(this.currentChunkIndex * this.chunkSize, (this.currentChunkIndex * this.chunkSize) + this.chunkSize);
+  }
+
+  nextChunk(){
+    console.log('stop next', this.stopNext)
+    if(!this.productList || this.productList.length == 0){
+      return;
+    }
+    this.stopPrev = false;
+
+    this.currentChunkIndex = this.currentChunkIndex + 1;
+
+    if(this.currentChunkIndex >= this.pageItems.length - 1){
+      this.stopNext = true;
+    }
+  }
+
+  prevChunk(){
+    
+    if(!this.productList || this.productList.length == 0){
+      return;
+    }
+
+    this.stopNext = false;
+
+    this.currentChunkIndex = this.currentChunkIndex - 1;
+   
+    if(this.currentChunkIndex <= 0){
+      this.stopPrev = true;
+    }
   }
 }
