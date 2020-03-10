@@ -62,4 +62,32 @@ export class CategoryManagerComponent implements OnInit {
     this.dialog.open(EditCategoryDialogComponent, dialogConfig);
   }
 
+  nextChunk() {
+    if (!this.categoryService.categoryList || this.categoryService.categoryList.length == 0) {
+      return;
+    }
+    this.categoryService.stopPrev = false;
+
+    this.categoryService.currentChunkIndex = this.categoryService.currentChunkIndex + 1;
+
+    if (this.categoryService.currentChunkIndex >= this.categoryService.pageItems.length - 1) {
+      this.categoryService.stopNext = true;
+    }
+  }
+
+  prevChunk() {
+
+    if (!this.categoryService.categoryList || this.categoryService.categoryList.length == 0) {
+      return;
+    }
+
+    this.categoryService.stopNext = false;
+
+    this.categoryService.currentChunkIndex = this.categoryService.currentChunkIndex - 1;
+
+    if (this.categoryService.currentChunkIndex <= 0) {
+      this.categoryService.stopPrev = true;
+    }
+  }
+
 }

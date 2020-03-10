@@ -12,12 +12,31 @@ export class ProviderService {
 
   public providerList: ProviderModel[];
 
+  public currentChunkIndex = 0;
+  public chunkSize = 5;
+  public pageItems = [];
+  public stopNext = false;
+  public stopPrev = true;
+
   refreshProviderList(){
     this.http.get(DataConfig.baseUrl + '/providers')
     .subscribe(
-      data => this.providerList = data as ProviderModel[],
+      data => {
+        this.providerList = data as ProviderModel[];
+        this.updateState();
+      },
       error => console.log(error)
     )
+  }
+
+  getProviderChunks(){
+    if (!this.providerList) {
+      return [];
+    }
+
+    return this.providerList
+      .slice(this.currentChunkIndex * this.chunkSize,
+        (this.currentChunkIndex * this.chunkSize) + this.chunkSize);
   }
 
   addProvider(provider){
@@ -36,6 +55,44 @@ export class ProviderService {
       data => this.refreshProviderList(),
       error => console.log(error)
     )
+  }
+
+  updateProvider(provider : ProviderModel){
+    this.http.put(DataConfig.baseUrl + '/providers', provider)
+    .subscribe(
+      data =>{
+        this.refreshProviderList();
+      },
+      error => console.log(error)
+    )
+  }
+
+  updateState() {
+    let maxChunks = Math.ceil(this.providerList.length / this.chunkSize);
+    if (this.pageItems.length > 0) {
+      this.pageItems = [];
+    }
+    for (let i = 0; i < maxChunks; i++) {
+      this.pageItems.push(i + 1);
+    }
+    if (maxChunks === 1) {
+      this.stopNext = true;
+      this.stopPrev = true;
+    }
+
+    if (this.currentChunkIndex > 0) {
+      this.currentChunkIndex = this.currentChunkIndex - 1;
+    }
+
+    if (this.currentChunkIndex <= 0) {
+      this.stopPrev = true;
+      this.stopNext = false;
+    }
+
+    if (this.currentChunkIndex >= this.pageItems.length - 1) {
+      this.stopNext = false;
+      this.stopNext = true;
+    }
   }
 
   

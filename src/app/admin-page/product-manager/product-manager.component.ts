@@ -13,8 +13,6 @@ import { EditProductDialogComponent } from './edit-product-dialog/edit-product-d
 })
 export class ProductManagerComponent implements OnInit {
 
-  public productList: Product[];
-
   constructor(private productService: ProductService,
     public dialog: MatDialog) { }
 
@@ -24,7 +22,7 @@ export class ProductManagerComponent implements OnInit {
 
   deleteProduct(id) {
     this.productService.deleteProduct(id)
-      
+
   }
 
   openAddProductDialog() {
@@ -34,7 +32,7 @@ export class ProductManagerComponent implements OnInit {
     const dialogRef = this.dialog.open(AddProductDialogComponent, dialogConfig);
   }
 
-  openEditProductDialog(product){
+  openEditProductDialog(product) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.width = '80%';
     dialogConfig.height = '600px';
@@ -42,14 +40,14 @@ export class ProductManagerComponent implements OnInit {
     const dialogRef = this.dialog.open(EditProductDialogComponent, dialogConfig);
   }
 
-  filterProducts(value: string){
-    if(!this.productService.productList){
+  filterProducts(value: string) {
+    if (!this.productService.productList) {
       return;
     }
 
     let filterResult = [];
     let filterValue = value.toLowerCase().trim();
-    
+
     this.productService.productList.forEach(product => {
       let name: string = nonAccentVietnamese(product.name);
       let provider = (product.provider) ? product.provider.name : "Unknown";
@@ -57,19 +55,48 @@ export class ProductManagerComponent implements OnInit {
 
       let providerNonVietnamese: string = nonAccentVietnamese(provider);
       let categoryNonVietnamese: string = nonAccentVietnamese(category);
-      
-      if(name.includes(filterValue) || providerNonVietnamese.includes(filterValue) || categoryNonVietnamese.includes(filterValue)){
+
+      if (name.includes(filterValue) || providerNonVietnamese.includes(filterValue) || categoryNonVietnamese.includes(filterValue)) {
         filterResult.push(product);
       }
     });
-    
-    if(value){
+
+    if (value) {
       this.productService.productList = filterResult;
     }
-    else{
+    else {
       this.productService.refreshProductList();
     }
-    
+
+  }
+
+
+  nextChunk() {
+    if (!this.productService.productList || this.productService.productList.length == 0) {
+      return;
+    }
+    this.productService.stopPrev = false;
+
+    this.productService.currentChunkIndex = this.productService.currentChunkIndex + 1;
+
+    if (this.productService.currentChunkIndex >= this.productService.pageItems.length - 1) {
+      this.productService.stopNext = true;
+    }
+  }
+
+  prevChunk() {
+
+    if (!this.productService.productList || this.productService.productList.length == 0) {
+      return;
+    }
+
+    this.productService.stopNext = false;
+
+    this.productService.currentChunkIndex = this.productService.currentChunkIndex - 1;
+
+    if (this.productService.currentChunkIndex <= 0) {
+      this.productService.stopPrev = true;
+    }
   }
 
 

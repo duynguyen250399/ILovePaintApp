@@ -26,6 +26,7 @@ import { ProviderManagerComponent } from './admin-page/provider-manager/provider
 import { AddProviderDialogComponent } from './admin-page/provider-manager/add-provider-dialog/add-provider-dialog.component';
 import { EditProductDialogComponent } from './admin-page/product-manager/edit-product-dialog/edit-product-dialog.component';
 import { EditCategoryDialogComponent } from './admin-page/category-manager/edit-category-dialog/edit-category-dialog.component';
+import { EditProviderDialogComponent } from './admin-page/provider-manager/edit-provider-dialog/edit-provider-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,14 +46,16 @@ import { EditCategoryDialogComponent } from './admin-page/category-manager/edit-
     ProviderManagerComponent,
     AddProviderDialogComponent,
     EditProductDialogComponent,
-    EditCategoryDialogComponent
+    EditCategoryDialogComponent,
+    EditProviderDialogComponent
   ],
   entryComponents: [
     AddProductDialogComponent,
     AddCategoryDialogComponent,
     AddProviderDialogComponent,
     EditProductDialogComponent,
-    EditCategoryDialogComponent
+    EditCategoryDialogComponent,
+    EditProviderDialogComponent
   ],
   imports: [
     BrowserModule,

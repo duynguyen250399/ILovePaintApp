@@ -66,16 +66,16 @@
 <nav aria-label="Page navigation example" class="text-center">
     <ul class="pagination pagination-lg">
         <li class="page-item">
-            <button [disabled] = "productService.stopPrev" class="page-link" aria-label="Previous" (click) = "productService.prevChunk()">
-                Previous
+            <button [disabled] = "productService.stopPrev" class="page-link" aria-label="Previous" (click) = "prevChunk()">
+                <i class="fas fa-chevron-left"></i>
             </button>
         </li>
         <li *ngFor="let item of productService.pageItems" class="page-item">
-            <a class="page-link" [class.active] = "productService.currentChunkIndex === item - 1">{{item}}</a>
+            <a class="page-link" [class.page-active] = "productService.currentChunkIndex === item - 1">{{item}}</a>
         </li>      
         <li class="page-item">
-            <button [disabled] = "productService.stopNext" class="page-link" aria-label="Next" (click) = "productService.nextChunk()">
-                Next
+            <button [disabled] = "productService.stopNext" class="page-link" aria-label="Next" (click) = "nextChunk()">
+                <i class="fas fa-chevron-right"></i>
             </button>
         </li>
     </ul>

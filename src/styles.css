@@ -6,3 +6,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .editing-input{
     background-color: rgba(201, 196, 196, 0.75) !important;
 }
+
+.pagination{
+    justify-content: center !important;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    right: 50%;
+}
+
+.page-link{
+    color: black !important;
+    cursor: pointer;
+}
+
+button:disabled{
+    background-color: rgba(222, 221, 221, 0.68) !important;
+    color: gray !important;
+}
+
+.page-active{
+    background-color: #26A7E2 !important;
+    color: white !important;
+}

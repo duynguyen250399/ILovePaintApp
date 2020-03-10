@@ -29,8 +29,8 @@
                 There's no category!
             </td>
         </tr>
-        <tr *ngFor="let category of categoryService.categoryList; index as i">
-            <td>{{i + 1}}</td>
+        <tr *ngFor="let category of categoryService.getCategoryChunks(); index as i">
+            <td>{{i + 1 + (categoryService.currentChunkIndex * categoryService.chunkSize)}}</td>
             <td>{{category?.name}}</td>
             <td>
                 <button (click) = "openEditCategoryDialog(category)" mat-icon-button color="primary">
@@ -45,3 +45,21 @@
         </tr>
     </tbody>
 </table>
+
+<nav aria-label="Page navigation example" class="text-center">
+    <ul class="pagination pagination-lg">
+        <li class="page-item">
+            <button [disabled] = "categoryService.stopPrev" class="page-link" aria-label="Previous" (click) = "prevChunk()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+        </li>
+        <li *ngFor="let item of categoryService.pageItems" class="page-item">
+            <a class="page-link" [class.page-active] = "categoryService.currentChunkIndex === item - 1">{{item}}</a>
+        </li>      
+        <li class="page-item">
+            <button [disabled] = "categoryService.stopNext" class="page-link" aria-label="Next" (click) = "nextChunk()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </li>
+    </ul>
+</nav>

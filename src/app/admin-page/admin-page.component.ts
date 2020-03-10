@@ -9,8 +9,14 @@ export class AdminPageComponent implements OnInit {
 
   constructor() { }
 
+  public listItemState = 0;
+
   ngOnInit() {
 
+  }
+
+  changeListItemState(state: number){
+    this.listItemState = state;
   }
 
 

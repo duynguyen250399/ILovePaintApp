@@ -1,3 +1,4 @@
+<!-- Admin App Navigation Bar -->
 <mat-toolbar>
     <mat-toolbar-row>
         <div>
@@ -14,21 +15,26 @@
         </div>
     </mat-toolbar-row>
 </mat-toolbar>
+
+<!-- Side Navbar of Angular Material -->
 <mat-drawer-container>
     <mat-drawer #sidenav mode="over">
         <div class="text-center my-3">
             <a class="text-decoration-none dashboard" routerLink="/admin">Dashboard</a>
         </div>
         <mat-nav-list>
-            <a routerLink="/admin/product" mat-list-item>
+            <a (click) = "changeListItemState(0)" 
+            [class.list-item-active] = "listItemState === 0" routerLink="/admin/product" mat-list-item>
                 <mat-icon class="mx-3">shopping_cart</mat-icon>
                 Manage Products
             </a>
-            <a routerLink="/admin/category" mat-list-item>
+            <a (click) = "changeListItemState(1)" 
+            [class.list-item-active] = "listItemState === 1" routerLink="/admin/category" mat-list-item>
                 <mat-icon class="mx-3">category</mat-icon>
                 Manage Categories
             </a>
-            <a routerLink="/admin/provider" mat-list-item>
+            <a (click) = "changeListItemState(2)" 
+            [class.list-item-active] = "listItemState === 2" routerLink="/admin/provider" mat-list-item>
                 <mat-icon class="mx-3">contact_phone</mat-icon>
                 Manage Providers
             </a>

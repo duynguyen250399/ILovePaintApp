@@ -19,105 +19,81 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getProductList(){
+  getProductList() {
     return this.http.get(this.url);
   }
 
-  refreshProductList(){
+  refreshProductList() {
     this.http.get(this.url)
-    .subscribe(data => {
-      this.productList = data as Product[];
-      let maxChunks = Math.ceil(this.productList.length / this.chunkSize);
-      if(this.pageItems.length > 0){
-        this.pageItems = [];
-      }
-      for(let i = 0; i < maxChunks; i++){
-        this.pageItems.push(i + 1);
-      }
-      if(maxChunks === 1){
-        this.stopNext = true;
-        this.stopPrev = true;
-      }
-
-      if(this.currentChunkIndex > 0){
-        this.currentChunkIndex = this.currentChunkIndex - 1;
-      }
-
-      if(this.currentChunkIndex <= 0){
-        this.stopPrev = true;
-        this.stopNext = false;
-      }
-     
-      if(this.currentChunkIndex >= this.pageItems.length - 1){
-        this.stopNext = false;
-        this.stopNext = true;
-      }
-
-    });
+      .subscribe(data => {
+        this.productList = data as Product[];
+        this.updateState();
+      });
   }
 
-  getProductById(id){
-    return this.http.get(this.url + '/' + id);
-  }
-
-  createProduct(product: Product){
-    return this.http.post(DataConfig.baseUrl + '/products', product);
-  }
-
-  deleteProduct(id){
-    this.http.delete(DataConfig.baseUrl + '/products/' + id)
-    .subscribe(
-      data => {   
-        this.refreshProductList();
-      },
-      error => console.log(error)
-    );
-  }
-
-  updateProduct(product: Product){
-   
-    this.http.put(DataConfig.baseUrl + '/products', product)
-    .subscribe(
-      data => this.refreshProductList(),
-      error => console.log(error)
-    )
-  }
-
-  getProductChunks(){
-    if(!this.productList){
-      return [];
+  updateState() {
+    let maxChunks = Math.ceil(this.productList.length / this.chunkSize);
+    if (this.pageItems.length > 0) {
+      this.pageItems = [];
     }
-   
-    return this.productList
-    .slice(this.currentChunkIndex * this.chunkSize, (this.currentChunkIndex * this.chunkSize) + this.chunkSize);
-  }
-
-  nextChunk(){
-    console.log('stop next', this.stopNext)
-    if(!this.productList || this.productList.length == 0){
-      return;
+    for (let i = 0; i < maxChunks; i++) {
+      this.pageItems.push(i + 1);
     }
-    this.stopPrev = false;
+    if (maxChunks === 1) {
+      this.stopNext = true;
+      this.stopPrev = true;
+    }
 
-    this.currentChunkIndex = this.currentChunkIndex + 1;
+    if (this.currentChunkIndex > 0) {
+      this.currentChunkIndex = this.currentChunkIndex - 1;
+    }
 
-    if(this.currentChunkIndex >= this.pageItems.length - 1){
+    if (this.currentChunkIndex <= 0) {
+      this.stopPrev = true;
+      this.stopNext = false;
+    }
+
+    if (this.currentChunkIndex >= this.pageItems.length - 1) {
+      this.stopNext = false;
       this.stopNext = true;
     }
   }
 
-  prevChunk(){
-    
-    if(!this.productList || this.productList.length == 0){
-      return;
-    }
-
-    this.stopNext = false;
-
-    this.currentChunkIndex = this.currentChunkIndex - 1;
-   
-    if(this.currentChunkIndex <= 0){
-      this.stopPrev = true;
-    }
+  getProductById(id) {
+    return this.http.get(this.url + '/' + id);
   }
+
+  getProductChunks() {
+    if (!this.productList) {
+      return [];
+    }
+
+    return this.productList
+      .slice(this.currentChunkIndex * this.chunkSize,
+        (this.currentChunkIndex * this.chunkSize) + this.chunkSize);
+  }
+
+  createProduct(product: Product) {
+    return this.http.post(DataConfig.baseUrl + '/products', product);
+  }
+
+  deleteProduct(id) {
+    this.http.delete(DataConfig.baseUrl + '/products/' + id)
+      .subscribe(
+        data => {
+          this.refreshProductList();
+        },
+        error => console.log(error)
+      );
+  }
+
+  updateProduct(product: Product) {
+
+    this.http.put(DataConfig.baseUrl + '/products', product)
+      .subscribe(
+        data => this.refreshProductList(),
+        error => console.log(error)
+      )
+  }
+
 }

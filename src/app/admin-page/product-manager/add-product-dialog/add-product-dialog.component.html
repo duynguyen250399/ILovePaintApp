@@ -12,12 +12,13 @@
             <form [formGroup]="addProductForm">
                 <div class="form-group">
                     <label for="">Product Name</label>
-                    <input formControlName="name" type="text" class="form-control" required placeholder="Product Name">
+                    <input [class.is-invalid]="nameControl.invalid && nameControl.touched" formControlName="name"
+                        type="text" class="form-control" required placeholder="Product Name">
                 </div>
                 <div class="form-group">
                     <label for="">Quantity</label>
-                    <input formControlName="quantity" type="number" class="form-control" required
-                        placeholder="Quantity">
+                    <input [class.is-invalid]="quantityControl.invalid && quantityControl.touched" formControlName="quantity"
+                        type="number" class="form-control" required placeholder="Quantity">
                 </div>
                 <div class="form-group">
                     <label for="">Weight</label>
@@ -30,7 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label for="">Price</label>
-                    <input formControlName="price" type="text" class="form-control" placeholder="Product Price"
+                    <input (keydown) = "numberOnly($event)" [class.is-invalid] = "priceControl.invalid && priceControl.touched"  formControlName="price" type="text" class="form-control" placeholder="Product Price"
                         required>
                 </div>
                 <div class="form-group">
@@ -41,14 +42,16 @@
                     <label for="">Provider</label>
                     <select formControlName="provider" class="form-control" name="" id="">
                         <option value="">Select Provider</option>
-                        <option value="{{provider.id}}" *ngFor="let provider of providerService.providerList">{{provider.name}}</option>
+                        <option value="{{provider.id}}" *ngFor="let provider of providerService.providerList">
+                            {{provider.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="">Category</label>
                     <select formControlName="category" class="form-control" name="" id="">
                         <option value="">Select Category</option>
-                        <option value="{{category.id}}" *ngFor="let category of categoryService.categoryList">{{category.name}}</option>
+                        <option value="{{category.id}}" *ngFor="let category of categoryService.categoryList">
+                            {{category.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -58,7 +61,8 @@
                     </textarea>
                 </div>
 
-                <button mat-dialog-close class="btn btn-block btn-primary" (click)="addProduct()">
+                <button [disabled]="addProductForm.invalid || !validProviderCategoryAndWeight()" mat-dialog-close
+                    class="btn btn-block btn-primary" (click)="addProduct()">
                     <i class="fas fa-database"></i> Submit</button>
             </form>
 

@@ -3,6 +3,7 @@ import { ProviderService } from 'src/app/services/provider.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddProviderDialogComponent } from './add-provider-dialog/add-provider-dialog.component';
 import { nonAccentVietnamese } from 'src/helpers/helper';
+import { EditProviderDialogComponent } from './edit-provider-dialog/edit-provider-dialog.component';
 
 @Component({
   selector: 'app-provider-manager',
@@ -22,6 +23,14 @@ export class ProviderManagerComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.width = '50%';
     const dialogRef = this.dialog.open(AddProviderDialogComponent, dialogConfig);
+  }
+
+  openEditProviderDialog(provider){
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '50%';
+    dialogConfig.data = provider;
+
+    const dialogRef = this.dialog.open(EditProviderDialogComponent, dialogConfig);
   }
 
   deleteProvider(id){
@@ -49,6 +58,34 @@ export class ProviderManagerComponent implements OnInit {
       this.providerService.refreshProviderList();
     }
     
+  }
+
+  nextChunk() {
+    if (!this.providerService.providerList || this.providerService.providerList.length == 0) {
+      return;
+    }
+    this.providerService.stopPrev = false;
+
+    this.providerService.currentChunkIndex = this.providerService.currentChunkIndex + 1;
+
+    if (this.providerService.currentChunkIndex >= this.providerService.pageItems.length - 1) {
+      this.providerService.stopNext = true;
+    }
+  }
+
+  prevChunk() {
+
+    if (!this.providerService.providerList || this.providerService.providerList.length == 0) {
+      return;
+    }
+
+    this.providerService.stopNext = false;
+
+    this.providerService.currentChunkIndex = this.providerService.currentChunkIndex - 1;
+
+    if (this.providerService.currentChunkIndex <= 0) {
+      this.providerService.stopPrev = true;
+    }
   }
 
 }
