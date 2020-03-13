@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProviderService } from 'src/app/services/provider.service';
 import { ProviderModel } from 'src/app/models/provider.model';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
+import { ValidationPatterns } from 'src/helpers/helper';
 
 @Component({
   selector: 'app-add-provider-dialog',
@@ -14,13 +15,36 @@ export class AddProviderDialogComponent implements OnInit {
     private fb: FormBuilder) { }
 
   public addProviderForm = this.fb.group({
-    name: [''],
-    phone: [''],
-    email: [''],
+    name: ['', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(30),
+      Validators.pattern(ValidationPatterns.noSpecialCharsWithVietnameseRegex)
+    ]],
+    phone: ['', [
+      Validators.required,
+      Validators.pattern(ValidationPatterns.phoneNumberRegex)
+    ]],
+    email: ['', [
+      Validators.required,
+      Validators.email
+    ]],
     address: ['']
   });
 
   ngOnInit() {
+  }
+
+  get nameControl(): FormControl{
+    return this.addProviderForm.controls.name as FormControl;
+  }
+
+  get phoneControl(): FormControl{
+    return this.addProviderForm.controls.phone as FormControl;
+  }
+
+  get emailControl(): FormControl{
+    return this.addProviderForm.controls.email as FormControl;
   }
 
   addProvider(){

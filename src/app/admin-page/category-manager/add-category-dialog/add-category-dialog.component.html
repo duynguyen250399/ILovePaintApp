@@ -1,11 +1,22 @@
 <div class="p-5">
     <h3 class="text-center mb-5">Add new category</h3>
-    <mat-form-field>
-        <mat-label>Category Name</mat-label>
-        <input type="text" matInput [(ngModel)] = "categoryName">
-    </mat-form-field>
-    <div>
-        <button mat-dialog-close (click) = "addCategory()" class="d-block w-100" mat-raised-button color="primary">Submit</button>
-    </div>
+    <form [formGroup]="addCategoryForm">
+        <div class="form-group">
+            <label>Category Name</label>
+            <input class="form-control" type="text" formControlName="name">
 
+            <div *ngIf="nameControl.invalid && nameControl.touched">
+                <ul class="text-danger">
+                    <li *ngIf="nameControl.invalid && nameControl.errors?.required">
+                        <small>Name is required</small>
+                    </li>
+                    <li *ngIf="nameControl.invalid && nameControl.errors?.pattern">
+                        <small>Name does not contain special characters</small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <button [disabled]="addCategoryForm.invalid" mat-dialog-close (click)="addCategory()" class="d-block w-100"
+            mat-raised-button color="primary">Submit</button>
+    </form>
 </div>

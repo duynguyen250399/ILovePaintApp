@@ -73,8 +73,8 @@ export class ProductService {
         (this.currentChunkIndex * this.chunkSize) + this.chunkSize);
   }
 
-  createProduct(product: Product) {
-    return this.http.post(DataConfig.baseUrl + '/products', product);
+  createProduct(formData: FormData) {
+    return this.http.post(DataConfig.baseUrl + '/products/', formData);
   }
 
   deleteProduct(id) {
@@ -91,7 +91,9 @@ export class ProductService {
 
     this.http.put(DataConfig.baseUrl + '/products', product)
       .subscribe(
-        data => this.refreshProductList(),
+        data => {
+          this.refreshProductList();      
+        },
         error => console.log(error)
       )
   }

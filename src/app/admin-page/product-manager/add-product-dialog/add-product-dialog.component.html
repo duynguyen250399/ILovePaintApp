@@ -3,26 +3,52 @@
 <mat-dialog-content>
     <div class="row">
         <div class="col-6">
-            <img class="w-100" src="../../../assets/images/default_product.png" alt="product_image">
+            <img class="w-100" [src]="imageUrl" alt="product_image">
             <div class="form-group">
-                <input class="form-control" type="file" name="" id="">
+                <input (change)="onImageSelected($event)" class="form-control" type="file" name="" id="">
             </div>
         </div>
         <div class="col-6">
             <form [formGroup]="addProductForm">
                 <div class="form-group">
                     <label for="">Product Name</label>
-                    <input [class.is-invalid]="nameControl.invalid && nameControl.touched" formControlName="name"
-                        type="text" class="form-control" required placeholder="Product Name">
+                    <input [class.is-valid]="nameControl.valid"
+                        [class.is-invalid]="nameControl.invalid && nameControl.touched" formControlName="name"
+                        type="text" class="form-control" placeholder="Product Name">
+                    <div *ngIf="nameControl.invalid && nameControl.touched">
+                        <ul class="text-danger">
+                            <li *ngIf="nameControl.errors?.required"><small>Product name is required</small></li>
+                            <li *ngIf="nameControl.errors?.pattern"><small>Product name does not contain special
+                                    characters</small></li>
+                            <li *ngIf="nameControl.errors?.minlength"><small>Product name must be at least 5
+                                    characters</small></li>
+                            <li *ngIf="nameControl.errors?.maxlength"><small>Product name is no more than 30
+                                    chracters</small></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="">Quantity</label>
-                    <input [class.is-invalid]="quantityControl.invalid && quantityControl.touched" formControlName="quantity"
-                        type="number" class="form-control" required placeholder="Quantity">
+                    <input [class.is-valid]="quantityControl.valid"
+                        [class.is-invalid]="quantityControl.invalid && quantityControl.touched"
+                        formControlName="quantity" type="text" class="form-control" placeholder="Quantity">
+
+                    <div *ngIf="quantityControl.invalid && quantityControl.touched">
+                        <ul class="text-danger">
+                            <li *ngIf="quantityControl.errors?.required">
+                                <small>Product quantity is required</small>
+                            </li>
+                            <li *ngIf="quantityControl.errors?.pattern">
+                                <small>Product quantity must be a positive number</small>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="">Weight</label>
-                    <select formControlName="weight" name="" id="" class="form-control">
+                    <select [class.is-invalid]="weightControl.value === '' && weightControl.touched"
+                        [class.is-valid]="weightControl.value !== ''" formControlName="weight" name="" id=""
+                        class="form-control">
                         <option value="">Select Weight</option>
                         <option value="1">1 kg</option>
                         <option value="5">5 kg</option>
@@ -31,8 +57,20 @@
                 </div>
                 <div class="form-group">
                     <label for="">Price</label>
-                    <input (keydown) = "numberOnly($event)" [class.is-invalid] = "priceControl.invalid && priceControl.touched"  formControlName="price" type="text" class="form-control" placeholder="Product Price"
-                        required>
+                    <input [class.is-valid]='priceControl.valid'
+                        [class.is-invalid]="priceControl.invalid && priceControl.touched" formControlName="price"
+                        type="text" class="form-control" placeholder="Product Price">
+
+                    <div *ngIf="priceControl.invalid && priceControl.touched">
+                        <ul class="text-danger">
+                            <li *ngIf="priceControl.errors?.required">
+                                <small>Product price is required</small>
+                            </li>
+                            <li *ngIf="priceControl.errors?.pattern">
+                                <small>Product price must be a positive number</small>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="">Manufacture Date (optional)</label>
@@ -40,7 +78,9 @@
                 </div>
                 <div class="form-group">
                     <label for="">Provider</label>
-                    <select formControlName="provider" class="form-control" name="" id="">
+                    <select [class.is-invalid]="providerControl.value === '' && providerControl.touched"
+                        [class.is-valid]="providerControl.value !== ''" formControlName="provider" class="form-control"
+                        name="" id="">
                         <option value="">Select Provider</option>
                         <option value="{{provider.id}}" *ngFor="let provider of providerService.providerList">
                             {{provider.name}}</option>
@@ -48,7 +88,9 @@
                 </div>
                 <div class="form-group">
                     <label for="">Category</label>
-                    <select formControlName="category" class="form-control" name="" id="">
+                    <select [class.is-invalid]="categoryControl.value === '' && categoryControl.touched"
+                        [class.is-valid]="categoryControl.value !== ''" 
+                        formControlName="category" class="form-control" name="" id="">
                         <option value="">Select Category</option>
                         <option value="{{category.id}}" *ngFor="let category of categoryService.categoryList">
                             {{category.name}}</option>

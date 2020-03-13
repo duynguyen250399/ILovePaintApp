@@ -2,9 +2,9 @@
 
 <div class="row">
     <div class="col-6">
-        <img class="w-100" src="../../../assets/images/default_product.png" alt="product_image">
+        <img class="w-100" [src]="imageUrl" alt="product_image">
         <div class="form-group">
-            <input class="form-control" type="file" name="" id="">
+            <input (change)="onFileSelected($event)" class="form-control" type="file" name="" id="">
         </div>
     </div>
     <div class="col-6">
@@ -37,8 +37,9 @@
                     placeholder="Product Price" required>
             </div>
             <div class="form-group">
-                <label for="">Manufacture Date (optional)</label>
-                <input formControlName="date" type="date" class="form-control editing-input" placeholder="Optional">
+                <label for="">Manufacture Date (optional)</label><br>
+                <small for="" class="font-weight-bold">Year-Month-Day</small>
+                <input [ngModel]="editProductForm.value.manufactureDate | date:'yyyy-MM-dd'" formControlName="manufactureDate" type="date" class="form-control editing-input">              
             </div>
             <div class="form-group">
                 <label for="">Provider</label>

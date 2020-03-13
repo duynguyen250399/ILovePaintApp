@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/category.model';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { ValidationPatterns } from 'src/helpers/helper';
 
 @Component({
   selector: 'app-add-category-dialog',
@@ -9,17 +11,28 @@ import { Category } from 'src/app/models/category.model';
 })
 export class AddCategoryDialogComponent implements OnInit {
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService,
+    private fb: FormBuilder) { }
 
-  public categoryName: string;
+  public addCategoryForm: FormGroup;
 
   ngOnInit() {
+    this.addCategoryForm = this.fb.group({
+      name: ['', [
+        Validators.required,
+        Validators.pattern(ValidationPatterns.noSpecialCharsWithVietnameseRegex)
+      ]]
+    })
+  }
+
+  get nameControl(): FormControl{
+    return this.addCategoryForm.controls.name as FormControl;
   }
 
   addCategory(){
-    if(this.categoryName){
+    if(this.addCategoryForm.value.name){
       let category : Category = {
-        name: this.categoryName
+        name: this.addCategoryForm.value.name
       }
       this.categoryService.addCategory(category);
     }

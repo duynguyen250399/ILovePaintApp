@@ -13,3 +13,20 @@ export function nonAccentVietnamese(str) {
     str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // Â, Ê, Ă, Ơ, Ư
     return str;
 }
+
+export function numberOnly(e) {
+    e.target.value = e.target.value.replace(/[^\d.]/g, '').replace(/(\..*)\./g, '$1');   
+}
+
+export function integerOnly(e) {
+    e.target.value = e.target.value.replace(/[^\d]/g, '').replace(/(\..*)\./g, '$1');
+}
+
+
+export class ValidationPatterns{
+    public static noSpecialCharsWithVietnameseRegex: RegExp = /^[0-9a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$/;
+    public static positiveNumberRegex: RegExp = /^[0-9]\d*/;
+    public static positiveNumberWithOneDotRegex: RegExp = /^\d*\.?\d*$/
+    public static phoneNumberRegex: RegExp = /^[0-9]{10}$/
+ }
+

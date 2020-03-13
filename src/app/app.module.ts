@@ -27,6 +27,7 @@ import { AddProviderDialogComponent } from './admin-page/provider-manager/add-pr
 import { EditProductDialogComponent } from './admin-page/product-manager/edit-product-dialog/edit-product-dialog.component';
 import { EditCategoryDialogComponent } from './admin-page/category-manager/edit-category-dialog/edit-category-dialog.component';
 import { EditProviderDialogComponent } from './admin-page/provider-manager/edit-provider-dialog/edit-provider-dialog.component';
+import { ImageService } from './services/image.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,7 @@ import { EditProviderDialogComponent } from './admin-page/provider-manager/edit-
     FormsModule,
     MaterialModule
   ],
-  providers: [ProductService, ProviderService, CategoryService],
+  providers: [ProductService, ProviderService, CategoryService, ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

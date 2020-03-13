@@ -9,7 +9,7 @@ export class AdminPageComponent implements OnInit {
 
   constructor() { }
 
-  public listItemState = 0;
+  public listItemState = -1;
 
   ngOnInit() {
 
