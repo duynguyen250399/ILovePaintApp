@@ -1,0 +1,6 @@
+.quantity-input, .weight-input{
+    width: 100%;
+    height: 48px;
+    border-radius: 5px;
+    border: 1px solid rgba(177, 174, 174, 0.91);
+}

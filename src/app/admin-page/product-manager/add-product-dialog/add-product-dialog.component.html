@@ -14,7 +14,7 @@
                     <label for="">Product Name</label>
                     <input [class.is-valid]="nameControl.valid"
                         [class.is-invalid]="nameControl.invalid && nameControl.touched" formControlName="name"
-                        type="text" class="form-control" placeholder="Product Name">
+                        type="text" class="form-control" placeholder="Product Name" id="name">
                     <div *ngIf="nameControl.invalid && nameControl.touched">
                         <ul class="text-danger">
                             <li *ngIf="nameControl.errors?.required"><small>Product name is required</small></li>
@@ -31,7 +31,7 @@
                     <label for="">Quantity</label>
                     <input [class.is-valid]="quantityControl.valid"
                         [class.is-invalid]="quantityControl.invalid && quantityControl.touched"
-                        formControlName="quantity" type="text" class="form-control" placeholder="Quantity">
+                        formControlName="quantity" type="text" class="form-control" placeholder="Quantity" id="quantity">
 
                     <div *ngIf="quantityControl.invalid && quantityControl.touched">
                         <ul class="text-danger">
@@ -47,7 +47,7 @@
                 <div class="form-group">
                     <label for="">Weight</label>
                     <select [class.is-invalid]="weightControl.value === '' && weightControl.touched"
-                        [class.is-valid]="weightControl.value !== ''" formControlName="weight" name="" id=""
+                        [class.is-valid]="weightControl.value !== ''" formControlName="weight" name="" id="weight"
                         class="form-control">
                         <option value="">Select Weight</option>
                         <option value="1">1 kg</option>

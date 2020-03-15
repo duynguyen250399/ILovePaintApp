@@ -29,3 +29,12 @@ button:disabled{
     background-color: #26A7E2 !important;
     color: white !important;
 }
+
+.item-hover{
+    border: 1px solid transparent;
+    transition: 0.5s;
+}
+
+.item-hover:hover{
+    border: 1px solid #DAF1EC;
+}

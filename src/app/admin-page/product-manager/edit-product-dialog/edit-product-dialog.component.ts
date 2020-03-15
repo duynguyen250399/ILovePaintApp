@@ -8,6 +8,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { ImageService } from 'src/app/services/image.service';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-edit-product-dialog',
@@ -22,6 +23,8 @@ export class EditProductDialogComponent implements OnInit {
 
   public productImage: File;
   public imageUrl: string;
+  public imageName: string;
+  public uploadPath: string;
 
   constructor(private fb: FormBuilder,
     private providerService: ProviderService,
@@ -52,15 +55,33 @@ export class EditProductDialogComponent implements OnInit {
     this.imageUrl = `https://localhost:44385/api/images/product/${this.data.id}`;
   }
 
-  updateProduct(){
-    let updatedProduct : Product = this.editProductForm.value as Product;
-    updatedProduct.status = (updatedProduct.quantity > 0) ? 1 : 0;
-    this.productService.updateProduct(updatedProduct);  
+  updateProduct(){   
+
+    let formData = new FormData();
+    formData.append('id', this.editProductForm.get('id').value);
+    formData.append('name', this.editProductForm.get('name').value);
+    formData.append('description', this.editProductForm.get('description').value);
+    formData.append('price', this.editProductForm.get('price').value);
+    formData.append('weight', this.editProductForm.get('weight').value);
+    formData.append('quantity', this.editProductForm.get('quantity').value);
+    let status = (this.editProductForm.get('quantity').value > 0) ? 1 : 0;
+    formData.append('status', status.toString());
+    formData.append('manufactureDate', this.editProductForm.get('manufactureDate').value);
+    formData.append('providerId', this.editProductForm.get('providerId').value);
+    formData.append('categoryId', this.editProductForm.get('categoryId').value);
+
+    if (this.productImage) {
+      this.imageName = Date.now().toString() + '-iLovePaint-' + uuid.v4() + '-' + this.productImage.name;
+      this.uploadPath = '/uploads/images/products/'+ this.imageName;
+      formData.append('image', this.uploadPath);
+    }
+
+    this.productService.updateProduct(formData);  
 
     if (this.productImage) {
       let imageFormData = new FormData();
-      imageFormData.append('file', this.productImage, this.productImage.name)
-      this.imageService.uploadProductImage(imageFormData, this.imageName);
+      imageFormData.append('file', this.productImage, this.productImage.name);
+      this.imageService.updateImage(imageFormData, this.editProductForm.get('id').value, this.imageName);
     }
   }
 

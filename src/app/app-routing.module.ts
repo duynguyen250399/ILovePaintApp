@@ -9,15 +9,16 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { CategoryManagerComponent } from './admin-page/category-manager/category-manager.component';
 import { ProviderManagerComponent } from './admin-page/provider-manager/provider-manager.component';
+import { ShoppingCartComponent } from './user-page/shopping-cart/shopping-cart.component';
 
 
 const routes: Routes = [
   {path: '', component: UserPageComponent, children: [
-    {path: 'products', component: ProductListComponent, children: [
-      {path: 'product-order/:id', component: ProductOrderComponent}
-    ]},
+    {path: '', component: ProductListComponent},
     {path: 'contact', component: ContactComponent},
-    {path: 'about', component: AboutUsComponent}
+    {path: 'about', component: AboutUsComponent},
+    {path: 'product-order/:id', component: ProductOrderComponent},
+    {path: 'my-cart', component: ShoppingCartComponent}
   ]},
   {path: 'admin', component: AdminPageComponent, children: [
     {path: 'product', component: ProductManagerComponent},

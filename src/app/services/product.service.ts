@@ -87,9 +87,9 @@ export class ProductService {
       );
   }
 
-  updateProduct(product: Product) {
+  updateProduct(formData: FormData) {
 
-    this.http.put(DataConfig.baseUrl + '/products', product)
+    this.http.put(DataConfig.baseUrl + '/products', formData)
       .subscribe(
         data => {
           this.refreshProductList();      

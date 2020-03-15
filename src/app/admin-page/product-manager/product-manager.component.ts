@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddProductDialogComponent } from './add-product-dialog/add-product-dialog.component';
 import { nonAccentVietnamese } from "../../../helpers/helper";
 import { EditProductDialogComponent } from './edit-product-dialog/edit-product-dialog.component';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-product-manager',
@@ -14,15 +15,17 @@ import { EditProductDialogComponent } from './edit-product-dialog/edit-product-d
 export class ProductManagerComponent implements OnInit {
 
   constructor(private productService: ProductService,
+    private imageService: ImageService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
     this.productService.refreshProductList();
   }
 
-  deleteProduct(id) {
-    this.productService.deleteProduct(id)
-
+  deleteProduct(id, imageUrl: string) {
+    let url = imageUrl.replace('/uploads/images/products/', '');
+    this.imageService.deleteImage(url); 
+    this.productService.deleteProduct(id);  
   }
 
   openAddProductDialog() {

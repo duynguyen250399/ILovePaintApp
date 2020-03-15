@@ -1,20 +1,68 @@
 <div class="row m-5">
-    <div class="col-lg-4">
-        <h2 class="text-center my-3">{{product.name}}</h2>
-        <img src="{{product.image}}" alt="paint_product" class="w-100">
+    <div class="col-4 py-5">
+        <img [src]="productImage" alt="paint_product" class="w-100">
     </div>
-    <div class="col-lg-8 p-5">
-        <ul>
-            <li>{{product.description}}</li>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">Weight</div>
-                </div>
-                <input type="text" class="form-control">
+    <div class="col-8 p-5">
+        <h4>Product Details</h4>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <td>{{product.name}}</td>
+            </tr>
+            <tr>
+                <th>Manufacture Date</th>
+                <td>
+                    {{product.manufactureDate ? (product.manufactureDate | date:'longDate') : "Unknown"}}
+                </td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td [class.text-danger]="product.quantity === 0" [class.text-success]="product.quantity > 0">
+                    {{product.quantity > 0 ? "Available" : "Unavailable"}}
+                </td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>{{product.category ? product.category.name : "Unknown"}}</td>
+            </tr>
+            <tr>
+                <th>Provider</th>
+                <td>{{product.provider ? product.provider.name : "Unknown"}}</td>
+            </tr>
+        </table>
+
+        <div style="font-size: 32px;" class="d-block text-center font-weight-bold text-danger my-5">
+            {{product.price}} đ
+        </div>
+
+        <div class="row my-3">
+            <div class="col-6">
+                <small class="font-weight-bold text-secondary d-block">Quantity</small>
+                <input [(ngModel)]="quantity" class="quantity-input" type="text" placeholder="Quantity" value="1">
             </div>
-            <li>Status: {{(product.quantity > 0) ? "Available" : "Unavailable"}}</li>
-            <li>Provider: <a href="#">{{product.provider.name}}</a></li>
-            <li>Category: <a href="#">{{product.category.name}}</a></li>
-        </ul>
+            <div class="col-6">
+                <small class="font-weight-bold text-secondary d-block">Weight</small>
+                <select class="weight-input" name="" id="">
+                    <option value="1">1</option>
+                    <option value="5">5</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+        </div>
+
+        <button (click)="addToCart()" class="btn btn-block btn-lg btn-danger">Add to Cart 
+            <i class="fas fa-shopping-cart"></i>
+        </button>
+
     </div>
+</div>
+
+<div class="m-5">
+    <h4 style="text-decoration: underline;">Product Description:</h4>
+    <p class="lead mx-5 my-3" *ngIf="product.description">
+        {{product.description}}
+    </p>
+    <p class="lead font-italic mx-5 my-3" *ngIf="!product.description">
+        No desctiption!
+    </p>
 </div>

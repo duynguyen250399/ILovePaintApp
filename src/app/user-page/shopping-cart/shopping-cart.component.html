@@ -1,0 +1,55 @@
+<h4 class="my-5">
+    YOUR CART ({{orderService.orderItemList.length}} product{{orderService.orderItemList.length > 1 ? "s" : ""}})
+</h4>
+
+<div *ngIf="orderService.orderItemList.length === 0" class="text-center border border-muted p-3">
+    <div>
+        <p class="font-italic">There's no product in your cart!</p>
+        <a class="btn btn-danger px-5" href="/">Go Shopping</a>
+    </div>
+</div>
+
+<div class="row p-3 justify-content-between" *ngIf="orderService.orderItemList.length > 0">
+    <div class="col-8">
+        <div class="row my-3 item-hover p-3" *ngFor="let item of orderService.orderItemList; let i = index">
+            <div class="col-2">
+                <img class="w-100" [src]="item.image" alt="{{item.productName}}">
+            </div>
+            <div class="col-5">
+                <p>{{item.productName}}</p>
+
+                <button (click)="removeItem('order-item-' + item.productId)" class="btn btn-danger mt-3">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>
+            <div class="col-3">
+                <p style="font-size: 20px; font-weight: 510;">{{item.productPrice}}đ</p>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-danger"
+                            (click)="decreaseQuantity('order-item-' + item.productId)">-</button>
+                    </div>
+                    <input type="text" class="form-control text-center" value="{{item.quantity}}">
+                    <div class="input-group-append">
+                        <button class="btn btn-success"
+                            (click)="increaseQuantity('order-item-' + item.productId)">+</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-4 p-5">
+        <div class="row border border-muted p-3" style="height: 200px;">
+            <div class="col-6">
+                <p style="font-size: 22px; line-height: 2em;">Total:</p>
+            </div>
+            <div class="col-6">
+                <p style="font-size: 30px;" class="text-danger">{{orderService.total}}đ</p>
+            </div>
+            <button style="height: 48px;" class="btn btn-primary btn-block">Checkout</button>
+        </div>
+    </div>
+</div>

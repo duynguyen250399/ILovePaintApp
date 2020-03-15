@@ -28,6 +28,8 @@ import { EditProductDialogComponent } from './admin-page/product-manager/edit-pr
 import { EditCategoryDialogComponent } from './admin-page/category-manager/edit-category-dialog/edit-category-dialog.component';
 import { EditProviderDialogComponent } from './admin-page/provider-manager/edit-provider-dialog/edit-provider-dialog.component';
 import { ImageService } from './services/image.service';
+import { ShoppingCartComponent } from './user-page/shopping-cart/shopping-cart.component';
+import { OrderService } from './services/order.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { ImageService } from './services/image.service';
     AddProviderDialogComponent,
     EditProductDialogComponent,
     EditCategoryDialogComponent,
-    EditProviderDialogComponent
+    EditProviderDialogComponent,
+    ShoppingCartComponent
   ],
   entryComponents: [
     AddProductDialogComponent,
@@ -67,7 +70,8 @@ import { ImageService } from './services/image.service';
     FormsModule,
     MaterialModule
   ],
-  providers: [ProductService, ProviderService, CategoryService, ImageService],
+  providers: [ProductService, ProviderService, CategoryService,
+    ImageService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -18,6 +18,24 @@ export class ImageService {
     );
   }
 
+  updateImage(formData: FormData, productId, imageName: string){
+    this.http.put(DataConfig.baseUrl + '/images/product/' + productId + '/' + imageName, formData)
+    .subscribe(
+      res => console.log(res),
+      error => console.log(error)
+    )
+  }
+
+  deleteImage(url){
+    this.http.delete(DataConfig.baseUrl + '/images/product/' + url)
+    .subscribe(
+      res => {
+        console.log('imaged removed');
+      },
+      error => console.log(error)
+    )
+  }
+
   getImage(id){
     return this.http.get(DataConfig.baseUrl + '/images/product/' + id);
   }
