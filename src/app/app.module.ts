@@ -30,6 +30,7 @@ import { EditProviderDialogComponent } from './admin-page/provider-manager/edit-
 import { ImageService } from './services/image.service';
 import { ShoppingCartComponent } from './user-page/shopping-cart/shopping-cart.component';
 import { OrderService } from './services/order.service';
+import { CheckoutComponent } from './user-page/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { OrderService } from './services/order.service';
     EditProductDialogComponent,
     EditCategoryDialogComponent,
     EditProviderDialogComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    CheckoutComponent
   ],
   entryComponents: [
     AddProductDialogComponent,

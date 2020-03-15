@@ -1,0 +1,84 @@
+<div class="w-50 mx-auto my-5 p-3 checkout-form">
+    <div class="row" *ngFor="let item of orderService.orderItemList">
+        <div class="col-3">
+            <img [src]="item.image" alt="{{item.productName}}" class="w-100">
+        </div>
+        <div class="col-5">
+            <p class="mt-5">{{item.productName}}</p>
+            <p>{{item.productPrice}}đ</p>
+        </div>
+        <div class="col-4">
+            <p class="mt-5">Quantity: <b>{{item.quantity}}</b></p>
+        </div>
+        <div class="divider"></div>
+    </div>
+
+    <div>
+        <h3 class="text-center py-3">Total: {{orderService.total}}đ</h3>
+    </div>
+    <div class="divider"></div>
+
+    <form action="" class="mt-5" [formGroup]="checkoutForm">
+        <div class="mb-3">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="male" name="gender" class="custom-control-input" value="0"
+                    formControlName="gender">
+                <label class="custom-control-label" for="male">Male</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="female" name="gender" class="custom-control-input" value="1"
+                    formControlName="gender">
+                <label class="custom-control-label" for="female">Female</label>
+            </div>
+            <small class="text-danger" *ngIf="genderControl.invalid && genderControl.touched">Please select your
+                gender</small>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <input formControlName="fullName" type="text" class="form-control" placeholder="Full Name">
+                    <div *ngIf="fullNameControl.errors && fullNameControl.touched">
+                        <small class="text-danger" *ngIf="fullNameControl.errors?.required">Please fill your full
+                            name</small>
+                        <small class="text-danger" *ngIf="fullNameControl.errors?.pattern">Invalid name</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <input formControlName="phone" type="text" class="form-control" placeholder="Phone Number">
+                    <div *ngIf="phoneControl.errors && phoneControl.touched">
+                        <small class="text-danger" *ngIf="phoneControl.errors?.required">Please fill your phone
+                            number</small>
+                        <small class="text-danger" *ngIf="phoneControl.errors?.pattern">Invalid phone number</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <textarea formControlName="address" style="resize: none;" class="form-control" name="" id="" cols="30"
+                rows="5" placeholder="Address"></textarea>
+            <div *ngIf="addressControl.errors && addressControl.touched">
+                <small class="text-danger" *ngIf="addressControl.errors?.required">Please fill your address</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <input formControlName="email" type="text" class="form-control" placeholder="Email">
+                    <div *ngIf="emailControl.errors && emailControl.touched">
+                        <small class="text-danger" *ngIf="emailControl.errors?.required">Please fill your email</small>
+                        <small class="text-danger" *ngIf="emailControl.errors?.email">Invalid email</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <input formControlName="notes" type="text" class="form-control" placeholder="Notes">
+                </div>
+            </div>
+        </div>
+        <button [disabled]="checkoutForm.invalid" class="btn btn-primary btn-block">Checkout</button>
+    </form>
+</div>

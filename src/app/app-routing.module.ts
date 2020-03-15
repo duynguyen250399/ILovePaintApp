@@ -10,6 +10,7 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { CategoryManagerComponent } from './admin-page/category-manager/category-manager.component';
 import { ProviderManagerComponent } from './admin-page/provider-manager/provider-manager.component';
 import { ShoppingCartComponent } from './user-page/shopping-cart/shopping-cart.component';
+import { CheckoutComponent } from './user-page/checkout/checkout.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
     {path: 'contact', component: ContactComponent},
     {path: 'about', component: AboutUsComponent},
     {path: 'product-order/:id', component: ProductOrderComponent},
-    {path: 'my-cart', component: ShoppingCartComponent}
+    {path: 'my-cart', component: ShoppingCartComponent},
+    {path: 'checkout', component: CheckoutComponent}
   ]},
   {path: 'admin', component: AdminPageComponent, children: [
     {path: 'product', component: ProductManagerComponent},
