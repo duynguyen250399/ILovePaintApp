@@ -2,17 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { OrderItemCart } from '../models/order-item-cart';
 import { DataConfig } from 'src/config/data';
-import { JsonPipe } from '@angular/common';
+import { OrderData } from '../models/order-data.model';
+import { Router } from '@angular/router';
+import { Order } from '../models/order.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private router: Router) { }
 
   public orderItemList: OrderItemCart[];
   public total: number = 0;
+  
+  public orderList: OrderData[] = [];
 
   refreshOrderItemList(){
     this.orderItemList = [];
@@ -31,5 +36,26 @@ export class OrderService {
   addOrderItemToCart(orderItem: OrderItemCart){
     sessionStorage.setItem('order-item-' + orderItem.productId, JSON.stringify(orderItem));
     this.refreshOrderItemList();
+  }
+
+  checkoutOrder(orderData: OrderData){
+    this.http.post(DataConfig.baseUrl + '/order', orderData)
+    .subscribe(
+      data => {
+        console.log('order checkout:', data);
+        this.router.navigateByUrl('/');
+        sessionStorage.clear();
+        this.refreshOrderItemList();
+      },
+      error => console.log(error)
+    )
+  }
+
+  loadOrderList(){
+    this.http.get(DataConfig.baseUrl + '/order')
+    .subscribe(
+      data => this.orderList = data as OrderData[],
+      error => console.log(error)
+    )
   }
 }

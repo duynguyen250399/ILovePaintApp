@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/services/order.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ValidationPatterns } from 'src/helpers/helper';
+import { Order } from 'src/app/models/order.model';
+import { OrderItem } from 'src/app/models/order-item.model';
+import { OrderData } from 'src/app/models/order-data.model';
 
 @Component({
   selector: 'app-checkout',
@@ -57,6 +60,36 @@ export class CheckoutComponent implements OnInit {
 
   get genderControl(){
     return this.checkoutForm.get('gender');
+  }
+
+  async checkout(){
+    let order: Order = {
+      fullName: this.fullNameControl.value,
+      phoneNumber: this.phoneControl.value,
+      address: this.addressControl.value,
+      email: this.emailControl.value,
+      gender: (this.genderControl.value == 0) ? false : true,
+      notes: this.checkoutForm.get('notes').value
+    }
+
+    let orderItems: OrderItem[] = [];
+    for(let i = 0; i < this.orderService.orderItemList.length; i++){
+      let item = this.orderService.orderItemList[i];
+      let orderItem: OrderItem = {
+        productId: item.productId,
+        amount: item.amount,
+        quantity: item.quantity
+      }
+      orderItems.push(orderItem);
+    }
+
+    let orderData: OrderData = {
+      order: order,
+      orderItems: orderItems
+    }
+
+    this.orderService.checkoutOrder(orderData);
+   
   }
 
 }

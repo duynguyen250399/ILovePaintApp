@@ -11,6 +11,7 @@ import { CategoryManagerComponent } from './admin-page/category-manager/category
 import { ProviderManagerComponent } from './admin-page/provider-manager/provider-manager.component';
 import { ShoppingCartComponent } from './user-page/shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './user-page/checkout/checkout.component';
+import { OrderManagerComponent } from './admin-page/order-manager/order-manager.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,8 @@ const routes: Routes = [
   {path: 'admin', component: AdminPageComponent, children: [
     {path: 'product', component: ProductManagerComponent},
     {path: 'category', component: CategoryManagerComponent},
-    {path: 'provider', component: ProviderManagerComponent}
+    {path: 'provider', component: ProviderManagerComponent},
+    {path: 'order', component: OrderManagerComponent}
   ]}
 ];
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { formatNumber } from 'src/helpers/helper';
 
 @Component({
   selector: 'app-product-display',
@@ -10,6 +11,7 @@ export class ProductDisplayComponent implements OnInit {
   constructor() { }
 
   private defaultImage = '/assets/images/default_product.png';
+  public formatedPrice : string;
 
   @Input() product;
 
@@ -17,6 +19,7 @@ export class ProductDisplayComponent implements OnInit {
     if(this.product.image == null){
       this.product.image = this.defaultImage;
     }
+    this.formatedPrice = formatNumber(this.product.price);
   }
 
 }

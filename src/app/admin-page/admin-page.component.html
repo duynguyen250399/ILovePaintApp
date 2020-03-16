@@ -23,20 +23,27 @@
             <a class="text-decoration-none dashboard" routerLink="/admin">Dashboard</a>
         </div>
         <mat-nav-list>
-            <a (click) = "changeListItemState(0)" 
-            [class.list-item-active] = "listItemState === 0" routerLink="/admin/product" mat-list-item>
+            <a (click)="changeListItemState(0)" [class.list-item-active]="listItemState === 0"
+                routerLink="/admin/product" mat-list-item>
                 <mat-icon class="mx-3">shopping_cart</mat-icon>
                 Manage Products
             </a>
-            <a (click) = "changeListItemState(1)" 
-            [class.list-item-active] = "listItemState === 1" routerLink="/admin/category" mat-list-item>
+            <a (click)="changeListItemState(1)" [class.list-item-active]="listItemState === 1"
+                routerLink="/admin/category" mat-list-item>
                 <mat-icon class="mx-3">category</mat-icon>
                 Manage Categories
             </a>
-            <a (click) = "changeListItemState(2)" 
-            [class.list-item-active] = "listItemState === 2" routerLink="/admin/provider" mat-list-item>
+            <a (click)="changeListItemState(2)" [class.list-item-active]="listItemState === 2"
+                routerLink="/admin/provider" mat-list-item>
                 <mat-icon class="mx-3">contact_phone</mat-icon>
                 Manage Providers
+            </a>
+            <a (click)="changeListItemState(3)" [class.list-item-active]="listItemState === 3" routerLink="/admin/order"
+                mat-list-item>
+                <mat-icon class="mx-3">store</mat-icon>
+
+                <span matBadge="{{orderService.orderList.length}}" matBadgeOverlap="false"
+                    matBadgeColor="warn">Orders</span>
             </a>
         </mat-nav-list>
     </mat-drawer>

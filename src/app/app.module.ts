@@ -31,6 +31,7 @@ import { ImageService } from './services/image.service';
 import { ShoppingCartComponent } from './user-page/shopping-cart/shopping-cart.component';
 import { OrderService } from './services/order.service';
 import { CheckoutComponent } from './user-page/checkout/checkout.component';
+import { OrderManagerComponent } from './admin-page/order-manager/order-manager.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { CheckoutComponent } from './user-page/checkout/checkout.component';
     EditCategoryDialogComponent,
     EditProviderDialogComponent,
     ShoppingCartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    OrderManagerComponent
   ],
   entryComponents: [
     AddProductDialogComponent,

@@ -79,6 +79,6 @@
                 </div>
             </div>
         </div>
-        <button [disabled]="checkoutForm.invalid" class="btn btn-primary btn-block">Checkout</button>
+        <button (click)="checkout()" [disabled]="checkoutForm.invalid" class="btn btn-primary btn-block">Pay at home</button>
     </form>
 </div>
