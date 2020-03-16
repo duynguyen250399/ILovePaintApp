@@ -1,1 +1,29 @@
-<p>order-manager works!</p>
+<h3 class="m-3 text-center">Orders</h3>
+<div class="horizontal-divider"></div>
+<div>
+    <div class="my-3 mx-5">
+        <div class="row order-item p-3 my-3" *ngFor="let order of orderService.orderList">
+            <div class="col-2">
+                <i class="fas fa-user" style="font-size: 60px;"></i>
+            </div>
+            <div class="col-6">
+                <p>{{order.gender === true ? "Ms" : "Mr"}}. {{order.fullName}}
+                    has ordered our product!
+                </p>
+                <p>Order ID: #{{order.id}}</p>
+            </div>
+            <div class="col-3">
+                <p class="font-weight-bold" [class.text-warning]="order.status === 0"
+                    [class.text-info]="order.status === 1" [class.text-danger]="order.status === 2"
+                    [class.text-success]="order.status === 3">{{(order.status == null) ? "Unknown" : (order.status === 0) ? "Waiting..." : (order.status === 1) ? "Packaging..." :
+                    (order.status === 2) ? "Shipping..." : "Finished!"}}
+                </p>
+            </div>
+            <div class="col-1">
+                <button class="w-100 btn btn-danger" style="height: 60px;">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

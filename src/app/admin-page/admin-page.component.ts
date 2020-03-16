@@ -13,7 +13,9 @@ export class AdminPageComponent implements OnInit {
   public listItemState = -1;
 
   ngOnInit() {
-    this.orderService.loadOrderList();
+    if(!this.orderService.orderList || this.orderService.orderList.length === 0){
+      this.orderService.loadOrderList();
+    }
   }
 
   changeListItemState(state: number){

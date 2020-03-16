@@ -6,4 +6,5 @@ export interface Order{
     email: string;
     gender: boolean;
     notes?: string;
+    status?: number;
 }

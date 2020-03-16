@@ -69,7 +69,8 @@ export class CheckoutComponent implements OnInit {
       address: this.addressControl.value,
       email: this.emailControl.value,
       gender: (this.genderControl.value == 0) ? false : true,
-      notes: this.checkoutForm.get('notes').value
+      notes: this.checkoutForm.get('notes').value,
+      status: 0
     }
 
     let orderItems: OrderItem[] = [];

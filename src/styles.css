@@ -38,3 +38,18 @@ button:disabled{
 .item-hover:hover{
     border: 1px solid #DAF1EC;
 }
+
+.horizontal-divider {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    width: 100%;
+    margin: 5px 10px;
+}
+
+.vertical-divider{
+    
+}
+
+.full-width-divider {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    width: 100%;
+}
