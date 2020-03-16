@@ -38,7 +38,6 @@ export class ProductOrderComponent implements OnInit {
       amount: this.quantity * this.product.price,
       image: DataConfig.baseUrl + '/images/product/' + this.product.id
     }
-    // console.log(orderItem)
 
     this.orderService.addOrderItemToCart(orderItem);
   }

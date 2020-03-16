@@ -32,6 +32,7 @@ import { ShoppingCartComponent } from './user-page/shopping-cart/shopping-cart.c
 import { OrderService } from './services/order.service';
 import { CheckoutComponent } from './user-page/checkout/checkout.component';
 import { OrderManagerComponent } from './admin-page/order-manager/order-manager.component';
+import { OrderDetailsDialogComponent } from './admin-page/order-manager/order-details-dialog/order-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { OrderManagerComponent } from './admin-page/order-manager/order-manager.
     EditProviderDialogComponent,
     ShoppingCartComponent,
     CheckoutComponent,
-    OrderManagerComponent
+    OrderManagerComponent,
+    OrderDetailsDialogComponent
   ],
   entryComponents: [
     AddProductDialogComponent,
@@ -63,7 +65,8 @@ import { OrderManagerComponent } from './admin-page/order-manager/order-manager.
     AddProviderDialogComponent,
     EditProductDialogComponent,
     EditCategoryDialogComponent,
-    EditProviderDialogComponent
+    EditProviderDialogComponent,
+    OrderDetailsDialogComponent
   ],
   imports: [
     BrowserModule,

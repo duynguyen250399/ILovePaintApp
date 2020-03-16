@@ -1,7 +1,27 @@
 .order-item{
-    height: 100px;
     cursor: pointer;
     -webkit-box-shadow: -1px 3px 11px -3px rgba(0,0,0,0.75);
     -moz-box-shadow: -1px 3px 11px -3px rgba(0,0,0,0.75);
     box-shadow: -1px 3px 11px -3px rgba(0,0,0,0.75);
+    transition: 0.2s;
+}
+
+.order-item:hover{
+    background-color: rgba(35, 15, 25, 0.1);
+}
+
+.guest-tag{
+    background-color: rgba(63, 63, 191, 0.9); 
+}
+
+.member-tag{
+    background-color: rgba(191, 63, 127, 0.8);
+}
+
+.member-tag, .guest-tag{
+    padding: 6px 18px;
+    color: white;
+    border-radius: 10px;
+    font-size: 12px;
+    margin: 0 5px;
 }

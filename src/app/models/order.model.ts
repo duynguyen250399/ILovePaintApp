@@ -7,4 +7,5 @@ export interface Order{
     gender: boolean;
     notes?: string;
     status?: number;
+    isMember?: boolean;
 }

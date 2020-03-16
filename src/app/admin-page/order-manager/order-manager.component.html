@@ -2,25 +2,29 @@
 <div class="horizontal-divider"></div>
 <div>
     <div class="my-3 mx-5">
-        <div class="row order-item p-3 my-3" *ngFor="let order of orderService.orderList">
-            <div class="col-2">
-                <i class="fas fa-user" style="font-size: 60px;"></i>
+        <div class="p-5" *ngIf="orderService.orderList.length === 0">
+            <p class="font-italic text-danger text-center">There's no any available order</p>
+        </div>
+        <div (click)="openOrderDetailsDialog(order.id)" class="row order-item p-3 my-3" *ngFor="let order of orderService.orderList">
+            <div class="col-lg-2">
+                <i class="fas fa-user text-muted" style="font-size: 60px;"></i>
+                <span [class.member-tag]="order.isMember == true" [class.guest-tag]="order.isMember == false">{{order.isMember == true ? "Member" : "Guest"}}</span>
             </div>
-            <div class="col-6">
-                <p>{{order.gender === true ? "Ms" : "Mr"}}. {{order.fullName}}
+            <div class="col-lg-6">
+                <p><b>{{order.gender === true ? "Ms" : "Mr"}}. {{order.fullName}}</b>
                     has ordered our product!
                 </p>
-                <p>Order ID: #{{order.id}}</p>
+                <p>Order ID: <b>#{{order.id}}</b></p>
             </div>
-            <div class="col-3">
-                <p class="font-weight-bold" [class.text-warning]="order.status === 0"
-                    [class.text-info]="order.status === 1" [class.text-danger]="order.status === 2"
-                    [class.text-success]="order.status === 3">{{(order.status == null) ? "Unknown" : (order.status === 0) ? "Waiting..." : (order.status === 1) ? "Packaging..." :
+            <div class="col-lg-3">
+                <p style="font-weight: 500;" [class.text-info]="order.status === 0"
+                    [class.text-secondary]="order.status === 1" [class.text-danger]="order.status === 2"
+                    [class.text-success]="order.status === 3">{{(order.status == null) ? "Unknown" : (order.status === 0) ? "Waiting..." : (order.status === 1) ? "Packed" :
                     (order.status === 2) ? "Shipping..." : "Finished!"}}
                 </p>
             </div>
-            <div class="col-1">
-                <button class="w-100 btn btn-danger" style="height: 60px;">
+            <div class="col-lg-1">
+                <button class="btn btn-danger">
                     <i class="fas fa-trash"></i>
                 </button>
             </div>

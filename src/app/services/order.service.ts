@@ -39,6 +39,7 @@ export class OrderService {
   }
 
   checkoutOrder(orderData: OrderData){
+    orderData.order.isMember = false;
     this.http.post(DataConfig.baseUrl + '/order', orderData)
     .subscribe(
       data => {
@@ -57,5 +58,9 @@ export class OrderService {
       data => this.orderList = data as OrderData[],
       error => console.log(error)
     )
+  }
+
+  getOrderById(id){
+    return this.http.get(DataConfig.baseUrl + '/order/' + id);
   }
 }

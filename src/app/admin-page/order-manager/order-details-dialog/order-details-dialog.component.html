@@ -1,0 +1,26 @@
+<div class="row" *ngFor="let item of orderData?.orderItems">
+    <div class="col-3">
+        <img [src]="url + '/images/product/' + item.productID" alt="{{item.product.name}}" class="w-100">
+    </div>
+    <div class="col-5">
+        <p class="mt-5" style="font-weight: 500;">{{item.product.name}}</p>
+        <p>{{item.product.price}}đ</p>
+    </div>
+    <div class="col-4">
+        <p class="mt-5">Quantity: <b>{{item.quantity}}</b></p>
+    </div>
+    <div class="horizontal-divider"></div>
+</div>
+
+<div>
+    <h3 class="text-center py-3">Total: {{total}}đ</h3>
+</div>
+<div class="horizontal-divider"></div>
+
+<div>
+    <p>Customer: {{orderData.gender == true ? "Ms" : "Mr"}}. {{orderData.fullName}}</p>
+    <p>Phone Number: {{orderData.phoneNumber}}</p>
+    <p>Email: {{orderData.email}}</p>
+    <p>Address: {{orderData.address}}</p>
+    <p>Notes: {{orderData.notes}}</p>
+</div>
