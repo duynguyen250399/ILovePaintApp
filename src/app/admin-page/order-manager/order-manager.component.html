@@ -1,14 +1,55 @@
 <h3 class="m-3 text-center">Orders</h3>
 <div class="horizontal-divider"></div>
+
+<form action="" [formGroup]="filterForm" class="form-inline my-3">
+    <div class="col-lg text-center">
+        <div class="custom-control custom-radio custom-control-inline">
+            <input (change)="onStatusSelected($event)" formControlName="status" type="radio" id="all" name="status" value="-1"
+                class="custom-control-input">
+            <label class="custom-control-label" for="all">All</label>
+        </div>
+    </div>
+    <div class="col-lg text-center">
+        <div class="custom-control custom-radio custom-control-inline">
+            <input (change)="onStatusSelected($event)" formControlName="status" type="radio" id="waitting" name="status" value="0"
+                class="custom-control-input">
+            <label class="custom-control-label" for="waitting">Waitting</label>
+        </div>
+    </div>
+    <div class="col-lg text-center">
+        <div class="custom-control custom-radio custom-control-inline">
+            <input (change)="onStatusSelected($event)" formControlName="status" type="radio" id="packed" name="status" value="1"
+                class="custom-control-input">
+            <label class="custom-control-label" for="packed">Packed</label>
+        </div>
+    </div>
+    <div class="col-lg text-center">
+        <div class="custom-control custom-radio custom-control-inline">
+            <input (change)="onStatusSelected($event)" formControlName="status" type="radio" id="shipping" name="status" value="2"
+                class="custom-control-input">
+            <label class="custom-control-label" for="shipping">Shipping</label>
+        </div>
+    </div>
+    <div class="col-lg text-center">
+        <div class="custom-control custom-radio custom-control-inline">
+            <input (change)="onStatusSelected($event)" formControlName="status" type="radio" id="finished" name="status" value="3"
+                class="custom-control-input">
+            <label class="custom-control-label" for="finished">Finished</label>
+        </div>
+    </div>
+</form>
+
 <div>
     <div class="my-3 mx-5">
         <div class="p-5" *ngIf="orderService.orderList.length === 0">
             <p class="font-italic text-danger text-center">There's no any available order</p>
         </div>
-        <div (click)="openOrderDetailsDialog(order.id)" class="row order-item p-3 my-3" *ngFor="let order of orderService.orderList">
+        <div (click)="openOrderDetailsDialog(order.id)" class="row order-item p-3 my-3"
+            *ngFor="let order of orderService.orderList">
             <div class="col-lg-2">
                 <i class="fas fa-user text-muted" style="font-size: 60px;"></i>
-                <span [class.member-tag]="order.isMember == true" [class.guest-tag]="order.isMember == false">{{order.isMember == true ? "Member" : "Guest"}}</span>
+                <span [class.member-tag]="order.isMember == true"
+                    [class.guest-tag]="order.isMember == false">{{order.isMember == true ? "Member" : "Guest"}}</span>
             </div>
             <div class="col-lg-6">
                 <p><b>{{order.gender === true ? "Ms" : "Mr"}}. {{order.fullName}}</b>

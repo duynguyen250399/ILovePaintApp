@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ValidationPatterns } from 'src/helpers/helper';
 import { Order } from 'src/app/models/order.model';
 import { OrderItem } from 'src/app/models/order-item.model';
-import { OrderData } from 'src/app/models/order-data.model';
 
 @Component({
   selector: 'app-checkout',
@@ -63,16 +62,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   async checkout(){
-    let order: Order = {
-      fullName: this.fullNameControl.value,
-      phoneNumber: this.phoneControl.value,
-      address: this.addressControl.value,
-      email: this.emailControl.value,
-      gender: (this.genderControl.value == 0) ? false : true,
-      notes: this.checkoutForm.get('notes').value,
-      status: 0
-    }
-
     let orderItems: OrderItem[] = [];
     for(let i = 0; i < this.orderService.orderItemList.length; i++){
       let item = this.orderService.orderItemList[i];
@@ -84,12 +73,19 @@ export class CheckoutComponent implements OnInit {
       orderItems.push(orderItem);
     }
 
-    let orderData: OrderData = {
-      order: order,
+    let order: Order = {
+      fullName: this.fullNameControl.value,
+      phoneNumber: this.phoneControl.value,
+      address: this.addressControl.value,
+      email: this.emailControl.value,
+      gender: (this.genderControl.value == 0) ? false : true,
+      notes: this.checkoutForm.get('notes').value,
+      status: 0,
+      isMember: false,
       orderItems: orderItems
     }
 
-    this.orderService.checkoutOrder(orderData);
+    this.orderService.checkoutOrder(order);
    
   }
 

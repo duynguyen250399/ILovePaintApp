@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { OrderData } from 'src/app/models/order-data.model';
 import { OrderService } from 'src/app/services/order.service';
 import { DataConfig } from "../../../../config/data";
+import { Order } from 'src/app/models/order.model';
 
 @Component({
   selector: 'app-order-details-dialog',
@@ -14,7 +14,7 @@ export class OrderDetailsDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   private orderService: OrderService) { }
 
-  public orderData: OrderData;
+  public orderData: Order;
   public url: string;
   public total: number = 0;
   ngOnInit() {
@@ -22,7 +22,7 @@ export class OrderDetailsDialogComponent implements OnInit {
     this.orderService.getOrderById(this.data)
     .subscribe(
       data =>{   
-        this.orderData = data as OrderData;
+        this.orderData = data as Order;
         this.orderData.orderItems.forEach(item => {
           this.total = this.total + item.amount;
         });

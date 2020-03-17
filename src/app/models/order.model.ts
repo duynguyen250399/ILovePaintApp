@@ -1,3 +1,5 @@
+import { OrderItem } from './order-item.model';
+
 export interface Order{
     id?: number;
     fullName: string;
@@ -6,6 +8,8 @@ export interface Order{
     email: string;
     gender: boolean;
     notes?: string;
+    orderDate?: Date;
     status?: number;
     isMember?: boolean;
+    orderItems?: OrderItem[];
 }

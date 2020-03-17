@@ -5,6 +5,17 @@
     <div class="col-5">
         <p class="mt-5" style="font-weight: 500;">{{item.product.name}}</p>
         <p>{{item.product.price}}đ</p>
+        <p><span style="font-size: 13px; font-weight: 500;" class="mr-3">Status:</span> 
+            <span *ngIf="item.product.quantity - item.quantity >= 0" class="tag tag-available">
+                Available
+            </span>
+            <span *ngIf="item.product.quantity - item.quantity < 0" class="tag tag-unavailable">
+                Not enough
+            </span>
+        </p>
+        <small *ngIf="item.product.quantity - item.quantity < 0">
+            Remaining quantity: <b>{{item.product.quantity}}</b>
+        </small>
     </div>
     <div class="col-4">
         <p class="mt-5">Quantity: <b>{{item.quantity}}</b></p>
@@ -18,9 +29,86 @@
 <div class="horizontal-divider"></div>
 
 <div>
-    <p>Customer: {{orderData.gender == true ? "Ms" : "Mr"}}. {{orderData.fullName}}</p>
-    <p>Phone Number: {{orderData.phoneNumber}}</p>
-    <p>Email: {{orderData.email}}</p>
-    <p>Address: {{orderData.address}}</p>
-    <p>Notes: {{orderData.notes}}</p>
+    <h4 class="text-center mt-5" style="font-weight: 500;">Customer Information</h4>
+    <div class="form-group">
+        <small style="font-weight: 500;">Customer</small>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-user-alt"></i>
+                </div>
+            </div>
+            <input disabled="true" type="text" class="form-control"
+                value="{{orderData.gender == true ? 'Ms' : 'Mr'}}. {{orderData.fullName}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <small style="font-weight: 500;">Phone number</small>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-mobile"></i>
+                </div>
+            </div>
+            <input disabled="true" type="text" class="form-control" value="{{orderData.phoneNumber}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <small style="font-weight: 500;">Email</small>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-envelope"></i>
+                </div>
+            </div>
+            <input disabled="true" type="text" class="form-control" value="{{orderData.email}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <small style="font-weight: 500;">Address</small>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+            </div>
+            <input disabled="true" type="text" class="form-control" value="{{orderData.address}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <small style="font-weight: 500;">Notes</small>
+        <div class="input-group" *ngIf="orderData.notes">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fas fa-sticky-note"></i>
+                </div>
+            </div>
+            <input disabled="true" type="text" class="form-control" value="{{orderData?.notes}}">
+        </div>
+        <div class="font-italic text-secondary" *ngIf="!orderData.notes">No notes!</div>
+    </div>
+</div>
+
+<div>
+    <h5>Ship by</h5>
+    <div class="form-group">
+        <select name="" id="" class="form-control">
+            <option value="">Nguyễn Văn A</option>
+            <option value="">Nguyễn Văn B</option>
+            <option value="">Nguyễn Văn C</option>
+        </select>
+    </div>
+    <p style="font-size: 13px; font-weight: 500;">Shipper Code: <span class="tag tag-shipper">SP01</span></p>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <button class="btn btn-primary w-100">Packing order</button>
+    </div>
+    <div class="col-lg-4">
+        <button class="btn btn-secondary w-100">Report out of stock</button>
+    </div>
+    <div class="col-lg-4">
+        <button class="btn btn-danger w-100">Cancel order</button>
+    </div>
 </div>

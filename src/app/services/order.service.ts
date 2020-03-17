@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { OrderItemCart } from '../models/order-item-cart';
 import { DataConfig } from 'src/config/data';
-import { OrderData } from '../models/order-data.model';
 import { Router } from '@angular/router';
 import { Order } from '../models/order.model';
 
@@ -17,7 +16,7 @@ export class OrderService {
   public orderItemList: OrderItemCart[];
   public total: number = 0;
   
-  public orderList: OrderData[] = [];
+  public orderList: Order[] = [];
 
   refreshOrderItemList(){
     this.orderItemList = [];
@@ -38,8 +37,8 @@ export class OrderService {
     this.refreshOrderItemList();
   }
 
-  checkoutOrder(orderData: OrderData){
-    orderData.order.isMember = false;
+  checkoutOrder(orderData: Order){
+    orderData.isMember = false;
     this.http.post(DataConfig.baseUrl + '/order', orderData)
     .subscribe(
       data => {
@@ -55,9 +54,13 @@ export class OrderService {
   loadOrderList(){
     this.http.get(DataConfig.baseUrl + '/order')
     .subscribe(
-      data => this.orderList = data as OrderData[],
+      data => this.orderList = data as Order[],
       error => console.log(error)
     )
+  }
+
+  getOrderList(){
+    return this.http.get(DataConfig.baseUrl + '/order');
   }
 
   getOrderById(id){
