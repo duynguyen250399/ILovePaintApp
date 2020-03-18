@@ -5,7 +5,7 @@
     <div class="col-5">
         <p class="mt-5" style="font-weight: 500;">{{item.product.name}}</p>
         <p>{{item.product.price}}đ</p>
-        <p><span style="font-size: 13px; font-weight: 500;" class="mr-3">Status:</span> 
+        <p><span style="font-size: 13px; font-weight: 500;" class="mr-3">Status:</span>
             <span *ngIf="item.product.quantity - item.quantity >= 0" class="tag tag-available">
                 Available
             </span>
@@ -92,13 +92,17 @@
 <div>
     <h5>Ship by</h5>
     <div class="form-group">
-        <select name="" id="" class="form-control">
-            <option value="">Nguyễn Văn A</option>
-            <option value="">Nguyễn Văn B</option>
-            <option value="">Nguyễn Văn C</option>
-        </select>
+        <form action="" [formGroup]="shipperForm">
+            <select formControlName="shipper" name="" id="" class="form-control" (change)="log(shipper)">
+                <option value="">Select a shipper</option>
+                <option value="{{shipper.id}}" *ngFor="let shipper of shipperService.shipperList">
+                    {{shipper.fullName}}
+                </option>
+            </select>
+        </form>
     </div>
-    <p style="font-size: 13px; font-weight: 500;">Shipper Code: <span class="tag tag-shipper">SP01</span></p>
+    <p style="font-size: 13px; font-weight: 500;">Shipper Code: <span *ngIf="shipperForm.value.shipper"
+            class="tag tag-shipper">SP0{{shipperForm.value.shipper}}</span></p>
 </div>
 
 <div class="row">

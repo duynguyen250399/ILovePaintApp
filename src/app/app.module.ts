@@ -33,6 +33,7 @@ import { OrderService } from './services/order.service';
 import { CheckoutComponent } from './user-page/checkout/checkout.component';
 import { OrderManagerComponent } from './admin-page/order-manager/order-manager.component';
 import { OrderDetailsDialogComponent } from './admin-page/order-manager/order-details-dialog/order-details-dialog.component';
+import { ShipperService } from './services/shipper.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,7 @@ import { OrderDetailsDialogComponent } from './admin-page/order-manager/order-de
     MaterialModule
   ],
   providers: [ProductService, ProviderService, CategoryService,
-    ImageService, OrderService],
+    ImageService, OrderService, ShipperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
