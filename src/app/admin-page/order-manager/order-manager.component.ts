@@ -29,11 +29,11 @@ export class OrderManagerComponent implements OnInit {
     }
   }
 
-  openOrderDetailsDialog(orderId: number) {
+  openOrderDetailsDialog(order: Order) {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.width = '50%';
     dialogConfig.height = '600px';
-    dialogConfig.data = orderId;
+    dialogConfig.data = order;
     this.dialog.open(OrderDetailsDialogComponent, dialogConfig);
   }
 

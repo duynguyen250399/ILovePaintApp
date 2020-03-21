@@ -19,7 +19,7 @@ export class ProductDisplayComponent implements OnInit {
     if(this.product.image == null){
       this.product.image = this.defaultImage;
     }
-    this.formatedPrice = formatNumber(this.product.price);
+    // this.formatedPrice = formatNumber(this.product.price);
   }
 
 }

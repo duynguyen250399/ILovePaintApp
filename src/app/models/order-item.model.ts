@@ -6,4 +6,5 @@ export interface OrderItem{
     product?: Product;
     quantity: number;
     amount: number;
+    unitPrice: any;
 }

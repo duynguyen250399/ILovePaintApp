@@ -1,9 +1,8 @@
 <div class="card my-3" style="width: 18rem;">
-  <img style="height: 180px; width: 180px;" src="https://localhost:44385/api/images/product/{{product.id}}"
+  <img style="height: 180px; width: 180px;" [src]="product.image"
     class="card-img-top mx-auto my-3" alt="paint_product">
   <div class="card-body">
     <h5 class="card-title">{{product.name}}</h5>
-    <b>{{formatedPrice}} đ</b>
     <a href="/product-order/{{product.id}}" class="btn btn-primary float-right">Buy now</a>
   </div>
 </div>

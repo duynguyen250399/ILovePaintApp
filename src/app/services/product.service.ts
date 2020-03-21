@@ -98,4 +98,8 @@ export class ProductService {
       )
   }
 
+  getProductVolume(productId, volumeId){
+    return this.http.get(DataConfig.baseUrl + '/products/' + productId + '/volumes/' + volumeId);
+  }
+
 }

@@ -16,3 +16,9 @@
 .tag-available{
     background-color: rgba(1, 125, 1, 0.9);
 }
+
+.out-of-stock-btn{
+    font-size: 14px;
+    margin: 10px 0;
+    color: rgba(221, 12, 12, 0.9);
+}

@@ -61,14 +61,16 @@ export class CheckoutComponent implements OnInit {
     return this.checkoutForm.get('gender');
   }
 
-  async checkout(){
+  checkout(){
     let orderItems: OrderItem[] = [];
     for(let i = 0; i < this.orderService.orderItemList.length; i++){
       let item = this.orderService.orderItemList[i];
+      item.productPrice = parseInt(item.productPrice.replace(',',''));
       let orderItem: OrderItem = {
         productId: item.productId,
         amount: item.amount,
-        quantity: item.quantity
+        quantity: item.quantity,
+        unitPrice: item.productPrice     
       }
       orderItems.push(orderItem);
     }
@@ -81,11 +83,14 @@ export class CheckoutComponent implements OnInit {
       gender: (this.genderControl.value == 0) ? false : true,
       notes: this.checkoutForm.get('notes').value,
       status: 0,
-      isMember: false,
+      isMember: false
+    }
+    let orderData = {
+      order: order,
       orderItems: orderItems
     }
-
-    this.orderService.checkoutOrder(order);
+    
+    this.orderService.checkoutOrder(orderData);
    
   }
 

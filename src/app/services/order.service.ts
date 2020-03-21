@@ -4,6 +4,7 @@ import { OrderItemCart } from '../models/order-item-cart';
 import { DataConfig } from 'src/config/data';
 import { Router } from '@angular/router';
 import { Order } from '../models/order.model';
+import { formatNumber } from 'src/helpers/helper';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class OrderService {
     private router: Router) { }
 
   public orderItemList: OrderItemCart[];
-  public total: number = 0;
+  public total: any = 0;
   
   public orderList: Order[] = [];
 
@@ -29,7 +30,9 @@ export class OrderService {
 
     for(let i = 0; i < this.orderItemList.length; i++){
       this.total = this.total + this.orderItemList[i].amount;
+      this.orderItemList[i].productPrice = formatNumber(this.orderItemList[i].productPrice);
     }
+    this.total = formatNumber(this.total);
   }
 
   addOrderItemToCart(orderItem: OrderItemCart){
@@ -37,7 +40,7 @@ export class OrderService {
     this.refreshOrderItemList();
   }
 
-  checkoutOrder(orderData: Order){
+  checkoutOrder(orderData: any){
     orderData.isMember = false;
     this.http.post(DataConfig.baseUrl + '/order', orderData)
     .subscribe(
@@ -65,5 +68,17 @@ export class OrderService {
 
   getOrderById(id){
     return this.http.get(DataConfig.baseUrl + '/order/' + id);
+  }
+
+  getOrder(id){
+    this.http.get(DataConfig.baseUrl + '/order/' + id)
+    .subscribe(
+      data => {return data as Order},
+      error => console.log(error)
+    )
+  }
+
+  updateOrder(order){
+    return this.http.put(DataConfig.baseUrl + '/order', order);
   }
 }

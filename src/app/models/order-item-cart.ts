@@ -2,7 +2,7 @@ export interface OrderItemCart {
     id?: number;
     productId: number;
     productName: string;
-    productPrice: number;
+    productPrice: any;
     quantity: number;
     amount: number;
     image?: string;

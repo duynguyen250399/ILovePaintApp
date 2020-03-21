@@ -1,24 +1,30 @@
 <div class="row" *ngFor="let item of orderData?.orderItems">
     <div class="col-3">
-        <img [src]="url + '/images/product/' + item.productID" alt="{{item.product.name}}" class="w-100">
+        <img [src]="url + '/images/product/' + item.productID" alt="{{item?.product.name}}" class="w-100">
     </div>
     <div class="col-5">
-        <p class="mt-5" style="font-weight: 500;">{{item.product.name}}</p>
-        <p>{{item.product.price}}đ</p>
-        <p><span style="font-size: 13px; font-weight: 500;" class="mr-3">Status:</span>
+        <p class="mt-5" style="font-weight: 500;">{{item?.product.name}}</p>
+        <p>{{item.unitPrice}}đ</p>
+        <!-- <p><span style="font-size: 13px; font-weight: 500;" class="mr-3">Status:</span>
             <span *ngIf="item.product.quantity - item.quantity >= 0" class="tag tag-available">
                 Available
             </span>
             <span *ngIf="item.product.quantity - item.quantity < 0" class="tag tag-unavailable">
                 Not enough
             </span>
-        </p>
-        <small *ngIf="item.product.quantity - item.quantity < 0">
-            Remaining quantity: <b>{{item.product.quantity}}</b>
-        </small>
+        </p> -->
+        <p>Volume: <b>{{item.volumeValue}} (L)</b></p>
+        <!-- <div *ngIf="item.product.quantity - item.quantity < 0">
+            <small class="d-block">
+                Remaining quantity: <b>{{item?.product.quantity}}</b>
+            </small>
+
+            <a href="#" class="out-of-stock-btn">Report out of stock</a>
+        </div> -->
+
     </div>
     <div class="col-4">
-        <p class="mt-5">Quantity: <b>{{item.quantity}}</b></p>
+        <p class="mt-5">Quantity: <b>{{item?.quantity}}</b></p>
     </div>
     <div class="horizontal-divider"></div>
 </div>
@@ -39,7 +45,7 @@
                 </div>
             </div>
             <input disabled="true" type="text" class="form-control"
-                value="{{orderData.gender == true ? 'Ms' : 'Mr'}}. {{orderData.fullName}}">
+                value="{{orderData?.gender == true ? 'Ms' : 'Mr'}}. {{orderData?.fullName}}">
         </div>
     </div>
     <div class="form-group">
@@ -50,7 +56,7 @@
                     <i class="fas fa-mobile"></i>
                 </div>
             </div>
-            <input disabled="true" type="text" class="form-control" value="{{orderData.phoneNumber}}">
+            <input disabled="true" type="text" class="form-control" value="{{orderData?.phoneNumber}}">
         </div>
     </div>
     <div class="form-group">
@@ -61,7 +67,7 @@
                     <i class="fas fa-envelope"></i>
                 </div>
             </div>
-            <input disabled="true" type="text" class="form-control" value="{{orderData.email}}">
+            <input disabled="true" type="text" class="form-control" value="{{orderData?.email}}">
         </div>
     </div>
     <div class="form-group">
@@ -72,12 +78,12 @@
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
             </div>
-            <input disabled="true" type="text" class="form-control" value="{{orderData.address}}">
+            <input disabled="true" type="text" class="form-control" value="{{orderData?.address}}">
         </div>
     </div>
     <div class="form-group">
         <small style="font-weight: 500;">Notes</small>
-        <div class="input-group" *ngIf="orderData.notes">
+        <div class="input-group" *ngIf="orderData?.notes">
             <div class="input-group-prepend">
                 <div class="input-group-text">
                     <i class="fas fa-sticky-note"></i>
@@ -85,7 +91,7 @@
             </div>
             <input disabled="true" type="text" class="form-control" value="{{orderData?.notes}}">
         </div>
-        <div class="font-italic text-secondary" *ngIf="!orderData.notes">No notes!</div>
+        <div class="font-italic text-secondary" *ngIf="!orderData?.notes">No notes!</div>
     </div>
 </div>
 
@@ -93,9 +99,9 @@
     <h5>Ship by</h5>
     <div class="form-group">
         <form action="" [formGroup]="shipperForm">
-            <select formControlName="shipper" name="" id="" class="form-control" (change)="log(shipper)">
+            <select formControlName="shipper" name="" id="" class="form-control" (change)="onShipperChange()">
                 <option value="">Select a shipper</option>
-                <option value="{{shipper.id}}" *ngFor="let shipper of shipperService.shipperList">
+                <option value="{{shipper.id}}" *ngFor="let shipper of shipperService?.shipperList">
                     {{shipper.fullName}}
                 </option>
             </select>
@@ -105,14 +111,27 @@
             class="tag tag-shipper">SP0{{shipperForm.value.shipper}}</span></p>
 </div>
 
+<form action="" [formGroup]="statusForm">
+    <div class="form-group">
+        <small style="font-weight: 500;">Status</small>
+        <select name="" id="" class="form-control" formControlName="status">
+            <option value="0">Waitting</option>
+            <option value="1">Packed</option>
+            <option value="2">Shipping</option>
+            <option value="3">Finished</option>
+        </select>
+    </div>
+</form>
+
 <div class="row">
-    <div class="col-lg-4">
-        <button class="btn btn-primary w-100">Packing order</button>
+    <div class="col-lg-6">
+        <button mat-dialog-close (click)="saveOrder()" class="btn btn-success w-100">Save <div
+                class="spinner-border spinner-border-sm text-light" role="status" *ngIf="loading">
+                <span class="sr-only">Loading...</span>
+            </div></button>
+
     </div>
-    <div class="col-lg-4">
-        <button class="btn btn-secondary w-100">Report out of stock</button>
-    </div>
-    <div class="col-lg-4">
+    <div class="col-lg-6">
         <button class="btn btn-danger w-100">Cancel order</button>
     </div>
 </div>

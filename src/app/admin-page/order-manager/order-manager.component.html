@@ -44,7 +44,7 @@
         <div class="p-5" *ngIf="orderService.orderList.length === 0">
             <p class="font-italic text-danger text-center">There's no any available order</p>
         </div>
-        <div (click)="openOrderDetailsDialog(order.id)" class="row order-item p-3 my-3"
+        <div (click)="openOrderDetailsDialog(order)" class="row order-item p-3 my-3"
             *ngFor="let order of orderService.orderList">
             <div class="col-lg-2">
                 <i class="fas fa-user text-muted" style="font-size: 60px;"></i>

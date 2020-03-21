@@ -34,6 +34,8 @@ import { CheckoutComponent } from './user-page/checkout/checkout.component';
 import { OrderManagerComponent } from './admin-page/order-manager/order-manager.component';
 import { OrderDetailsDialogComponent } from './admin-page/order-manager/order-details-dialog/order-details-dialog.component';
 import { ShipperService } from './services/shipper.service';
+import { ProductVolumeService } from './services/product-volume.service';
+import { EmailService } from './services/email.service';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,8 @@ import { ShipperService } from './services/shipper.service';
     MaterialModule
   ],
   providers: [ProductService, ProviderService, CategoryService,
-    ImageService, OrderService, ShipperService],
+    ImageService, OrderService, ShipperService,
+  ProductVolumeService, EmailService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
