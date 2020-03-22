@@ -1,11 +1,11 @@
 <div class="w-50 mx-auto my-5 p-3 checkout-form">
     <div class="row" *ngFor="let item of orderService.orderItemList">
         <div class="col-3">
-            <img [src]="item.image" alt="{{item.productName}}" class="w-100">
+            <img [src]="item.product.image" alt="{{item.product.name}}" class="w-100">
         </div>
         <div class="col-5">
-            <p class="mt-5">{{item.productName}}</p>
-            <p>{{item.productPrice}}đ</p>
+            <p class="mt-5">{{item.product.name}} <b>{{item.product.productVolumes[0].volumeValue}}(L)</b></p>
+            <p>{{item.product.productVolumes[0].price}}đ</p>
         </div>
         <div class="col-4">
             <p class="mt-5">Quantity: <b>{{item.quantity}}</b></p>
@@ -79,6 +79,8 @@
                 </div>
             </div>
         </div>
-        <button (click)="checkout()" [disabled]="checkoutForm.invalid" class="btn btn-primary btn-block">Pay at home</button>
+        <button (click)="checkout()" [disabled]="checkoutForm.invalid" class="btn btn-primary btn-block">Pay at home 
+            <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
     </form>
 </div>

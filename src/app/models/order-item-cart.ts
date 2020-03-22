@@ -6,4 +6,5 @@ export interface OrderItemCart {
     quantity: number;
     amount: number;
     image?: string;
+    volumeValue: number;
 }

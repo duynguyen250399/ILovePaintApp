@@ -36,6 +36,8 @@ import { OrderDetailsDialogComponent } from './admin-page/order-manager/order-de
 import { ShipperService } from './services/shipper.service';
 import { ProductVolumeService } from './services/product-volume.service';
 import { EmailService } from './services/email.service';
+import { DialogService } from './services/dialog.service';
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { EmailService } from './services/email.service';
     ShoppingCartComponent,
     CheckoutComponent,
     OrderManagerComponent,
-    OrderDetailsDialogComponent
+    OrderDetailsDialogComponent,
+    ConfirmDialogComponent
   ],
   entryComponents: [
     AddProductDialogComponent,
@@ -69,7 +72,8 @@ import { EmailService } from './services/email.service';
     EditProductDialogComponent,
     EditCategoryDialogComponent,
     EditProviderDialogComponent,
-    OrderDetailsDialogComponent
+    OrderDetailsDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +86,7 @@ import { EmailService } from './services/email.service';
   ],
   providers: [ProductService, ProviderService, CategoryService,
     ImageService, OrderService, ShipperService,
-  ProductVolumeService, EmailService],
+  ProductVolumeService, EmailService, DialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

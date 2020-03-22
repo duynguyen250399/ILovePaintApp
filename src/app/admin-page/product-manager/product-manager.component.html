@@ -19,13 +19,9 @@
     <thead>
         <tr>
             <td>No.</td>
-            <td>Product Name</td>
-            <td>Weight</td>
-            <td>Price</td>
-            <td>Quantity</td>
+            <td>Product Name</td>        
             <td>Provider</td>
-            <td>Category</td>
-            <td>Status</td>
+            <td>Category</td>       
             <td colspan="2">Edit/Delete</td>
         </tr>
     </thead>
@@ -38,18 +34,13 @@
         <tr *ngFor="let product of productService.getProductChunks(); index as i">
             <td>{{i + 1 + (productService.currentChunkIndex * productService.chunkSize)}}</td>
             <td>{{product.name}}</td>
-            <td>{{product.weight}}</td>
-            <td>{{product.price}}</td>
-            <td>{{product.quantity}}</td>
             <td [class.text-warning]="!product.provider">
                 {{(product.provider) ? product.provider.name : "Unknown"}}
             </td>
             <td [class.text-warning]="!product.category">
                 {{(product.category) ? product.category.name : "Unknown"}}
-            </td>
-            <td [class.text-success]="product.status === 1" [class.text-danger]="product.status !== 1">
-                {{(product.status === 1) ? "Available" : "Unavailable"}}</td>
-            <td>
+            </td>  
+            <td>          
                 <button (click)="openEditProductDialog(product)" mat-icon-button color="primary">
                     <mat-icon>create</mat-icon>
                 </button>

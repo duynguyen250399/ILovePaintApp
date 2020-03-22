@@ -27,6 +27,7 @@ export class ProductService {
     this.http.get(this.url)
       .subscribe(data => {
         this.productList = data as Product[];
+     
         this.updateState();
       });
   }

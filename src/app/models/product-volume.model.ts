@@ -1,8 +1,8 @@
 export interface ProductVolume {
-    productID: number;
-    volumeID: number;
+    productID?: number;
+    id?: number;
     volumeValue?: number;
     quantity: number;
-    price: number;
+    price: any;
     status?: number;
 }

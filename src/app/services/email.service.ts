@@ -12,7 +12,9 @@ export class EmailService {
   sendOrderConfirmEmail(orderEmail){
     this.http.post(DataConfig.baseUrl + '/email/order-confirm', orderEmail)
     .subscribe(
-      data => console.log(data),
+      data => {
+        console.log(data);  
+      },
       error => console.log(error)
     )
   }

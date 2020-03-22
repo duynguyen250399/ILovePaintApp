@@ -7,6 +7,7 @@ import { ShipperService } from 'src/app/services/shipper.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmailService } from 'src/app/services/email.service';
+import { formatNumber } from 'src/helpers/helper';
 
 @Component({
   selector: 'app-order-details-dialog',
@@ -28,11 +29,14 @@ export class OrderDetailsDialogComponent implements OnInit {
   public shipperForm: FormGroup;
   public statusForm: FormGroup;
   public loading = false;
+  
+  public unitPriceFormat: string;
+  public totalFormat: string;
 
   public productVolume: any;
 
   ngOnInit() {
-    console.log(this.data);
+  
     this.shipperForm = this.fb.group({
       shipper: [this.data.shipperID ? this.data.shipperID : '', [Validators.required]]
     })
@@ -40,20 +44,14 @@ export class OrderDetailsDialogComponent implements OnInit {
     this.statusForm = this.fb.group({
       status: [this.data.status]
     });
+  
+    this.data.orderItems.forEach(item =>{
+      this.total = this.total + item.unitPrice;
+      item.unitPrice = formatNumber(item.unitPrice);
+    });
+    this.totalFormat = formatNumber(this.total);
 
     this.url = DataConfig.baseUrl;
-
-    this.orderService.getOrderById(this.data.id)
-    .subscribe(
-      data =>{   
-        this.orderData = data as Order;
-        this.orderData.orderItems.forEach(item => {
-          this.total = this.total + item.amount;
-        });
-        
-      }
-    )
-
 
     if(!this.shipperService.shipperList || this.shipperService.shipperList.length == 0){
       this.shipperService.loadShipperList();
@@ -83,32 +81,6 @@ export class OrderDetailsDialogComponent implements OnInit {
       shipperId: this.shipperForm.value.shipper
     }   
 
-    if(newOrder.status == 1){
-      let orderMail = {
-        order: {
-          id: this.data.id,
-          fullName: this.data.fullName,
-          phoneNumber: this.data.phoneNumber,
-          address: this.data.address,
-          email: this.data.email
-        },
-        orderItems: []
-      }
-      this.data.orderItems.forEach(item =>{
-        let itemMail = {
-          productName: item.product.name,
-          quantity: item.quantity,
-          amount: item.amount,
-          unitPrice: item.unitPrice,
-          volumeValue: item.volumeValue
-        };
-
-        orderMail.orderItems.push(itemMail);
-      });
-      
-      this.emailService.sendOrderConfirmEmail(orderMail);
-    }
-    
     this.orderService.updateOrder(newOrder)
     .subscribe(
       data => {      

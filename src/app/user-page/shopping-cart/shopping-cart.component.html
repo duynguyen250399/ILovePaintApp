@@ -13,28 +13,28 @@
     <div class="col-8">
         <div class="row my-3 item-hover p-3" *ngFor="let item of orderService.orderItemList; let i = index">
             <div class="col-2">
-                <img class="w-100" [src]="item.image" alt="{{item.productName}}">
+                <img class="w-100" [src]="item.product.image" alt="{{item.product.name}}">
             </div>
             <div class="col-5">
-                <p>{{item.productName}}</p>
+                <p>{{item.product.name}} <b>{{item.product.productVolumes[0].volumeValue}}(L)</b></p>
 
-                <button (click)="removeItem('order-item-' + item.productId)" class="btn btn-danger mt-3">
+                <button (click)="removeItem('order-item-' + item.productId + '-' + item.volumeValue)" class="btn btn-danger mt-3">
                     <i class="far fa-trash-alt"></i>
                 </button>
             </div>
             <div class="col-3">
-                <p style="font-size: 20px; font-weight: 510;">{{item.productPrice}}</p>
+                <p style="font-size: 20px; font-weight: 510;">{{item.product.productVolumes[0].price}}</p>
             </div>
             <div class="col-2">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <button class="btn btn-danger"
-                            (click)="decreaseQuantity('order-item-' + item.productId)">-</button>
+                            (click)="decreaseQuantity('order-item-' + item.productId + '-' + item.volumeValue)">-</button>
                     </div>
                     <input type="text" class="form-control text-center" value="{{item.quantity}}">
                     <div class="input-group-append">
                         <button class="btn btn-success"
-                            (click)="increaseQuantity('order-item-' + item.productId)">+</button>
+                            (click)="increaseQuantity('order-item-' + item.productId + '-' + item.volumeValue)">+</button>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { ProductService } from '../../services/product.service';
 import { Product } from 'src/app/models/product.model';
 import { OrderItemCart } from 'src/app/models/order-item-cart';
@@ -9,6 +9,7 @@ import { ProductVolumeService } from 'src/app/services/product-volume.service';
 import { ProductVolume } from 'src/app/models/product-volume.model';
 import { formatNumber } from 'src/helpers/helper';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { OrderItem } from 'src/app/models/order-item.model';
 
 @Component({
   selector: 'app-product-order',
@@ -19,7 +20,7 @@ export class ProductOrderComponent implements OnInit {
 
   constructor(private productService: ProductService,
     private orderService: OrderService,
-    private fb: FormBuilder,
+    private router: Router,
     private route: ActivatedRoute) { }
   public product: Product;
   public productImage: string;
@@ -41,16 +42,21 @@ export class ProductOrderComponent implements OnInit {
   }
 
   addToCart() {
-    let orderItem: OrderItemCart = {
+    
+    let orderItem: OrderItem = {
       productId: this.product.id,
       quantity: this.quantity,
-      productName: this.product.name,
-      productPrice: this.currentProductVolume.price,
-      amount: this.quantity * this.currentProductVolume.price,
-      image: DataConfig.baseUrl + '/images/product/' + this.product.id
+      product: this.product,
+      amount: this.quantity * this.currentProductVolume.price
     }
 
+    orderItem.product.productVolumes = orderItem.product.productVolumes
+    .filter(pv => pv.id == this.currentProductVolume.id);
+    orderItem.amount = orderItem.quantity * orderItem.product.productVolumes[0].price;
+
     this.orderService.addOrderItemToCart(orderItem);
+
+    this.router.navigate(['/']);
   }
 
   increaseQuantity(){
@@ -66,12 +72,11 @@ export class ProductOrderComponent implements OnInit {
   }
 
   onVolumeChange(e){
-    let selectedIndex = this.product.productVolumes.findIndex(pv => pv.volumeID == e.target.value);
     
-    if(selectedIndex >= 0){
-      this.currentProductVolume = this.product.productVolumes[selectedIndex];
-      this.formatedPrice = formatNumber(this.currentProductVolume.price);
-    }
+    this.currentProductVolume = this.product.productVolumes
+    .filter(p => p.id == e.target.value)[0];
+    
+    this.formatedPrice = formatNumber(this.currentProductVolume.price);
   
   }
 

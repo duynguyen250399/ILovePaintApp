@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { OrderDetailsDialogComponent } from './order-details-dialog/order-details-dialog.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Order } from 'src/app/models/order.model';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-order-manager',
@@ -14,6 +15,7 @@ export class OrderManagerComponent implements OnInit {
 
   constructor(private orderService: OrderService,
     private fb: FormBuilder,
+    private dialogService: DialogService,
     public dialog: MatDialog) { }
 
   public filterForm: FormGroup;
@@ -60,7 +62,18 @@ export class OrderManagerComponent implements OnInit {
         )
 
     }
+  }
 
+  onOrderDelete(id){
+    this.dialogService.openConfirmDialog('Are you sure to delete this order?')
+    .afterClosed()
+    .subscribe(res =>{
+      if(res){
+        this.orderService.removeOrder(id);
+        location.reload();
+      }
+     
+    })
   }
 
 }

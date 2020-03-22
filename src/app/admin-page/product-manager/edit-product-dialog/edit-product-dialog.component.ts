@@ -36,12 +36,13 @@ export class EditProductDialogComponent implements OnInit {
   public editProductForm: FormGroup
 
   ngOnInit() {
+   
     this.editProductForm = this.fb.group({
       id: [this.data.id],
       name: [this.data.name, Validators.required],
-      quantity: [this.data.quantity, Validators.required],
-      weight: [this.data.weight],
-      price: [this.data.price, Validators.required],
+      quantity: [this.data.productVolumes[0].quantity, Validators.required],
+      volume: [''],
+      price: [this.data.productVolumes[0].price, Validators.required],
       manufactureDate: [this.data.manufactureDate],
       providerId: [(this.data.provider) ? this.data.provider.id : null],
       categoryId: [(this.data.category) ? this.data.category.id : null],
@@ -94,5 +95,17 @@ export class EditProductDialogComponent implements OnInit {
     fileReader.onload = (event: any) =>{
       this.imageUrl = event.target.result;
     }
+  }
+
+  onVolumeChange(event){
+    let volumeId = event.target.value;
+    if(!volumeId){
+      return;
+    }
+   
+    let productVolume = this.data.productVolumes.filter(pv => pv.id == volumeId)[0];
+    
+    this.editProductForm.get('price').setValue(productVolume.price);
+    this.editProductForm.get('quantity').setValue(productVolume.quantity);
   }
 }

@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ValidationPatterns } from 'src/helpers/helper';
 import { Order } from 'src/app/models/order.model';
 import { OrderItem } from 'src/app/models/order-item.model';
+import { EmailService } from 'src/app/services/email.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -13,9 +15,13 @@ import { OrderItem } from 'src/app/models/order-item.model';
 export class CheckoutComponent implements OnInit {
 
   constructor(private orderService: OrderService,
+    private emailService: EmailService,
+    private router: Router,
     private fb: FormBuilder) { }
 
   public checkoutForm: FormGroup;
+
+  public loading = false;
 
   ngOnInit() {
     this.checkoutForm = this.fb.group({
@@ -62,18 +68,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   checkout(){
-    let orderItems: OrderItem[] = [];
-    for(let i = 0; i < this.orderService.orderItemList.length; i++){
-      let item = this.orderService.orderItemList[i];
-      item.productPrice = parseInt(item.productPrice.replace(',',''));
-      let orderItem: OrderItem = {
-        productId: item.productId,
-        amount: item.amount,
-        quantity: item.quantity,
-        unitPrice: item.productPrice     
-      }
-      orderItems.push(orderItem);
-    }
+    this.loading = true;
+    this.orderService.orderItemList.forEach(item => {
+      item.product.productVolumes[0].price = parseInt(item.product.productVolumes[0].price.replace(',',''))
+    });
 
     let order: Order = {
       fullName: this.fullNameControl.value,
@@ -85,12 +83,61 @@ export class CheckoutComponent implements OnInit {
       status: 0,
       isMember: false
     }
+
+    let orderItems = [];
+
+    this.orderService.orderItemList.forEach(item => {
+      let itemFromCart = {
+        productId: item.productId,
+        quantity: item.quantity,
+        amount: item.amount,
+        productName: item.product.name,
+        unitPrice: item.product.productVolumes[0].price,
+        volumeValue: item.product.productVolumes[0].volumeValue     
+      }
+      orderItems.push(itemFromCart);
+    });
+
     let orderData = {
       order: order,
       orderItems: orderItems
     }
     
-    this.orderService.checkoutOrder(orderData);
+    this.orderService.checkoutOrder(orderData)
+    .subscribe(
+      data => {
+        console.log('order checkout:', data);      
+        sessionStorage.clear();
+        this.orderService.refreshOrderItemList();
+        this.loading = false;
+        this.router.navigate(['/']);
+      },
+      error => console.log(error)
+    )
+
+    // let orderMail = {
+    //   order: {
+    //     id: order.id,
+    //     fullName: order.fullName,
+    //     phoneNumber: order.phoneNumber,
+    //     address: order.address,
+    //     email: order.email
+    //   },
+    //   orderItems: []
+    // }
+    // this.orderService.orderItemList.forEach(item =>{
+    //   let itemMail = {
+    //     productName: item.product.name,
+    //     quantity: item.quantity,
+    //     amount: item.amount,
+    //     unitPrice: item.product.productVolumes[0].price,
+    //     volumeValue: item.product.productVolumes[0].volumeValue
+    //   };
+
+    //   orderMail.orderItems.push(itemMail);
+    // });
+    
+    // this.emailService.sendOrderConfirmEmail(orderMail);
    
   }
 

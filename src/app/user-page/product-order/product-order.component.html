@@ -53,7 +53,7 @@
                 <small class="font-weight-bold text-secondary d-block">Volume (L)</small>
                 <form action="">
                     <select (change)="onVolumeChange($event)" class="volume-input" name="" id="">
-                        <option value="{{pv.volumeID}}" *ngFor="let pv of product?.productVolumes">{{pv.volumeValue}}</option>
+                        <option value="{{pv.id}}" *ngFor="let pv of product?.productVolumes">{{pv.volumeValue}}</option>
                     </select>
                 </form>
             </div>
