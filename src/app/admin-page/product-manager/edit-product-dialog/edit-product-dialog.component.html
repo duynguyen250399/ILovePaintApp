@@ -4,8 +4,9 @@
     <div class="col-6">
         <img class="w-100" [src]="imageUrl" alt="product_image">
         <div class="form-group">
-            <input (change)="onFileSelected($event)" class="form-control" type="file" name="" id="">
+            <input #imageInput (change)="onFileSelected($event)" class="form-control d-none" type="file" name="" id="">
         </div>
+        <button (click)="imageInput.click()" class="btn btn-outline-danger btn-block">Update Product Image</button>
     </div>
     <div class="col-6">
         <form [formGroup]="editProductForm">
@@ -20,11 +21,18 @@
 
             <div class="form-group">
                 <label for="">Volume (L)</label>
-                <select (change)="onVolumeChange($event)" formControlName="volume" name="" id=""
-                    class="form-control editing-input">
-                    <option value="">Select volume</option>
-                    <option value="{{pv.id}}" *ngFor="let pv of data?.productVolumes">{{pv.volumeValue}}</option>
-                </select>
+                <div class="row">
+                    <div class="col">
+                        <select (change)="onVolumeChange($event)" formControlName="volume" name="" id=""
+                        class="form-control editing-input">
+                        <option value="">Select volume</option>
+                        <option value="{{pv.id}}" *ngFor="let pv of data?.productVolumes">{{pv.volumeValue}}</option>
+                    </select>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary w-100" (click)="openAddVolumeDialog(data.id)">Add volume</button>
+                    </div>
+                </div>
             </div>
 
             <div *ngIf="editProductForm.value.volume">
@@ -41,12 +49,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="">Manufacture Date (optional)</label><br>
-                <small for="" class="font-weight-bold">Year-Month-Day</small>
-                <input [ngModel]="editProductForm.value.manufactureDate | date: 'yyyy-MM-dd'"
-                    formControlName="manufactureDate" type="date" class="form-control editing-input">
-            </div>
             <div class="form-group">
                 <label for="">Provider</label>
                 <select formControlName="providerId" class="form-control editing-input" name="" id="">
@@ -70,7 +72,7 @@
                     </textarea>
             </div>
 
-            <button (click)="updateProduct()" mat-dialog-close class="btn btn-block btn-primary">
+            <button [disabled]="editProductForm.invalid || !editProductForm.value.volume" (click)="updateProduct()" mat-dialog-close class="btn btn-block btn-primary">
                 <i class="fas fa-database"></i> Save</button>
         </form>
 

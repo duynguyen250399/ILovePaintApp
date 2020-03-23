@@ -6,9 +6,13 @@ import { ProviderService } from 'src/app/services/provider.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogConfig, MatDialog } from '@angular/material';
 import { ImageService } from 'src/app/services/image.service';
 import * as uuid from 'uuid';
+import { AddVolumeDialogComponent } from '../add-volume-dialog/add-volume-dialog.component';
+import { ProductVolume } from 'src/app/models/product-volume.model';
+import { ProductVolumeService } from 'src/app/services/product-volume.service';
+import { ValidationPatterns } from 'src/helpers/helper';
 
 @Component({
   selector: 'app-edit-product-dialog',
@@ -30,23 +34,30 @@ export class EditProductDialogComponent implements OnInit {
     private providerService: ProviderService,
     private categoryService: CategoryService,
     private productService: ProductService,
+    private productVolumeService: ProductVolumeService,
     private imageService: ImageService,
+    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   public editProductForm: FormGroup
 
   ngOnInit() {
+    console.log(this.data)
    
     this.editProductForm = this.fb.group({
       id: [this.data.id],
       name: [this.data.name, Validators.required],
-      quantity: [this.data.productVolumes[0].quantity, Validators.required],
+      quantity: [(this.data.productVolumes.length > 0) ? this.data.productVolumes[0].quantity : '', [
+        Validators.required,
+        Validators.pattern(ValidationPatterns.positiveNumberRegex)
+      ]],
       volume: [''],
-      price: [this.data.productVolumes[0].price, Validators.required],
-      manufactureDate: [this.data.manufactureDate],
+      price: [(this.data.productVolumes.length > 0) ? this.data.productVolumes[0].price : '', [
+        Validators.required,
+        Validators.pattern(ValidationPatterns.positiveNumberWithOneDotRegex)
+      ]],
       providerId: [(this.data.provider) ? this.data.provider.id : null],
       categoryId: [(this.data.category) ? this.data.category.id : null],
-      image: [this.data.image],
       description: [this.data.description]
     })
 
@@ -62,12 +73,6 @@ export class EditProductDialogComponent implements OnInit {
     formData.append('id', this.editProductForm.get('id').value);
     formData.append('name', this.editProductForm.get('name').value);
     formData.append('description', this.editProductForm.get('description').value);
-    formData.append('price', this.editProductForm.get('price').value);
-    formData.append('weight', this.editProductForm.get('weight').value);
-    formData.append('quantity', this.editProductForm.get('quantity').value);
-    let status = (this.editProductForm.get('quantity').value > 0) ? 1 : 0;
-    formData.append('status', status.toString());
-    formData.append('manufactureDate', this.editProductForm.get('manufactureDate').value);
     formData.append('providerId', this.editProductForm.get('providerId').value);
     formData.append('categoryId', this.editProductForm.get('categoryId').value);
 
@@ -79,11 +84,34 @@ export class EditProductDialogComponent implements OnInit {
 
     this.productService.updateProduct(formData);  
 
+    // Update product volume: price, volume value and quantity
+    let productVolume: ProductVolume = this.data.productVolumes
+    .filter(pv => pv.id == this.editProductForm.get('volume').value)[0];
+
+    let newProductVolume: ProductVolume = {
+      id: this.editProductForm.get('volume').value,
+      price: this.editProductForm.get('price').value,
+      quantity: this.editProductForm.get('quantity').value,
+      volumeValue: productVolume.volumeValue,
+      productID: this.editProductForm.get('id').value,
+      status: (this.editProductForm.get('quantity').value > 0) ? 1 : 0
+    };
+
+    this.productVolumeService.updateProductVolume(newProductVolume)
+    .subscribe(
+      res =>{
+        console.log(res);
+      },
+      err => console.log(err)
+    )
+
+    // update product image
     if (this.productImage) {
       let imageFormData = new FormData();
       imageFormData.append('file', this.productImage, this.productImage.name);
       this.imageService.updateImage(imageFormData, this.editProductForm.get('id').value, this.imageName);
     }
+
   }
 
   onFileSelected(event){
@@ -107,5 +135,15 @@ export class EditProductDialogComponent implements OnInit {
     
     this.editProductForm.get('price').setValue(productVolume.price);
     this.editProductForm.get('quantity').setValue(productVolume.quantity);
+  }
+
+  openAddVolumeDialog(productId){
+    let dialogConfig = new MatDialogConfig();
+
+    dialogConfig.width = '50%';
+    dialogConfig.data = productId;
+
+    let dialogRef = this.dialog.open(AddVolumeDialogComponent, dialogConfig);
+    
   }
 }

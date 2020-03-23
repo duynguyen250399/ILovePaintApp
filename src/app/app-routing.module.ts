@@ -12,6 +12,7 @@ import { ProviderManagerComponent } from './admin-page/provider-manager/provider
 import { ShoppingCartComponent } from './user-page/shopping-cart/shopping-cart.component';
 import { CheckoutComponent } from './user-page/checkout/checkout.component';
 import { OrderManagerComponent } from './admin-page/order-manager/order-manager.component';
+import { OrderSuccessComponent } from './user-page/order-success/order-success.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
     {path: 'about', component: AboutUsComponent},
     {path: 'product-order/:id', component: ProductOrderComponent},
     {path: 'my-cart', component: ShoppingCartComponent},
-    {path: 'checkout', component: CheckoutComponent}
+    {path: 'checkout', component: CheckoutComponent},
+    {path: 'order-success', component: OrderSuccessComponent}
   ]},
   {path: 'admin', component: AdminPageComponent, children: [
     {path: 'product', component: ProductManagerComponent},

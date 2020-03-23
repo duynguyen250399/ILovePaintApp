@@ -38,6 +38,8 @@ import { ProductVolumeService } from './services/product-volume.service';
 import { EmailService } from './services/email.service';
 import { DialogService } from './services/dialog.service';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
+import { AddVolumeDialogComponent } from './admin-page/product-manager/add-volume-dialog/add-volume-dialog.component';
+import { OrderSuccessComponent } from './user-page/order-success/order-success.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     CheckoutComponent,
     OrderManagerComponent,
     OrderDetailsDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    AddVolumeDialogComponent,
+    OrderSuccessComponent
   ],
   entryComponents: [
     AddProductDialogComponent,
@@ -73,7 +77,8 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
     EditCategoryDialogComponent,
     EditProviderDialogComponent,
     OrderDetailsDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    AddVolumeDialogComponent
   ],
   imports: [
     BrowserModule,

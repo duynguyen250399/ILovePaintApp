@@ -5,8 +5,9 @@
         <div class="col-6">
             <img class="w-100" [src]="imageUrl" alt="product_image">
             <div class="form-group">
-                <input (change)="onImageSelected($event)" class="form-control" type="file" name="" id="">
+                <input #imageInput (change)="onImageSelected($event)" class="form-control d-none" type="file" name="" id="">
             </div>
+            <button class="btn btn-outline-danger btn-block">Upload Image</button>
         </div>
         <div class="col-6">
             <form [formGroup]="addProductForm">
@@ -26,56 +27,8 @@
                                     chracters</small></li>
                         </ul>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="">Quantity</label>
-                    <input [class.is-valid]="quantityControl.valid"
-                        [class.is-invalid]="quantityControl.invalid && quantityControl.touched"
-                        formControlName="quantity" type="text" class="form-control" placeholder="Quantity" id="quantity">
-
-                    <div *ngIf="quantityControl.invalid && quantityControl.touched">
-                        <ul class="text-danger">
-                            <li *ngIf="quantityControl.errors?.required">
-                                <small>Product quantity is required</small>
-                            </li>
-                            <li *ngIf="quantityControl.errors?.pattern">
-                                <small>Product quantity must be a positive number</small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="">Weight</label>
-                    <select [class.is-invalid]="weightControl.value === '' && weightControl.touched"
-                        [class.is-valid]="weightControl.value !== ''" formControlName="weight" name="" id="weight"
-                        class="form-control">
-                        <option value="">Select Weight</option>
-                        <option value="1">1 kg</option>
-                        <option value="5">5 kg</option>
-                        <option value="12">12 kg</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="">Price</label>
-                    <input [class.is-valid]='priceControl.valid'
-                        [class.is-invalid]="priceControl.invalid && priceControl.touched" formControlName="price"
-                        type="text" class="form-control" placeholder="Product Price">
-
-                    <div *ngIf="priceControl.invalid && priceControl.touched">
-                        <ul class="text-danger">
-                            <li *ngIf="priceControl.errors?.required">
-                                <small>Product price is required</small>
-                            </li>
-                            <li *ngIf="priceControl.errors?.pattern">
-                                <small>Product price must be a positive number</small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="">Manufacture Date (optional)</label>
-                    <input formControlName="date" type="date" class="form-control" placeholder="Optional">
-                </div>
+                </div>       
+              
                 <div class="form-group">
                     <label for="">Provider</label>
                     <select [class.is-invalid]="providerControl.value === '' && providerControl.touched"
@@ -103,7 +56,7 @@
                     </textarea>
                 </div>
 
-                <button [disabled]="addProductForm.invalid || !validProviderCategoryAndWeight()" mat-dialog-close
+                <button [disabled]="addProductForm.invalid || !validProviderCategory()" mat-dialog-close
                     class="btn btn-block btn-primary" (click)="addProduct()">
                     <i class="fas fa-database"></i> Submit</button>
             </form>

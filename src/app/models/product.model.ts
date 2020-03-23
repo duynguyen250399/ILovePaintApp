@@ -7,7 +7,6 @@ export interface Product {
     id?: number;
     name: string;
     description?: string;  
-    manufactureDate?: Date;
     image?: string;
     colors?: Color[];
     provider?: ProviderModel;

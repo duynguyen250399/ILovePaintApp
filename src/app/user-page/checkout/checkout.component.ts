@@ -110,35 +110,11 @@ export class CheckoutComponent implements OnInit {
         sessionStorage.clear();
         this.orderService.refreshOrderItemList();
         this.loading = false;
-        this.router.navigate(['/']);
+        this.router.navigate(['order-success']);
       },
       error => console.log(error)
     )
 
-    // let orderMail = {
-    //   order: {
-    //     id: order.id,
-    //     fullName: order.fullName,
-    //     phoneNumber: order.phoneNumber,
-    //     address: order.address,
-    //     email: order.email
-    //   },
-    //   orderItems: []
-    // }
-    // this.orderService.orderItemList.forEach(item =>{
-    //   let itemMail = {
-    //     productName: item.product.name,
-    //     quantity: item.quantity,
-    //     amount: item.amount,
-    //     unitPrice: item.product.productVolumes[0].price,
-    //     volumeValue: item.product.productVolumes[0].volumeValue
-    //   };
-
-    //   orderMail.orderItems.push(itemMail);
-    // });
-    
-    // this.emailService.sendOrderConfirmEmail(orderMail);
-   
   }
 
 }

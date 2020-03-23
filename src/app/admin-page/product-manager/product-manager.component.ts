@@ -32,6 +32,7 @@ export class ProductManagerComponent implements OnInit {
     let dialogConfig = new MatDialogConfig();
     dialogConfig.width = '80%';
     dialogConfig.height = '600px';
+    dialogConfig.autoFocus = false;
     const dialogRef = this.dialog.open(AddProductDialogComponent, dialogConfig);
   }
 
@@ -40,6 +41,7 @@ export class ProductManagerComponent implements OnInit {
     dialogConfig.width = '80%';
     dialogConfig.height = '600px';
     dialogConfig.data = product;
+    dialogConfig.autoFocus = false;
     const dialogRef = this.dialog.open(EditProductDialogComponent, dialogConfig);
   }
 

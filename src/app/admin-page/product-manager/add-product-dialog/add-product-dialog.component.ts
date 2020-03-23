@@ -66,16 +66,6 @@ export class AddProductDialogComponent implements OnInit {
         Validators.minLength(5),
         Validators.maxLength(30)
       ]],
-    quantity: ['', [
-      Validators.required,
-      Validators.pattern(ValidationPatterns.positiveNumberRegex)
-    ]],
-    weight: [''],
-    price: ['', [
-      Validators.required,
-      Validators.pattern(ValidationPatterns.positiveNumberWithOneDotRegex)
-    ]],
-    date: [''],
     provider: [''],
     category: [''],
     image: [''],
@@ -92,12 +82,6 @@ export class AddProductDialogComponent implements OnInit {
     let formData = new FormData();
     formData.append('name', this.addProductForm.get('name').value);
     formData.append('description', this.addProductForm.get('description').value);
-    formData.append('price', this.addProductForm.get('price').value);
-    formData.append('weight', this.addProductForm.get('weight').value);
-    formData.append('quantity', this.addProductForm.get('quantity').value);
-    let status = (this.addProductForm.get('quantity').value > 0) ? 1 : 0;
-    formData.append('status', status.toString());
-    formData.append('manufactureDate', this.addProductForm.get('date').value);
     formData.append('providerId', this.addProductForm.get('provider').value);
     formData.append('categoryId', this.addProductForm.get('category').value);
     if (this.productImage) {
@@ -124,9 +108,8 @@ export class AddProductDialogComponent implements OnInit {
 
   }
 
-  validProviderCategoryAndWeight() {
-    return this.addProductForm.value.provider && this.addProductForm.value.category
-      && this.addProductForm.value.weight;
+  validProviderCategory() {
+    return this.addProductForm.value.provider && this.addProductForm.value.category;
   }
 
   onImageSelected(event) {

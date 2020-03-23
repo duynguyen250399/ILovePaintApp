@@ -46,7 +46,7 @@ export class OrderDetailsDialogComponent implements OnInit {
     });
   
     this.data.orderItems.forEach(item =>{
-      this.total = this.total + item.unitPrice;
+      this.total = this.total + item.amount;
       item.unitPrice = formatNumber(item.unitPrice);
     });
     this.totalFormat = formatNumber(this.total);
