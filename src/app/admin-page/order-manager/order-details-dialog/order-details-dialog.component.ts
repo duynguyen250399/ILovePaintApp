@@ -19,7 +19,6 @@ export class OrderDetailsDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
   private orderService: OrderService,
   private shipperService: ShipperService,
-  private emailService: EmailService,
   private fb: FormBuilder,
   private router: Router) { }
 
@@ -36,7 +35,7 @@ export class OrderDetailsDialogComponent implements OnInit {
   public productVolume: any;
 
   ngOnInit() {
-  
+    console.log(this.data)
     this.shipperForm = this.fb.group({
       shipper: [this.data.shipperID ? this.data.shipperID : '', [Validators.required]]
     })

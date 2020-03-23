@@ -32,12 +32,12 @@
             </tr>
         </table>
 
-        <div style="font-size: 32px;" class="d-block text-center font-weight-bold text-danger my-5">
+        <div style="font-size: 32px; font-weight: 500;" class="d-block text-center text-danger my-5">
             {{formatedPrice}} đ
         </div>
 
         <div class="row my-3">
-            <div class="col-6">
+            <div class="col">
                 <small class="font-weight-bold text-secondary d-block">Quantity</small>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -49,17 +49,16 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col">
                 <small class="font-weight-bold text-secondary d-block">Volume (L)</small>
                 <form action="">
                     <select (change)="onVolumeChange($event)" class="volume-input" name="" id="">
                         <option value="{{pv.id}}" *ngFor="let pv of product?.productVolumes">{{pv.volumeValue}}</option>
                     </select>
                 </form>
-            </div>
+            </div>       
         </div>
-
-        <button (click)="addToCart()" class="btn btn-block btn-lg btn-danger">Add to Cart
+        <button (click)="addToCart()" class="btn btn-block btn-danger btn-lg">Add to Cart
             <i class="fas fa-shopping-cart"></i>
         </button>
 

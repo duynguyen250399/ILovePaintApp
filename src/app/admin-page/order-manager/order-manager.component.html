@@ -1,4 +1,23 @@
 <h3 class="m-3 text-center">Orders</h3>
+
+<div style="font-size: 18px;" class="text-center my-3">
+    <div class="row">
+        <div class="col">
+            <p><b>Waitting Orders: </b>{{orderService.waittingOrders}}</p>
+        </div>
+        <div class="col">
+            <p><b>Packed Orders: </b>{{orderService.packedOrders}}</p>
+        </div>
+        <div class="col">
+            <p><b>Shipping Orders: </b>{{orderService.shippingOrders}}</p>
+        </div>
+        <div class="col">
+            <p><b>Finished Orders: </b>{{orderService.finishedOrders}}</p>
+        </div>
+    </div>
+  
+</div>
+
 <div class="horizontal-divider"></div>
 
 <form action="" [formGroup]="filterForm" class="form-inline my-3">

@@ -65,7 +65,7 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <div class="form-group">
+                <div class="form-group">    
                     <input formControlName="email" type="text" class="form-control" placeholder="Email">
                     <div *ngIf="emailControl.errors && emailControl.touched">
                         <small class="text-danger" *ngIf="emailControl.errors?.required">Please fill your email</small>
@@ -79,6 +79,8 @@
                 </div>
             </div>
         </div>
+        <small><b class="text-danger">*</b><b>Note: </b>You must provide exactly your personal email to receive 
+            information about your order!</small>
         <button (click)="checkout()" [disabled]="checkoutForm.invalid" class="btn btn-primary btn-block">Pay at home 
             <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         </button>

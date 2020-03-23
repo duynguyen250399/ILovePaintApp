@@ -81,7 +81,8 @@ export class CheckoutComponent implements OnInit {
       gender: (this.genderControl.value == 0) ? false : true,
       notes: this.checkoutForm.get('notes').value,
       status: 0,
-      isMember: false
+      isMember: false,
+      orderDate: new Date()
     }
 
     let orderItems = [];

@@ -5,22 +5,7 @@
     <div class="col-5">
         <p class="mt-5" style="font-weight: 500;">{{item?.product.name}}</p>
         <p>{{item.unitPrice}}đ</p>
-        <!-- <p><span style="font-size: 13px; font-weight: 500;" class="mr-3">Status:</span>
-            <span *ngIf="item.product.quantity - item.quantity >= 0" class="tag tag-available">
-                Available
-            </span>
-            <span *ngIf="item.product.quantity - item.quantity < 0" class="tag tag-unavailable">
-                Not enough
-            </span>
-        </p> -->
         <p>Volume: <b>{{item.volumeValue}} (L)</b></p>
-        <!-- <div *ngIf="item.product.quantity - item.quantity < 0">
-            <small class="d-block">
-                Remaining quantity: <b>{{item?.product.quantity}}</b>
-            </small>
-
-            <a href="#" class="out-of-stock-btn">Report out of stock</a>
-        </div> -->
 
     </div>
     <div class="col-4">
@@ -33,6 +18,10 @@
     <h3 class="text-center py-3">Total: {{totalFormat}}đ</h3>
 </div>
 <div class="horizontal-divider"></div>
+
+<div class="mt-5" *ngIf="data?.orderDate">
+    <p><b>Order date: </b>{{data.orderDate | date:'longDate'}}</p>
+</div>
 
 <div>
     <h4 class="text-center mt-5" style="font-weight: 500;">Customer Information</h4>

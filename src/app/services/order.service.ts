@@ -20,6 +20,12 @@ export class OrderService {
 
   public orderList: Order[] = [];
 
+  public waittingOrders: number;
+  public packedOrders: number;
+  public shippingOrders: number;
+  public finishedOrders: number;
+
+
   refreshOrderItemList() {
     this.orderItemList = [];
     for (let i = 0; i < sessionStorage.length; i++) {
@@ -49,7 +55,14 @@ export class OrderService {
   loadOrderList() {
     this.http.get(DataConfig.baseUrl + '/order')
       .subscribe(
-        data => this.orderList = data as Order[],
+        data => {
+          this.orderList = data as Order[];
+          this.waittingOrders = this.orderList.filter(o => o.status == 0).length;
+          this.packedOrders = this.orderList.filter(o => o.status == 1).length;
+          this.shippingOrders = this.orderList.filter(o => o.status == 2).length;
+          this.finishedOrders = this.orderList.filter(o => o.status == 3).length;
+          // console.log(this.waittingOrders, this.packedOrders, this.shippingOrders, this.finishedOrders)
+        },
         error => console.log(error)
       )
   }

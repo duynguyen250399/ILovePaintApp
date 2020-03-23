@@ -1,0 +1,10 @@
+.product-card{
+    border: none !important;
+    transition: 0.2s;
+}
+
+.product-card:hover{
+    -webkit-box-shadow: -1px 8px 24px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 8px 24px -9px rgba(0,0,0,0.75);
+    box-shadow: -1px 8px 24px -9px rgba(0,0,0,0.75);
+}

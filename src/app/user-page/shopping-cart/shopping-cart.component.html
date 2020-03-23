@@ -18,7 +18,7 @@
             <div class="col-5">
                 <p>{{item.product.name}} <b>{{item.product.productVolumes[0].volumeValue}}(L)</b></p>
 
-                <button (click)="removeItem('order-item-' + item.productId + '-' + item.volumeValue)" class="btn btn-danger mt-3">
+                <button (click)="removeItem('order-item-' + item.productId + '-' + item.product.productVolumes[0].volumeValue)" class="btn btn-danger mt-3">
                     <i class="far fa-trash-alt"></i>
                 </button>
             </div>
@@ -29,12 +29,12 @@
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <button class="btn btn-danger"
-                            (click)="decreaseQuantity('order-item-' + item.productId + '-' + item.volumeValue)">-</button>
+                            (click)="decreaseQuantity('order-item-' + item.productId + '-' + item.product.productVolumes[0].volumeValue)">-</button>
                     </div>
                     <input type="text" class="form-control text-center" value="{{item.quantity}}">
                     <div class="input-group-append">
                         <button class="btn btn-success"
-                            (click)="increaseQuantity('order-item-' + item.productId + '-' + item.volumeValue)">+</button>
+                            (click)="increaseQuantity('order-item-' + item.productId + '-' + item.product.productVolumes[0].volumeValue)">+</button>
                     </div>
                 </div>
             </div>

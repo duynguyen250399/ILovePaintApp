@@ -45,11 +45,16 @@ button:disabled{
     margin: 5px 10px;
 }
 
-.vertical-divider{
-    
-}
 
 .full-width-divider {
     border: 1px solid rgba(0, 0, 0, 0.12);
     width: 100%;
+}
+
+.btn{
+    border-radius: 0 !important;
+}
+
+.form-control{
+    border-radius: 0 !important;
 }
