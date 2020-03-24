@@ -4,9 +4,35 @@
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="form-group form-inline">
-        <input type="text" class="form-control" placeholder="Search product">
-        <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+
+    <!-- Search products -->
+    <div class="form-group form-inline search-product">
+        <form action="">
+            <input (focus)="onSearchBarFocus()" name="searchValue" [(ngModel)]="searchValue" (keyup)="onSearchProduct($event)" type="text"
+                class="form-control" placeholder="Search product">
+        </form>
+        <button class="btn btn-primary" style="cursor: default; outline: none !important;"><i class="fas fa-search"></i></button>
+        <ul *ngIf="searchResult && searchResult.length > 0">
+            <i (click)="closeSearchResultList()" class="far fa-window-close float-right text-danger" style="cursor: pointer;"></i>
+            <li *ngFor="let p of searchResult" class="my-3">
+                <a href="product-order/{{p.id}}">
+                    <div class="row text-center" style="max-height: 55px;">
+                        <div class="col-4">
+                            <img style="max-width: 55px; max-height: 55px;" [src]="p.image" alt="{{p.name}}">
+                        </div>
+                        <div class="col-8">
+                            <b style="line-height: 55px;">{{p.name}}</b>
+                        </div>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                </a>
+
+            </li>
+            <div class="text-center">
+                <a *ngIf="maxSearchResult < totalSearchResult" href="#"
+                    (click)="seeMore($event)">See more</a>
+            </div>
+        </ul>
     </div>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -20,7 +46,7 @@
                     Products
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#" *ngFor = "let c of categoryList">{{c.name}}</a>                   
+                    <a class="dropdown-item" href="#" *ngFor="let c of categoryList">{{c.name}}</a>
                 </div>
             </li>
             <li class="nav-item">

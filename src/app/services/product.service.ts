@@ -9,7 +9,7 @@ import { DataConfig } from 'src/config/data';
 export class ProductService {
 
   private url = 'https://localhost:44385/api/products';
-  public productList: Product[];
+  public productList: Product[] = [];
 
   public currentChunkIndex = 0;
   public chunkSize = 5;
@@ -26,8 +26,7 @@ export class ProductService {
   refreshProductList() {
     this.http.get(this.url)
       .subscribe(data => {
-        this.productList = data as Product[];
-     
+        this.productList = data as Product[];    
         this.updateState();
       });
   }

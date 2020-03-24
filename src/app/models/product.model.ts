@@ -11,7 +11,7 @@ export interface Product {
     colors?: Color[];
     provider?: ProviderModel;
     category?: Category;
-    providerId?: number;
-    categoryId?: number;
+    providerID?: number;
+    categoryID?: number;
     productVolumes: ProductVolume[];
 }

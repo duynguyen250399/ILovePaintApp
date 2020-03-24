@@ -1,27 +1,33 @@
-<div class="row my-5">
-    <div class="col-2">
-        <button class="btn btn-outline-secondary btn-block">Filter</button>
-    </div>
-    <div class="col-2">
-        <select name="" id="" class="form-control">
-            <option value="">Category</option>
-        </select>
-    </div>
-    <div class="col-2" >
-        <select name="" id="" class="form-control">
-            <option value="">Provider</option>
-        </select>
-    </div>
-</div>
 
-<div *ngIf = "productList.length > 0">
-    <div class="row" *ngFor = "let productChunk of productList">
-        <div class="col-lg-3" *ngFor = "let p of productChunk">
-            <app-product-display [product] = "p"></app-product-display>
+<form action="" [formGroup]="filterForm">
+    <div class="row my-3">
+        <div class="col-4"></div>
+        <div class="col-2">
+            <small>Category</small><br>
+            <select formControlName="category" (change)="filterProducts()" name="" id="" class="form-control">
+                <option value="">All</option>
+                <option value="{{c.id}}" *ngFor="let c of categoryService.categoryList">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="col-2">
+            <small>Provider</small><br>
+            <select (change)="filterProducts()" formControlName="provider" name="" id="" class="form-control">
+                <option value="">All</option>
+                <option value="{{p.id}}" *ngFor="let p of providerService.providerList">{{p.name}}</option>
+            </select>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</form>
+
+<div *ngIf="productList.length > 0">
+    <div class="row" *ngFor="let productChunk of productList">
+        <div class="col-lg-3" *ngFor="let p of productChunk">
+            <app-product-display [product]="p"></app-product-display>
         </div>
     </div>
 </div>
 
-<div class="alert alert-danger" *ngIf = "productList.length === 0">
-    There's no paint product
+<div class="lead text-center my-5" *ngIf="productList.length === 0 || !productList">
+    <p class="font-italic">There's no paint product!</p>
 </div>
