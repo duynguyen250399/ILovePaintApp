@@ -40,6 +40,7 @@ import { DialogService } from './services/dialog.service';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 import { AddVolumeDialogComponent } from './admin-page/product-manager/add-volume-dialog/add-volume-dialog.component';
 import { OrderSuccessComponent } from './user-page/order-success/order-success.component';
+import { SnackBarService } from './services/snack-bar.service';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { OrderSuccessComponent } from './user-page/order-success/order-success.c
   ],
   providers: [ProductService, ProviderService, CategoryService,
     ImageService, OrderService, ShipperService,
-  ProductVolumeService, EmailService, DialogService],
+  ProductVolumeService, EmailService, DialogService,
+  SnackBarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

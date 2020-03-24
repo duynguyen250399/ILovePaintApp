@@ -10,6 +10,7 @@ import { MatDialogRef } from '@angular/material';
 import { ValidationPatterns } from 'src/helpers/helper';
 import { ImageService } from 'src/app/services/image.service';
 import * as uuid from "uuid";
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-add-product-dialog',
@@ -31,6 +32,7 @@ export class AddProductDialogComponent implements OnInit {
     private providerService: ProviderService,
     private categoryService: CategoryService,
     private productService: ProductService,
+    private snackBarService: SnackBarService,
     public dialogRef: MatDialogRef<AddProductDialogComponent>) { }
 
   get nameControl(): FormControl {
@@ -95,6 +97,7 @@ export class AddProductDialogComponent implements OnInit {
         data => {
           this.productService.refreshProductList();
           console.log('product added');
+          this.snackBarService.showSnackBar('Product added', 'Close');
         },
         error => console.log(error)
       )

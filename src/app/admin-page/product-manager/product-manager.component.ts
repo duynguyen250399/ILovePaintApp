@@ -6,6 +6,8 @@ import { AddProductDialogComponent } from './add-product-dialog/add-product-dial
 import { nonAccentVietnamese } from "../../../helpers/helper";
 import { EditProductDialogComponent } from './edit-product-dialog/edit-product-dialog.component';
 import { ImageService } from 'src/app/services/image.service';
+import { DialogService } from 'src/app/services/dialog.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-product-manager',
@@ -16,6 +18,8 @@ export class ProductManagerComponent implements OnInit {
 
   constructor(private productService: ProductService,
     private imageService: ImageService,
+    private dialogService: DialogService,
+    private snackBarService: SnackBarService,
     public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -23,9 +27,19 @@ export class ProductManagerComponent implements OnInit {
   }
 
   deleteProduct(id, imageUrl: string) {
-    let url = imageUrl.replace('/uploads/images/products/', '');
-    this.imageService.deleteImage(url); 
-    this.productService.deleteProduct(id);  
+    this.dialogService.openConfirmDialog('Are you sure to delete this product?')
+    .afterClosed()
+    .subscribe(
+      result => {
+        if(result){
+          let url = imageUrl.replace('/uploads/images/products/', '');
+          this.imageService.deleteImage(url); 
+          this.productService.deleteProduct(id);  
+          this.snackBarService.showSnackBar('Product has been deleted', 'Close');
+        }
+      }
+    )
+    
   }
 
   openAddProductDialog() {

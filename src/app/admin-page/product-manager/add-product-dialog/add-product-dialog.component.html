@@ -7,7 +7,7 @@
             <div class="form-group">
                 <input #imageInput (change)="onImageSelected($event)" class="form-control d-none" type="file" name="" id="">
             </div>
-            <button class="btn btn-outline-danger btn-block">Upload Image</button>
+            <button (click)="imageInput.click()" class="btn btn-outline-danger btn-block">Upload Image</button>
         </div>
         <div class="col-6">
             <form [formGroup]="addProductForm">
