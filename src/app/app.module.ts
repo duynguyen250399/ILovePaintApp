@@ -48,6 +48,8 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
 import { AuthService } from "./services/auth.service";
 import { UserProfileComponent } from './user-page/user-profile/user-profile.component';
 import { RegisterSuccessComponent } from './user-page/register-success/register-success.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,9 @@ import { RegisterSuccessComponent } from './user-page/register-success/register-
     UserRegistrationComponent,
     UserLoginComponent,
     UserProfileComponent,
-    RegisterSuccessComponent
+    RegisterSuccessComponent,
+    ForbiddenComponent,
+    NotFoundComponent
   ],
   entryComponents: [
     AddProductDialogComponent,

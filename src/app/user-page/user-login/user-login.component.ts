@@ -21,10 +21,16 @@ export class UserLoginComponent implements OnInit {
   public loading = false;
 
   ngOnInit() {
+    let authToken = localStorage.getItem('jwt');
+    if(authToken){
+      this.router.navigate(['/']);
+    }
+
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+
 
   }
 

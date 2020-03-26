@@ -46,6 +46,11 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
+    let authToken = localStorage.getItem('jwt');
+    if(authToken){
+      this.router.navigate(['/']);
+    }
+
     this.registrationForm = this.fb.group({
       username: ['', [
         Validators.required,

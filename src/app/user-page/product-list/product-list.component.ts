@@ -21,6 +21,7 @@ export class ProductListComponent implements OnInit {
   public filterForm: FormGroup;
 
   ngOnInit() {
+
     this.filterForm = this.fb.group({
       category: [''],
       provider: ['']

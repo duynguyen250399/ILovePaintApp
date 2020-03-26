@@ -3,10 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { DataConfig } from 'src/config/data';
 import { Router } from '@angular/router';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
 
   constructor(private http: HttpClient,
     private router: Router) { }
@@ -15,9 +17,9 @@ export class AuthService {
     let loginModel = {
       username: username,
       password: password
-    }
+    };
 
-    return this.http.post(DataConfig.baseUrl + '/users/authenticate', loginModel)    
+    return this.http.post(DataConfig.baseUrl + '/users/authenticate', loginModel);    
   }
 
 }
