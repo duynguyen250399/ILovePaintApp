@@ -15,6 +15,8 @@ import { OrderManagerComponent } from './admin-page/order-manager/order-manager.
 import { OrderSuccessComponent } from './user-page/order-success/order-success.component';
 import { UserRegistrationComponent } from './user-page/user-registration/user-registration.component';
 import { UserLoginComponent } from './user-page/user-login/user-login.component';
+import { UserProfileComponent } from './user-page/user-profile/user-profile.component';
+import { RegisterSuccessComponent } from './user-page/register-success/register-success.component';
 
 
 const routes: Routes = [
@@ -27,7 +29,9 @@ const routes: Routes = [
     {path: 'checkout', component: CheckoutComponent},
     {path: 'order-success', component: OrderSuccessComponent},
     {path: 'user-registration', component: UserRegistrationComponent},
-    {path: 'user-login', component: UserLoginComponent}
+    {path: 'user-login', component: UserLoginComponent},
+    {path: 'profile', component: UserProfileComponent},
+    {path: 'register-success', component: RegisterSuccessComponent}
   ]},
   {path: 'admin', component: AdminPageComponent, children: [
     {path: 'product', component: ProductManagerComponent},

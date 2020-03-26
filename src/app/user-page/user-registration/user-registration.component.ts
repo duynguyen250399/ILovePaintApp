@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ValidationPatterns } from 'src/helpers/helper';
 import { Registration } from 'src/app/models/registration.model';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-registration',
@@ -12,10 +13,12 @@ import { UserService } from 'src/app/services/user.service';
 export class UserRegistrationComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
+    private router: Router,
     private userService: UserService) { }
 
   public registrationForm: FormGroup;
   public validationErr: string;
+  public loading = false;
 
   get usernameControl(){
     return this.registrationForm.get('username');
@@ -79,6 +82,8 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   registerAccount(){
+    this.validationErr = '';
+    this.loading = true;
     let registrationModel: Registration = {
       username : this.usernameControl.value,
       password : this.passwordControl.value,
@@ -94,8 +99,11 @@ export class UserRegistrationComponent implements OnInit {
       res => {
         console.log(res);
         this.validationErr = '';
+        this.loading = false;
+        this.router.navigate(['register-success']);
       },
       err => {
+        this.loading = false;
         console.log(err);
         this.validationErr = err.error.message;
       }

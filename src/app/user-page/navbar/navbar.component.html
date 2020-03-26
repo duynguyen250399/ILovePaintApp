@@ -8,13 +8,16 @@
     <!-- Search products -->
     <div class="form-group form-inline search-product">
         <form action="">
-            <input (focus)="onSearchBarFocus()" name="searchValue" [(ngModel)]="searchValue" (keyup)="onSearchProduct($event)" type="text"
+            <input #searchInput (focus)="onSearchBarFocus()" name="searchValue" [(ngModel)]="searchValue" (keyup)="onSearchProduct($event)" type="text"
                 class="form-control" placeholder="Search product">
         </form>
         <button class="btn btn-primary" style="cursor: default; outline: none !important;"><i class="fas fa-search"></i></button>
        
         <!-- Search Results -->
-        <ul *ngIf="searchResult && searchResult.length > 0">
+        <ul class="w-100 text-center" *ngIf="(!searchResult || searchResult.length == 0) && searchInput.value">
+            <li class="my-3">No results</li>
+        </ul>
+        <ul class="w-100" *ngIf="searchResult && searchResult.length > 0">
             <i (click)="closeSearchResultList()" class="far fa-window-close float-right text-danger" style="cursor: pointer;"></i>
             <li *ngFor="let p of searchResult" class="my-3">
                 <a href="product-order/{{p.id}}">
@@ -59,13 +62,20 @@
             </li>
         </ul>
         <div class="my-2 my-lg-0">
-            <a href="/my-cart" class="mx-3">
+            <a href="/my-cart" class="mx-3 d-inline">
                 <i class="fas fa-shopping-cart text-danger" style="font-size: 24px;">
                     <span matBadge="{{orderService.orderItemList.length}}" matBadgeOverlap="false" color="warn"></span>
                 </i>
             </a>
-            <a href="user-login" class="btn btn-success mx-3">Sign In</a>
-            <a href="user-registration" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Up</a>
+            <div *ngIf="!userService.currentUserProfile" class="d-inline">
+                <a href="user-login" class="btn btn-success mx-3">Sign In</a>
+                <a href="user-registration" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Up</a>
+            </div>
+            <div *ngIf="userService.currentUserProfile" class="d-inline">
+                <a href="profile" class="mx-3 text-muted">{{userService.currentUserProfile.fullName}}!</a>
+                <button (click)="userService.logout()" class="btn btn-danger my-2 my-sm-0" type="submit">Log out</button>
+            </div>
+            
         </div>
     </div>
 </nav>

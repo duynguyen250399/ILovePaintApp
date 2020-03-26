@@ -118,7 +118,8 @@
                 </div>
 
                 <button (click)="registerAccount()" [disabled]="registrationForm.invalid"
-                    class=" my-3 btn btn-success btn-lg btn-block">Register</button>
+                    class=" my-3 btn btn-success btn-lg btn-block">Register 
+                <span *ngIf="loading" class="spinner-border spinner-border-sm text-light"></span></button>
                 <a href="user-login">Already have account? Sign in now!</a>
             </form>
         </div>

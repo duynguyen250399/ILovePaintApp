@@ -1,0 +1,11 @@
+.success-notify {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+
+    transform: translate(-50%, -50%);
+    -webkit-box-shadow: 2px 2px 11px -1px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 2px 2px 11px -1px rgba(0, 0, 0, 0.75);
+    box-shadow: 2px 2px 11px -1px rgba(0, 0, 0, 0.75);
+}

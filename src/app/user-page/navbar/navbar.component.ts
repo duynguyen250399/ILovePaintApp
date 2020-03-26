@@ -4,6 +4,8 @@ import { CategoryService } from '../../services/category.service';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
 import { nonAccentVietnamese } from 'src/helpers/helper';
+import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +17,7 @@ export class NavbarComponent implements OnInit {
   public categoryList: Category[];
 
   constructor(private productService: ProductService,
+    private userService: UserService,
     private categoryService: CategoryService,
     private orderService: OrderService) { }
 
@@ -28,6 +31,7 @@ export class NavbarComponent implements OnInit {
       .subscribe(data => this.categoryList = data as Category[]);
     this.orderService.refreshOrderItemList();
     this.productService.refreshProductList();
+    this.userService.loadUserProfile();
   }
 
   onSearchProduct(event) {
@@ -81,5 +85,6 @@ export class NavbarComponent implements OnInit {
   closeSearchResultList(){
     this.searchResult = [];
   }
+
 
 }

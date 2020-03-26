@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +44,10 @@ import { SnackBarService } from './services/snack-bar.service';
 import { UserRegistrationComponent } from './user-page/user-registration/user-registration.component';
 import { UserLoginComponent } from './user-page/user-login/user-login.component';
 import { UserService } from './services/user.service';
+import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
+import { AuthService } from "./services/auth.service";
+import { UserProfileComponent } from './user-page/user-profile/user-profile.component';
+import { RegisterSuccessComponent } from './user-page/register-success/register-success.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +77,9 @@ import { UserService } from './services/user.service';
     AddVolumeDialogComponent,
     OrderSuccessComponent,
     UserRegistrationComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    UserProfileComponent,
+    RegisterSuccessComponent
   ],
   entryComponents: [
     AddProductDialogComponent,
@@ -97,8 +103,10 @@ import { UserService } from './services/user.service';
   ],
   providers: [ProductService, ProviderService, CategoryService,
     ImageService, OrderService, ShipperService,
-  ProductVolumeService, EmailService, DialogService,
-  SnackBarService, UserService],
+    ProductVolumeService, EmailService, DialogService,
+    SnackBarService, UserService, AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

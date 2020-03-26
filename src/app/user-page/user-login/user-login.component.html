@@ -2,17 +2,25 @@
     <div class="bg-primary py-3">
         <h3 class="text-center text-light">Sign In</h3>
     </div>
-    <form action="" class="login-form-inner">       
+    <form [formGroup]="loginForm" action="" class="login-form-inner">       
         <div class="form-group">
             <label for="">Username</label>
-            <input type="text" class="form-control" placeholder="Username">
+            <input formControlName="username" type="text" class="form-control" placeholder="Username">
+            <small class="text-danger" *ngIf="usernameControl.errors?.required && usernameControl.touched">Please enter username</small>
         </div>
         <div class="form-group">
             <label for="">Password</label>
-            <input type="password" class="form-control" placeholder="Password">
+            <input formControlName="password" type="password" class="form-control" placeholder="Password">
+            <small class="text-danger" *ngIf="passwordControl.errors?.required && passwordControl.touched">Please enter password</small>
         </div>
 
-        <button class="btn btn-success btn-block my-3">Sign In</button>
+        <div *ngIf="loginErr">
+            <small class="text-danger">{{loginErr}}</small>
+        </div>
+
+        <button [disabled]="loginForm.invalid" (click)="login()" class="btn btn-success btn-block my-3">Sign In
+             <span *ngIf="loading" class="spinner-border spinner-border-sm text-light"></span>
+        </button>
         <a href="user-registration">Don't have account yet? Register now!</a>
     </form>
 </div>
