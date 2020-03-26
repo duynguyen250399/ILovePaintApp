@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProviderService } from 'src/app/services/provider.service';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { ProviderModel } from 'src/app/models/provider.model';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-edit-provider-dialog',
@@ -13,6 +14,7 @@ export class EditProviderDialogComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private providerService: ProviderService,
+    private snackBarService: SnackBarService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   public editProviderForm: FormGroup;
@@ -30,6 +32,7 @@ export class EditProviderDialogComponent implements OnInit {
   updateProvider() {
     let provider = this.editProviderForm.value as ProviderModel; 
     this.providerService.updateProvider(provider);
+    this.snackBarService.showSnackBar('Provider updated', 'CLOSE');
   }
 
 }

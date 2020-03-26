@@ -4,6 +4,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddProviderDialogComponent } from './add-provider-dialog/add-provider-dialog.component';
 import { nonAccentVietnamese } from 'src/helpers/helper';
 import { EditProviderDialogComponent } from './edit-provider-dialog/edit-provider-dialog.component';
+import { DialogService } from 'src/app/services/dialog.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-provider-manager',
@@ -13,7 +15,9 @@ import { EditProviderDialogComponent } from './edit-provider-dialog/edit-provide
 export class ProviderManagerComponent implements OnInit {
 
   constructor(private providerService: ProviderService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private dialogService: DialogService,
+    private snackBarService: SnackBarService) { }
 
   ngOnInit() {
     this.providerService.refreshProviderList();
@@ -34,7 +38,17 @@ export class ProviderManagerComponent implements OnInit {
   }
 
   deleteProvider(id){
-    this.providerService.deleteProvider(id);
+    this.dialogService.openConfirmDialog('Are you sure to delete this provider?')
+    .afterClosed()
+    .subscribe(
+      result =>{
+        if(result){
+          this.providerService.deleteProvider(id);
+          this.snackBarService.showSnackBar('Provider deleted', 'CLOSE');
+        }
+      }
+    )
+    
   }
 
   filterProviders(value: string){

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Category } from 'src/app/models/category.model';
 import { CategoryService } from 'src/app/services/category.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-edit-category-dialog',
@@ -11,7 +12,8 @@ import { CategoryService } from 'src/app/services/category.service';
 })
 export class EditCategoryDialogComponent implements OnInit {
 
-  constructor(private categoryService: CategoryService, 
+  constructor(private categoryService: CategoryService,
+    private snackBarService: SnackBarService,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -27,6 +29,7 @@ export class EditCategoryDialogComponent implements OnInit {
   updateCategory(){
     let category: Category = this.editCategoryForm.value as Category;
     this.categoryService.updateCategory(category);
+    this.snackBarService.showSnackBar('Category updated', 'CLOSE');
   }
 
 }

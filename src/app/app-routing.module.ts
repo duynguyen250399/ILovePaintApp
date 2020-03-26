@@ -13,6 +13,8 @@ import { ShoppingCartComponent } from './user-page/shopping-cart/shopping-cart.c
 import { CheckoutComponent } from './user-page/checkout/checkout.component';
 import { OrderManagerComponent } from './admin-page/order-manager/order-manager.component';
 import { OrderSuccessComponent } from './user-page/order-success/order-success.component';
+import { UserRegistrationComponent } from './user-page/user-registration/user-registration.component';
+import { UserLoginComponent } from './user-page/user-login/user-login.component';
 
 
 const routes: Routes = [
@@ -23,7 +25,9 @@ const routes: Routes = [
     {path: 'product-order/:id', component: ProductOrderComponent},
     {path: 'my-cart', component: ShoppingCartComponent},
     {path: 'checkout', component: CheckoutComponent},
-    {path: 'order-success', component: OrderSuccessComponent}
+    {path: 'order-success', component: OrderSuccessComponent},
+    {path: 'user-registration', component: UserRegistrationComponent},
+    {path: 'user-login', component: UserLoginComponent}
   ]},
   {path: 'admin', component: AdminPageComponent, children: [
     {path: 'product', component: ProductManagerComponent},

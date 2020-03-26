@@ -97,7 +97,7 @@ export class AddProductDialogComponent implements OnInit {
         data => {
           this.productService.refreshProductList();
           console.log('product added');
-          this.snackBarService.showSnackBar('Product added', 'Close');
+          this.snackBarService.showSnackBar('Product added', 'CLOSE');
         },
         error => console.log(error)
       )

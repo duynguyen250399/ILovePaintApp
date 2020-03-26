@@ -1,0 +1,126 @@
+<div class="user-register-form">
+    <div class="row">
+        <div class="col-4 bg-primary text-center">
+            <h3 class="my-5 text-light">iLovePaint</h3>
+        </div>
+        <div class="col-8 p-5">
+            <h3 class="text-center">Register Account</h3>
+            <form action="" [formGroup]="registrationForm">
+                <div class="form-group">
+                    <label for=""><span class="text-danger">*</span> Username</label>
+                    <input [class.is-invalid]="usernameControl.invalid && usernameControl.touched"
+                        [class.is-valid]="usernameControl.valid" formControlName="username" type="text"
+                        class="form-control">
+                    <div *ngIf="usernameControl.invalid && usernameControl.touched">
+                        <small class="text-danger" *ngIf="usernameControl.errors?.required">Username is required</small>
+                        <small class="text-danger" *ngIf="usernameControl.errors?.minlength">Username must have at least
+                            5 characters</small>
+                        <small class="text-danger" *ngIf="usernameControl.errors?.maxlength">Username is no more than 30
+                            characters</small>
+                        <small class="text-danger" *ngIf="usernameControl.errors?.pattern">Username does not contain
+                            special or uppercase characters</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for=""><span class="text-danger">*</span> Password</label>
+                    <input [class.is-invalid]="passwordControl.invalid && passwordControl.touched"
+                        [class.is-valid]="passwordControl.valid" formControlName="password" type="password"
+                        class="form-control">
+                    <div *ngIf="passwordControl.invalid && passwordControl.touched">
+                        <ul>
+                            <li *ngIf="passwordControl.errors?.required">
+                                <small class="text-danger">Pasword is
+                                    required</small>
+                            </li>
+                            <li *ngIf="passwordControl.errors?.minlength">
+                                <small class="text-danger">Password must have at
+                                    least 5 characters</small>
+                            </li>
+                            <li *ngIf="passwordControl.errors?.maxlength">
+                                <small class="text-danger">Password is no more
+                                    than 20 characters</small>
+                            </li>
+                            <li *ngIf="passwordControl.errors?.pattern">
+                                <small class="text-danger">Password must start with
+                                    uppercase character</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for=""><span class="text-danger">*</span> Confirm Password</label>
+                    <input
+                        [class.is-invalid]="confirmPasswordControl.invalid && confirmPasswordControl.touched && !matchPassword()"
+                        [class.is-valid]="confirmPasswordControl.valid && matchPassword()"
+                        formControlName="confirmPassword" type="password" class="form-control">
+                    <div *ngIf="confirmPasswordControl.invalid && confirmPasswordControl.touched">
+                        <small class="text-danger" *ngIf="confirmPasswordControl.errors?.required">Confirm password is
+                            required</small>
+                    </div>
+                    <small class="text-danger" *ngIf="confirmPasswordControl.touched && !matchPassword()">Confirm
+                        password does not match</small>
+                </div>
+                <div class="form-group">
+                    <label for=""><span class="text-danger">*</span> Email</label>
+                    <input [class.is-invalid]="emailControl.invalid && emailControl.touched"
+                        [class.is-valid]="emailControl.valid" formControlName="email" type="text" class="form-control">
+                    <small>Please provide exactly your email to confirm account</small>
+                    <div *ngIf="emailControl.invalid && emailControl.touched">
+                        <small class="text-danger" *ngIf="emailControl.errors?.required">Email is required</small>
+                        <small class="text-danger" *ngIf="emailControl.errors?.email">Invalid email</small>
+                    </div>
+
+                </div>
+
+                <small><b>Your personal information</b></small>
+                <div class="personal-info p-3">
+                    <div class="form-group">
+                        <label for=""><span class="text-danger">*</span> Full Name</label>
+                        <input [class.is-invalid]="fullNameControl.invalid && fullNameControl.touched"
+                            [class.is-valid]="fullNameControl.valid" formControlName="fullName" type="text"
+                            class="form-control">
+                        <div *ngIf="fullNameControl.invalid && fullNameControl.touched">
+                            <small class="text-danger" *ngIf="fullNameControl.errors?.required">Full Name is
+                                required</small>
+                            <small class="text-danger" *ngIf="fullNameControl.errors?.pattern">Invalid name</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for=""><span class="text-danger">*</span> Phone number</label>
+                        <input [class.is-invalid]="phoneNumberControl.invalid && phoneNumberControl.touched"
+                            [class.is-valid]="phoneNumberControl.valid" formControlName="phoneNumber" type="text"
+                            class="form-control">
+                        <div *ngIf="phoneNumberControl.invalid && phoneNumberControl.touched">
+                            <small class="text-danger" *ngIf="phoneNumberControl.errors?.required">Phone number is
+                                required</small>
+                            <small class="text-danger" *ngIf="phoneNumberControl.errors?.pattern">Invalid phone
+                                number</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Birthdate</label>
+                        <input formControlName="birthdate" type="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for=""><span class="text-danger">*</span> Address</label>
+                        <textarea [class.is-invalid]="addressControl.invalid && addressControl.touched"
+                            [class.is-valid]="addressControl.valid" formControlName="address" style="resize: none;"
+                            class="form-control" name="" id="" cols="30" rows="10"></textarea>
+                        <div *ngIf="addressControl.invalid && addressControl.touched">
+                            <small class="text-danger" *ngIf="addressControl.errors?.required">Address is
+                                required</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="validationErr">
+                    <small class="text-danger">{{validationErr}}</small>
+                </div>
+
+                <button (click)="registerAccount()" [disabled]="registrationForm.invalid"
+                    class=" my-3 btn btn-success btn-lg btn-block">Register</button>
+                <a href="user-login">Already have account? Sign in now!</a>
+            </form>
+        </div>
+    </div>
+</div>

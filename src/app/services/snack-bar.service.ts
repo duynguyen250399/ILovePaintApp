@@ -14,6 +14,7 @@ export class SnackBarService {
     snackBarConfig.horizontalPosition = "left";
     snackBarConfig.verticalPosition = "bottom";
 
-    this.snackBar.open(msg, action, snackBarConfig);
+    let snackBarRef = this.snackBar.open(msg, action, snackBarConfig);
+    snackBarRef.onAction().subscribe(() => snackBarRef.dismiss());
   }
 }

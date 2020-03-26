@@ -3,6 +3,7 @@ import { ProviderService } from 'src/app/services/provider.service';
 import { ProviderModel } from 'src/app/models/provider.model';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ValidationPatterns } from 'src/helpers/helper';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-add-provider-dialog',
@@ -12,6 +13,7 @@ import { ValidationPatterns } from 'src/helpers/helper';
 export class AddProviderDialogComponent implements OnInit {
 
   constructor(private providerService: ProviderService,
+    private snackBarService: SnackBarService,
     private fb: FormBuilder) { }
 
   public addProviderForm = this.fb.group({
@@ -57,6 +59,7 @@ export class AddProviderDialogComponent implements OnInit {
 
     if(provider){
       this.providerService.addProvider(provider);
+      this.snackBarService.showSnackBar('Provider added', 'CLOSE');
     }
   }
 

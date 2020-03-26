@@ -4,6 +4,8 @@ import { nonAccentVietnamese } from 'src/helpers/helper';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddCategoryDialogComponent } from './add-category-dialog/add-category-dialog.component';
 import { EditCategoryDialogComponent } from './edit-category-dialog/edit-category-dialog.component';
+import { DialogService } from 'src/app/services/dialog.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-category-manager',
@@ -13,6 +15,8 @@ import { EditCategoryDialogComponent } from './edit-category-dialog/edit-categor
 export class CategoryManagerComponent implements OnInit {
 
   constructor(private categoryService: CategoryService,
+    private dialogService: DialogService,
+    private snackBarService: SnackBarService,
     public dialog: MatDialog) { }
 
 
@@ -21,7 +25,17 @@ export class CategoryManagerComponent implements OnInit {
   }
 
   onDeleteClick(id){
-    this.categoryService.deleteCategory(id);
+    this.dialogService.openConfirmDialog('Are you sure to delete this category?')
+    .afterClosed()
+    .subscribe(
+      result =>{
+        if(result){
+          this.categoryService.deleteCategory(id);
+          this.snackBarService.showSnackBar('Category deleted', 'CLOSE');
+        }
+      }
+    );
+    
   }
 
   filterCategories(value: string){

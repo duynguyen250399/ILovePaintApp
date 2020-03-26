@@ -12,6 +12,8 @@
                 class="form-control" placeholder="Search product">
         </form>
         <button class="btn btn-primary" style="cursor: default; outline: none !important;"><i class="fas fa-search"></i></button>
+       
+        <!-- Search Results -->
         <ul *ngIf="searchResult && searchResult.length > 0">
             <i (click)="closeSearchResultList()" class="far fa-window-close float-right text-danger" style="cursor: pointer;"></i>
             <li *ngFor="let p of searchResult" class="my-3">
@@ -21,7 +23,7 @@
                             <img style="max-width: 55px; max-height: 55px;" [src]="p.image" alt="{{p.name}}">
                         </div>
                         <div class="col-8">
-                            <b style="line-height: 55px;">{{p.name}}</b>
+                            <small style="line-height: 55px;">{{p.name}}</small>
                         </div>
                     </div>
                     <div class="dropdown-divider"></div>
@@ -62,8 +64,8 @@
                     <span matBadge="{{orderService.orderItemList.length}}" matBadgeOverlap="false" color="warn"></span>
                 </i>
             </a>
-            <button class="btn btn-success mx-3">Sign In</button>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Up</button>
+            <a href="user-login" class="btn btn-success mx-3">Sign In</a>
+            <a href="user-registration" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Up</a>
         </div>
     </div>
 </nav>

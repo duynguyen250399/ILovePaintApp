@@ -1,0 +1,12 @@
+.user-register-form{
+    -webkit-box-shadow: 3px 6px 33px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 6px 33px -9px rgba(0,0,0,0.75);
+    box-shadow: 3px 6px 33px -9px rgba(0,0,0,0.75);
+
+    width: 90%;
+    margin: 20px auto;
+}
+
+.personal-info{
+    border: 1px solid rgb(90, 89, 89);
+}

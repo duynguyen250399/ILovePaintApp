@@ -1,0 +1,12 @@
+.user-login-form{
+    -webkit-box-shadow: 3px 6px 33px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 6px 33px -9px rgba(0,0,0,0.75);
+    box-shadow: 3px 6px 33px -9px rgba(0,0,0,0.75);
+
+    width: 40%;
+    margin: 20px auto;
+}
+
+.login-form-inner{
+    padding: 30px;
+}

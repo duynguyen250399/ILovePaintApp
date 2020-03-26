@@ -35,7 +35,7 @@ export class ProductManagerComponent implements OnInit {
           let url = imageUrl.replace('/uploads/images/products/', '');
           this.imageService.deleteImage(url); 
           this.productService.deleteProduct(id);  
-          this.snackBarService.showSnackBar('Product has been deleted', 'Close');
+          this.snackBarService.showSnackBar('Product deleted', 'CLOSE');
         }
       }
     )

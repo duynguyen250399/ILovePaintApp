@@ -3,6 +3,7 @@ import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/models/category.model';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ValidationPatterns } from 'src/helpers/helper';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-add-category-dialog',
@@ -12,6 +13,7 @@ import { ValidationPatterns } from 'src/helpers/helper';
 export class AddCategoryDialogComponent implements OnInit {
 
   constructor(private categoryService: CategoryService,
+    private snackBarService: SnackBarService,
     private fb: FormBuilder) { }
 
   public addCategoryForm: FormGroup;
@@ -35,6 +37,7 @@ export class AddCategoryDialogComponent implements OnInit {
         name: this.addCategoryForm.value.name
       }
       this.categoryService.addCategory(category);
+      this.snackBarService.showSnackBar('Category added', 'CLOSE');
     }
   }
 

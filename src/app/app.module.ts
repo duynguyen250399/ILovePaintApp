@@ -41,6 +41,9 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.c
 import { AddVolumeDialogComponent } from './admin-page/product-manager/add-volume-dialog/add-volume-dialog.component';
 import { OrderSuccessComponent } from './user-page/order-success/order-success.component';
 import { SnackBarService } from './services/snack-bar.service';
+import { UserRegistrationComponent } from './user-page/user-registration/user-registration.component';
+import { UserLoginComponent } from './user-page/user-login/user-login.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +71,9 @@ import { SnackBarService } from './services/snack-bar.service';
     OrderDetailsDialogComponent,
     ConfirmDialogComponent,
     AddVolumeDialogComponent,
-    OrderSuccessComponent
+    OrderSuccessComponent,
+    UserRegistrationComponent,
+    UserLoginComponent
   ],
   entryComponents: [
     AddProductDialogComponent,
@@ -93,7 +98,7 @@ import { SnackBarService } from './services/snack-bar.service';
   providers: [ProductService, ProviderService, CategoryService,
     ImageService, OrderService, ShipperService,
   ProductVolumeService, EmailService, DialogService,
-  SnackBarService],
+  SnackBarService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

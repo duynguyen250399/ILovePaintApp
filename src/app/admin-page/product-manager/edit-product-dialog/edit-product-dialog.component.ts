@@ -13,6 +13,7 @@ import { AddVolumeDialogComponent } from '../add-volume-dialog/add-volume-dialog
 import { ProductVolume } from 'src/app/models/product-volume.model';
 import { ProductVolumeService } from 'src/app/services/product-volume.service';
 import { ValidationPatterns } from 'src/helpers/helper';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-edit-product-dialog',
@@ -29,6 +30,8 @@ export class EditProductDialogComponent implements OnInit {
   public imageUrl: string;
   public imageName: string;
   public uploadPath: string;
+  
+  public imageChange = false;
 
   constructor(private fb: FormBuilder,
     private providerService: ProviderService,
@@ -36,6 +39,7 @@ export class EditProductDialogComponent implements OnInit {
     private productService: ProductService,
     private productVolumeService: ProductVolumeService,
     private imageService: ImageService,
+    private snackBarService: SnackBarService,
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -64,7 +68,7 @@ export class EditProductDialogComponent implements OnInit {
     this.providerService.refreshProviderList();
     this.categoryService.refreshCategoryList();
     
-    this.imageUrl = `https://localhost:44385/api/images/product/${this.data.id}`;
+    this.imageUrl = this.data.image;
   }
 
   updateProduct(){   
@@ -76,12 +80,15 @@ export class EditProductDialogComponent implements OnInit {
     formData.append('providerId', this.editProductForm.get('providerId').value);
     formData.append('categoryId', this.editProductForm.get('categoryId').value);
 
-    if (this.productImage) {
+    if (this.productImage && this.imageChange) {
       this.imageName = Date.now().toString() + '-iLovePaint-' + uuid.v4() + '-' + this.productImage.name;
+
       this.uploadPath = '/uploads/images/products/'+ this.imageName;
+      
       formData.append('image', this.uploadPath);
     }
 
+   
     this.productService.updateProduct(formData);  
 
     // Update product volume: price, volume value and quantity
@@ -106,11 +113,13 @@ export class EditProductDialogComponent implements OnInit {
     )
 
     // update product image
-    if (this.productImage) {
+    if (this.productImage && this.imageChange) {
       let imageFormData = new FormData();
       imageFormData.append('file', this.productImage, this.productImage.name);
       this.imageService.updateImage(imageFormData, this.editProductForm.get('id').value, this.imageName);
     }
+
+    this.snackBarService.showSnackBar('Product edited', 'CLOSE');
 
   }
 
@@ -123,6 +132,7 @@ export class EditProductDialogComponent implements OnInit {
     fileReader.onload = (event: any) =>{
       this.imageUrl = event.target.result;
     }
+    this.imageChange = true;
   }
 
   onVolumeChange(event){
