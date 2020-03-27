@@ -84,6 +84,7 @@ export class NavbarComponent implements OnInit {
 
   closeSearchResultList(){
     this.searchResult = [];
+    this.searchValue = '';
   }
 
 

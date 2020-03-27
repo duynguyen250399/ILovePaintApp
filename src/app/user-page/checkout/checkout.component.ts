@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
 export class CheckoutComponent implements OnInit {
 
   constructor(private orderService: OrderService,
-    private emailService: EmailService,
     private router: Router,
     private fb: FormBuilder) { }
 
@@ -24,6 +23,10 @@ export class CheckoutComponent implements OnInit {
   public loading = false;
 
   ngOnInit() {
+    if(!this.orderService.orderItemList || this.orderService.orderItemList.length == 0){
+      this.router.navigate(['/']);
+    }
+
     this.checkoutForm = this.fb.group({
       fullName: ['', [
         Validators.required,

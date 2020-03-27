@@ -1,0 +1,61 @@
+<div class="m-3">
+    <div class="row">
+        <div class="col-1">
+            <img class="w-100" [src]="comment.user.image" alt="avatar">
+        </div>
+        <div class="col-11">
+            <div class="d-block">
+                <small style="font-weight: 500; font-size: 16px;">{{comment.user.fullName}}</small>
+                <small class="ml-3 role-tag" [class.member-tag]="comment.role == 'Member'"
+                    [class.admin-tag]="comment.role == 'Admin'">{{comment.role}}</small>
+            </div>
+            <small class="font-italic d-block text-muted">{{comment.commentDate | date:'longDate'}}</small>
+
+            <p class="mt-2">{{comment.content}}</p>
+            <div>
+                <a (click)="toggleReply($event)" href="" class="mr-5"><small>Reply</small></a>
+
+                <!-- List of replies -->
+                <a data-toggle="collapse" href="#comment{{comment.id}}"
+                    *ngIf="comment.commentReplies && comment.commentReplies.length > 0"><small>Replies
+                        ({{comment.commentReplies.length}})</small></a>
+
+                <!-- Reply form -->
+                <div class="input-group w-50 mb-2" *ngIf="showReplyForm">
+                    <input (keydown)="onKey($event)" [(ngModel)]="replyContent" name="replyContent" type="text" class="form-control"
+                        placeholder="Your reply...">
+                    <button (click)="postReply()" class="btn btn-success">Reply 
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm text-light"></span>
+                    </button>
+                </div>
+
+                <div class="collapse" id="comment{{comment.id}}" *ngIf="comment.commentReplies && comment.commentReplies.length > 0">
+                    <div class="card card-body">
+                        <div *ngFor="let r of comment.commentReplies">
+                            <div class="row">
+                                <div class="col-1">
+                                    <img class="w-100" [src]="r.user.image" alt="{{r.user.fullName}}">
+                                </div>
+                                <div class="col-11">
+                                    <div class="d-block">
+                                        <small style="font-weight: 500; font-size: 16px;">{{r.user.fullName}}</small>
+                                        <small class="ml-3 role-tag" [class.member-tag]="r.role == 'Member'"
+                                            [class.admin-tag]="r.role == 'Admin'">{{r.role}}</small>
+                                    </div>
+                                    <small
+                                        class="font-italic d-block text-muted">{{r.replyDate | date:'longDate'}}</small>
+
+                                    <p class="mt-2">{{r.content}}</p>
+                                </div>
+
+                            </div>
+                            <div class="dropdown-divider"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="dropdown-divider"></div>
+</div>

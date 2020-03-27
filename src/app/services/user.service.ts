@@ -41,6 +41,17 @@ export class UserService {
     }
   }
 
+  getUserProfile(){
+    let token = localStorage.getItem('jwt');
+
+    if (token) {
+      return this.http.get(DataConfig.baseUrl + '/users/profile');
+    }
+    else{
+      return null;
+    }
+  }
+
   logout() {
     localStorage.removeItem('jwt');
     this.router.navigate(['user-login']);

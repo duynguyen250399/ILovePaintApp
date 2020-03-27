@@ -10,6 +10,7 @@ import { ProductVolume } from 'src/app/models/product-volume.model';
 import { formatNumber } from 'src/helpers/helper';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { OrderItem } from 'src/app/models/order-item.model';
+import { CommentService } from 'src/app/services/comment.service';
 
 @Component({
   selector: 'app-product-order',
@@ -20,6 +21,7 @@ export class ProductOrderComponent implements OnInit {
 
   constructor(private productService: ProductService,
     private orderService: OrderService,
+    private commentService: CommentService,
     private router: Router,
     private route: ActivatedRoute) { }
   public product: Product;
@@ -28,6 +30,8 @@ export class ProductOrderComponent implements OnInit {
   public formatedPrice: number;
 
   public currentProductVolume: ProductVolume;
+
+  public comments;
 
   ngOnInit() {
 
@@ -39,6 +43,8 @@ export class ProductOrderComponent implements OnInit {
         this.formatedPrice = formatNumber(this.currentProductVolume.price);   
         
       });
+
+      this.commentService.loadComments(productId);
   }
 
   addToCart() {
@@ -78,6 +84,14 @@ export class ProductOrderComponent implements OnInit {
     
     this.formatedPrice = formatNumber(this.currentProductVolume.price);
   
+  }
+
+  seeMore(e){
+    e.preventDefault();
+
+    this.commentService.chunkSize = this.commentService.chunkSize + 5;
+    let productId = this.route.snapshot.paramMap.get('id');
+    this.commentService.loadComments(productId);
   }
 
 }

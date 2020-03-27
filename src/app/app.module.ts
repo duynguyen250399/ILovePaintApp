@@ -50,6 +50,10 @@ import { UserProfileComponent } from './user-page/user-profile/user-profile.comp
 import { RegisterSuccessComponent } from './user-page/register-success/register-success.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CommentFormComponent } from './user-page/comment-form/comment-form.component';
+import { UserCommentComponent } from './user-page/user-comment/user-comment.component';
+import { CommentService } from './services/comment.service';
+import { FooterComponent } from './user-page/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +87,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
     UserProfileComponent,
     RegisterSuccessComponent,
     ForbiddenComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CommentFormComponent,
+    UserCommentComponent,
+    FooterComponent
   ],
   entryComponents: [
     AddProductDialogComponent,
@@ -109,6 +116,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ImageService, OrderService, ShipperService,
     ProductVolumeService, EmailService, DialogService,
     SnackBarService, UserService, AuthService,
+    CommentService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]

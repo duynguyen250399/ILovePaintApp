@@ -1,0 +1,10 @@
+<div class="m-5 w-25">
+    <label for="" style="font-weight: 500;">Leave your comment</label>
+    <div class="input-group">
+        <input (keydown)="onKey($event)" name="content" [(ngModel)]="content" class="w-100" style="padding: 5px;">
+        
+    </div>
+    <button (click)="postComment()" class="btn btn-secondary btn-block my-2">POST 
+        <span *ngIf="loading" class="spinner-border spinner-border-sm text-light"></span>
+    </button>
+</div>

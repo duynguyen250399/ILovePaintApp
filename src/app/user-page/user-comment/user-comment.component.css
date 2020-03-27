@@ -1,0 +1,18 @@
+img{
+    border: 1px solid rgb(184, 181, 181);
+    padding: 5px;
+}
+
+.role-tag{
+    padding: 5px 10px;
+    color: white;
+    border-radius: 5px;
+}
+
+.admin-tag{
+    background-color: rgb(13, 5, 126);
+}
+
+.member-tag{
+    background-color: rgb(189, 47, 165);
+}

@@ -8,18 +8,12 @@
             <tr>
                 <th>Name</th>
                 <td>{{product?.name}}</td>
-            </tr>
-            <tr>
-                <th>Manufacture Date</th>
-                <td>
-                    {{product?.manufactureDate ? (product?.manufactureDate | date:'longDate') : "Unknown"}}
-                </td>
-            </tr>
+            </tr>          
             <tr>
                 <th>Status</th>
-                <td [class.text-danger]="product?.productVolumes[0] == 0"
-                    [class.text-success]="product?.productVolumes[0] == 1">
-                    {{product?.productVolumes[0] == 1 ? "Available" : "Unavailable"}}
+                <td [class.text-danger]="product?.productVolumes[0].quantity == 0"
+                    [class.text-success]="product?.productVolumes[0].quantity > 0">
+                    {{product?.productVolumes[0].quantity > 0 ? "Available" : "Unavailable"}}
                 </td>
             </tr>
             <tr>
@@ -65,7 +59,7 @@
     </div>
 </div>
 
-<div class="m-5">
+<div class="m-5 border p-5">
     <h4 style="text-decoration: underline;">Product Description:</h4>
     <p class="lead mx-5 my-3" *ngIf="product?.description">
         {{product.description}}
@@ -73,4 +67,23 @@
     <p class="lead font-italic mx-5 my-3" *ngIf="!product?.description">
         No desctiption!
     </p>
+</div>
+
+<app-comment-form [productID]="product?.id"></app-comment-form>
+
+<h4>Comments ({{commentService?.comments ? commentService?.totalComments : 0}})</h4>
+<div *ngIf="commentService?.comments">
+    <div class="row">
+        <div class="col-10">
+            <app-user-comment *ngFor="let c of commentService?.comments" [comment] = "c"></app-user-comment>
+            <div class="my-3 mx-5" *ngIf="commentService?.totalComments > commentService.chunkSize">
+                <a href="#" (click)= "seeMore($event)">See more</a>
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+<div *ngIf="!commentService?.comments || commentService?.comments.length == 0" class="mx-5 my-2">
+    <span>No comments...</span>
 </div>

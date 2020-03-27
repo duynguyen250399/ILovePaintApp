@@ -15,7 +15,7 @@ export function nonAccentVietnamese(str) {
 }
 
 export function numberOnly(e) {
-    e.target.value = e.target.value.replace(/[^\d.]/g, '').replace(/(\..*)\./g, '$1');   
+    e.target.value = e.target.value.replace(/[^\d.]/g, '').replace(/(\..*)\./g, '$1');
 }
 
 export function integerOnly(e) {
@@ -23,16 +23,27 @@ export function integerOnly(e) {
 }
 
 
-export class ValidationPatterns{
+export class ValidationPatterns {
     public static noSpecialCharsWithVietnameseRegex: RegExp = /^[0-9a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$/;
     public static positiveNumberRegex: RegExp = /^[0-9]\d*/;
     public static positiveNumberWithOneDotRegex: RegExp = /^\d*\.?\d*$/;
     public static phoneNumberRegex: RegExp = /^[0-9]{10}$/;
     public static passwordRegex: RegExp = /^[A-Z][\w\W]+$/;
     public static usernameRegex: RegExp = /^[a-z][a-z0-9]+$/;
- }
+}
 
- export function formatNumber(num) {
+export function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-  }
+}
+
+export function getPayload(){
+    let token = localStorage.getItem('jwt');
+    if(!token){
+        return null;
+    }
+
+    let payloadToken = token.split('.')[1];
+
+    return JSON.parse(window.atob(payloadToken));
+}
 
