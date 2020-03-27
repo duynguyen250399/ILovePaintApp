@@ -1,0 +1,30 @@
+<div>
+    <div class="row p-5">
+        <div class="col-3">
+            <div class="form-group">
+                <label for="">Product</label>
+                <select (change)="onProductChange()" name="product" [(ngModel)]="productID" class="form-control" name=""
+                    id="">
+                    <option value="">Select Product</option>
+                    <option *ngFor="let p of productService.productList" value="{{p.id}}">{{p.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-9 border p-3">
+            <div *ngIf="productID">
+                <div class="text-center" *ngIf="!colors || colors.length == 0">
+                    <p style="font-size: 20px;" class="my-3">No catalog</p>
+                    <button style="width: 100px;" class="btn btn-primary mb-3">Create</button>
+                </div>
+
+                <div *ngIf="colors && colors.length > 0">
+                    <div class="grid-container">
+                        <div matTooltip="{{c.name}} ({{c.colorCode}})" *ngFor="let c of colors" class="grid-item" [style.background-color]="c.colorCode"></div>
+                        <div class="grid-item" style="font-size: 50px;"><i class="fas fa-plus text-secondary"></i></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

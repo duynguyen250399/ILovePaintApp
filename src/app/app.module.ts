@@ -54,6 +54,8 @@ import { CommentFormComponent } from './user-page/comment-form/comment-form.comp
 import { UserCommentComponent } from './user-page/user-comment/user-comment.component';
 import { CommentService } from './services/comment.service';
 import { FooterComponent } from './user-page/footer/footer.component';
+import { ColorManagerComponent } from './admin-page/color-manager/color-manager.component';
+import { ColorService } from './services/color.service';
 
 @NgModule({
   declarations: [
@@ -90,7 +92,8 @@ import { FooterComponent } from './user-page/footer/footer.component';
     NotFoundComponent,
     CommentFormComponent,
     UserCommentComponent,
-    FooterComponent
+    FooterComponent,
+    ColorManagerComponent
   ],
   entryComponents: [
     AddProductDialogComponent,
@@ -116,7 +119,7 @@ import { FooterComponent } from './user-page/footer/footer.component';
     ImageService, OrderService, ShipperService,
     ProductVolumeService, EmailService, DialogService,
     SnackBarService, UserService, AuthService,
-    CommentService,
+    CommentService, ColorService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]

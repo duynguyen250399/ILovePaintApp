@@ -20,6 +20,7 @@ import { RegisterSuccessComponent } from './user-page/register-success/register-
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ColorManagerComponent } from './admin-page/color-manager/color-manager.component';
 
 
 const routes: Routes = [
@@ -44,7 +45,8 @@ const routes: Routes = [
       { path: 'product', component: ProductManagerComponent },
       { path: 'category', component: CategoryManagerComponent },
       { path: 'provider', component: ProviderManagerComponent },
-      { path: 'order', component: OrderManagerComponent }
+      { path: 'order', component: OrderManagerComponent },
+      {path: 'color', component: ColorManagerComponent}
     ]
   },
   { path: 'forbidden', component: ForbiddenComponent },

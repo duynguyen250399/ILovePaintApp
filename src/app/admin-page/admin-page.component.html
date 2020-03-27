@@ -45,6 +45,13 @@
                 <span matBadge="{{orderService.orderList.length}}" matBadgeOverlap="false"
                     matBadgeColor="warn">Orders</span>
             </a>
+            <a (click)="changeListItemState(4)" [class.list-item-active]="listItemState === 4" routerLink="/admin/color"
+                mat-list-item>
+                <mat-icon class="mx-3">assignment</mat-icon>
+
+                <span matBadge="{{orderService.orderList.length}}" matBadgeOverlap="false"
+                    matBadgeColor="warn">Color Catalog</span>
+            </a>
         </mat-nav-list>
     </mat-drawer>
 
