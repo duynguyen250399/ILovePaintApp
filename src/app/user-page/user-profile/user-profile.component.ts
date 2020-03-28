@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { UserProfile } from 'src/app/models/user-profile.model';
+import { getPayload } from 'src/helpers/helper';
 
 @Component({
   selector: 'app-user-profile',
@@ -29,12 +30,12 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUserProfile()
     .subscribe(
       res => {
+        console.log(res)
         this.profile = res as UserProfile;
         this.avatar = this.profile.image ? this.profile.image : '../../../assets/images/image_default.png';
 
         // process user role
-        let payloadToken = authToken.split('.')[1];
-        let payload = JSON.parse(window.atob(payloadToken));
+        let payload = getPayload();
         this.role = payload.role;
       },
       err => console.log(err)

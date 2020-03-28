@@ -51,7 +51,7 @@
                     Products
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#" *ngFor="let c of categoryList">{{c.name}}</a>
+                    <a class="dropdown-item" href="/categories/{{c.id}}" *ngFor="let c of categoryList">{{c.name}}</a>
                 </div>
             </li>
             <li class="nav-item">

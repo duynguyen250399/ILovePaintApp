@@ -25,7 +25,6 @@ export class OrderDetailsDialogComponent implements OnInit {
   public orderData: Order;
   public url: string;
   public total: number = 0;
-  public shipperForm: FormGroup;
   public statusForm: FormGroup;
   public loading = false;
   
@@ -36,9 +35,6 @@ export class OrderDetailsDialogComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.data)
-    this.shipperForm = this.fb.group({
-      shipper: [this.data.shipperID ? this.data.shipperID : '', [Validators.required]]
-    })
     
     this.statusForm = this.fb.group({
       status: [this.data.status]
@@ -52,32 +48,16 @@ export class OrderDetailsDialogComponent implements OnInit {
 
     this.url = DataConfig.baseUrl;
 
-    if(!this.shipperService.shipperList || this.shipperService.shipperList.length == 0){
-      this.shipperService.loadShipperList();
-    }
 
-
-  }
-
-  onShipperChange(){
-    if(this.shipperForm.value.shipper !== ''){
-      this.statusForm.setValue({status: 2})
-    }
-    else{
-      this.statusForm.setValue({status: 0})
-    }    
   }
 
   saveOrder(){
-    if((this.statusForm.value.status == 2 || this.statusForm.value.status == 3) && !this.shipperForm.value.shipper){
-      return;
-    }
+   
     this.loading = true;
 
     let newOrder = {
       orderId: this.data.id,
-      status: this.statusForm.value.status,
-      shipperId: this.shipperForm.value.shipper
+      status: this.statusForm.value.status 
     }   
 
     this.orderService.updateOrder(newOrder)

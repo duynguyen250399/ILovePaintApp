@@ -6,4 +6,6 @@ export interface OrderItem{
     product?: Product;
     quantity: number;
     amount: number;
+    colorName?: string;
+    colorCode?: string;
 }

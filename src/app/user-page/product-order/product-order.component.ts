@@ -38,6 +38,8 @@ export class ProductOrderComponent implements OnInit {
   
   public colorId;
   public colorCode;
+  public colorName;
+  public colorErr: string;
 
   ngOnInit() {
 
@@ -55,11 +57,21 @@ export class ProductOrderComponent implements OnInit {
 
   addToCart() {
     
+    if(!this.colorId){
+      this.colorErr = 'You forget to choose color';
+      return;
+    }
+    else{
+      this.colorErr = '';
+    }
+
     let orderItem: OrderItem = {
       productId: this.product.id,
       quantity: this.quantity,
       product: this.product,
-      amount: this.quantity * this.currentProductVolume.price
+      amount: this.quantity * this.currentProductVolume.price,
+      colorCode: this.colorCode,
+      colorName: this.colorName
     }
 
     orderItem.product.productVolumes = orderItem.product.productVolumes
@@ -112,6 +124,7 @@ export class ProductOrderComponent implements OnInit {
         if(res){
           this.colorId = res.id;
           this.colorCode = res.colorCode;
+          this.colorName = res.name;
         }
         
       }

@@ -6,4 +6,5 @@ export interface UserProfile{
     rewardPoints: number;
     birthdate?: Date;
     image?: string;
+    gender?: boolean;
 }

@@ -72,7 +72,7 @@
                     </textarea>
             </div>
 
-            <button [disabled]="editProductForm.invalid || !editProductForm.value.volume" (click)="updateProduct()" mat-dialog-close class="btn btn-block btn-primary">
+            <button [disabled]="editProductForm.invalid" (click)="updateProduct()" mat-dialog-close class="btn btn-block btn-primary">
                 <i class="fas fa-database"></i> Save</button>
         </form>
 

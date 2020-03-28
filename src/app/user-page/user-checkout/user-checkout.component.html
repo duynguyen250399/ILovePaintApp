@@ -1,0 +1,64 @@
+<div class="w-50 mx-auto my-5 p-3 checkout-form">
+    <div class="row" *ngFor="let item of orderService.orderItemList">
+        <div class="col-3">
+            <img [src]="item.product.image" alt="{{item.product.name}}" class="w-100">
+        </div>
+        <div class="col-5">
+            <p class="mt-5">{{item.product.name}} <b>{{item.product.productVolumes[0].volumeValue}}(L)</b></p>
+            <p><span [style.color]="item.colorCode">{{item.colorName}}</span> (<b>{{item.colorCode}}</b>)</p>
+            <p>{{item.product.productVolumes[0].price}}đ</p>         
+        </div>
+        <div class="col-4">
+            <p class="mt-5">Quantity: <b>{{item.quantity}}</b></p>
+        </div>
+        <div class="horizontal-divider"></div>
+    </div>
+
+    <div>
+        <h3 class="text-center py-3">Total: {{orderService.total}}đ</h3>
+    </div>
+    <div class="horizontal-divider"></div>
+
+    <form action="" class="mt-5">
+        <div class="mb-3">
+            <label for=""><span style="font-weight: 500;">Gender:</span> {{(userProfile.gender == false) ? 'Male' : 'Female'}}</label>
+   
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <input [(ngModel)]="userProfile.fullName" name="fullName" readonly type="text" class="form-control" placeholder="Full Name">                   
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <input [(ngModel)]="userProfile.phoneNumber" name="phoneNumber" readonly type="text" class="form-control" placeholder="Phone Number">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <textarea [(ngModel)]="userProfile.address" readonly style="resize: none;" class="form-control" name="address" id="" cols="30"
+                rows="5" placeholder="Address"></textarea>
+           
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">    
+                    <input [(ngModel)]="userProfile.email" name="email" readonly type="text" class="form-control" placeholder="Email">
+                    
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <input [(ngModel)]="notes" name="notes" type="text" class="form-control" placeholder="Notes">
+                </div>
+            </div>
+        </div>
+        
+        <button (click)="checkout()" [disabled]="checkoutForm.invalid" class="btn btn-primary btn-block">Pay at home 
+            <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+    </form>
+</div>

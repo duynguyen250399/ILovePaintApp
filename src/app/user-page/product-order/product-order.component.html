@@ -63,6 +63,7 @@
                 </form>
             </div>       
         </div>
+        <small class="text-danger" *ngIf="colorErr">{{colorErr}}</small>
         <button [disabled]="product.productVolumes.length == 0" (click)="addToCart()" class="btn btn-block btn-danger btn-lg">Add to Cart
             <i class="fas fa-shopping-cart"></i>
         </button>

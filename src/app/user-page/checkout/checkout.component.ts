@@ -27,6 +27,11 @@ export class CheckoutComponent implements OnInit {
       this.router.navigate(['/']);
     }
 
+    let token = localStorage.getItem('jwt');
+    if(token){
+      this.router.navigate(['my-cart']);
+    }
+
     this.checkoutForm = this.fb.group({
       fullName: ['', [
         Validators.required,
@@ -97,7 +102,9 @@ export class CheckoutComponent implements OnInit {
         amount: item.amount,
         productName: item.product.name,
         unitPrice: item.product.productVolumes[0].price,
-        volumeValue: item.product.productVolumes[0].volumeValue     
+        volumeValue: item.product.productVolumes[0].volumeValue,
+        colorName: item.colorName,
+        colorCode: item.colorCode     
       }
       orderItems.push(itemFromCart);
     });

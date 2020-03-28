@@ -13,9 +13,17 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private orderService: OrderService) { }
 
   public total: number = 0;
+  public checkoutLink: string;
 
   ngOnInit() {
     this.orderService.refreshOrderItemList();
+    let token = localStorage.getItem('jwt');
+    if(token){
+      this.checkoutLink = '/user-checkout';
+    }
+    else{
+      this.checkoutLink = '/checkout';
+    }
   }
 
   removeItem(key){

@@ -30,7 +30,7 @@ export class EditProductDialogComponent implements OnInit {
   public imageUrl: string;
   public imageName: string;
   public uploadPath: string;
-  
+
   public imageChange = false;
 
   constructor(private fb: FormBuilder,
@@ -47,7 +47,7 @@ export class EditProductDialogComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.data)
-   
+
     this.editProductForm = this.fb.group({
       id: [this.data.id],
       name: [this.data.name, Validators.required],
@@ -67,11 +67,11 @@ export class EditProductDialogComponent implements OnInit {
 
     this.providerService.refreshProviderList();
     this.categoryService.refreshCategoryList();
-    
+
     this.imageUrl = this.data.image;
   }
 
-  updateProduct(){   
+  updateProduct() {
 
     let formData = new FormData();
     formData.append('id', this.editProductForm.get('id').value);
@@ -83,34 +83,36 @@ export class EditProductDialogComponent implements OnInit {
     if (this.productImage && this.imageChange) {
       this.imageName = Date.now().toString() + '-iLovePaint-' + uuid.v4() + '-' + this.productImage.name;
 
-      this.uploadPath = '/uploads/images/products/'+ this.imageName;
-      
+      this.uploadPath = '/uploads/images/products/' + this.imageName;
+
       formData.append('image', this.uploadPath);
     }
 
-   
-    this.productService.updateProduct(formData);  
 
-    // Update product volume: price, volume value and quantity
-    let productVolume: ProductVolume = this.data.productVolumes
-    .filter(pv => pv.id == this.editProductForm.get('volume').value)[0];
+    this.productService.updateProduct(formData);
 
-    let newProductVolume: ProductVolume = {
-      id: this.editProductForm.get('volume').value,
-      price: this.editProductForm.get('price').value,
-      quantity: this.editProductForm.get('quantity').value,
-      volumeValue: productVolume.volumeValue,
-      productID: this.editProductForm.get('id').value,
-      status: (this.editProductForm.get('quantity').value > 0) ? 1 : 0
-    };
+    if (this.editProductForm.get('volume').value) {
+      // Update product volume: price, volume value and quantity
+      let productVolume: ProductVolume = this.data.productVolumes
+        .filter(pv => pv.id == this.editProductForm.get('volume').value)[0];
 
-    this.productVolumeService.updateProductVolume(newProductVolume)
-    .subscribe(
-      res =>{
-        console.log(res);
-      },
-      err => console.log(err)
-    )
+      let newProductVolume: ProductVolume = {
+        id: this.editProductForm.get('volume').value,
+        price: this.editProductForm.get('price').value,
+        quantity: this.editProductForm.get('quantity').value,
+        volumeValue: productVolume.volumeValue,
+        productID: this.editProductForm.get('id').value,
+        status: (this.editProductForm.get('quantity').value > 0) ? 1 : 0
+      };
+
+      this.productVolumeService.updateProductVolume(newProductVolume)
+        .subscribe(
+          res => {
+            console.log(res);
+          },
+          err => console.log(err)
+        )
+    }
 
     // update product image
     if (this.productImage && this.imageChange) {
@@ -123,37 +125,37 @@ export class EditProductDialogComponent implements OnInit {
 
   }
 
-  onFileSelected(event){
+  onFileSelected(event) {
     this.productImage = event.target.files[0];
 
     let fileReader = new FileReader();
 
     fileReader.readAsDataURL(this.productImage);
-    fileReader.onload = (event: any) =>{
+    fileReader.onload = (event: any) => {
       this.imageUrl = event.target.result;
     }
     this.imageChange = true;
   }
 
-  onVolumeChange(event){
+  onVolumeChange(event) {
     let volumeId = event.target.value;
-    if(!volumeId){
+    if (!volumeId) {
       return;
     }
-   
+
     let productVolume = this.data.productVolumes.filter(pv => pv.id == volumeId)[0];
-    
+
     this.editProductForm.get('price').setValue(productVolume.price);
     this.editProductForm.get('quantity').setValue(productVolume.quantity);
   }
 
-  openAddVolumeDialog(productId){
+  openAddVolumeDialog(productId) {
     let dialogConfig = new MatDialogConfig();
 
     dialogConfig.width = '50%';
     dialogConfig.data = productId;
 
     let dialogRef = this.dialog.open(AddVolumeDialogComponent, dialogConfig);
-    
+
   }
 }

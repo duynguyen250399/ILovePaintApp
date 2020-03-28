@@ -59,6 +59,8 @@ import { ColorManagerComponent } from './admin-page/color-manager/color-manager.
 import { ColorService } from './services/color.service';
 import { AddColorDialogComponent } from './admin-page/color-manager/add-color-dialog/add-color-dialog.component';
 import { ColorCatalogComponent } from './user-page/color-catalog/color-catalog.component';
+import { UserCheckoutComponent } from './user-page/user-checkout/user-checkout.component';
+import { ProductCategoryComponent } from './user-page/product-category/product-category.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +100,9 @@ import { ColorCatalogComponent } from './user-page/color-catalog/color-catalog.c
     FooterComponent,
     ColorManagerComponent,
     AddColorDialogComponent,
-    ColorCatalogComponent
+    ColorCatalogComponent,
+    UserCheckoutComponent,
+    ProductCategoryComponent
   ],
   entryComponents: [
     AddProductDialogComponent,

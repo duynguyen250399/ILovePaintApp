@@ -4,6 +4,7 @@ import { Product } from '../../models/product.model';
 import { ProviderService } from 'src/app/services/provider.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',

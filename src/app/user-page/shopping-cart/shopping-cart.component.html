@@ -17,6 +17,7 @@
             </div>
             <div class="col-5">
                 <p>{{item.product.name}} <b>{{item.product.productVolumes[0].volumeValue}}(L)</b></p>
+                <p><span [style.color]="item.colorCode">{{item.colorName}}</span> (<b>{{item.colorCode}}</b>)</p>
 
                 <button (click)="removeItem('order-item-' + item.productId + '-' + item.product.productVolumes[0].volumeValue)" class="btn btn-danger mt-3">
                     <i class="far fa-trash-alt"></i>
@@ -49,7 +50,7 @@
             <div class="col-6">
                 <p style="font-size: 30px;" class="text-danger">{{orderService.total}}đ</p>
             </div>
-            <a href="/checkout" style="height: 48px;" class="btn btn-primary btn-block">Checkout</a>
+            <a [href]="checkoutLink" style="height: 48px;" class="btn btn-primary btn-block">Checkout</a>
         </div>
     </div>
 </div>

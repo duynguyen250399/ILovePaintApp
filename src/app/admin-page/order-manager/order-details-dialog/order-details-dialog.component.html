@@ -4,6 +4,7 @@
     </div>
     <div class="col-5">
         <p class="mt-5" style="font-weight: 500;">{{item?.product.name}}</p>
+        <p><span [style.color]="item.colorCode">{{item.colorName}}</span> (<b>{{item.colorCode}}</b>)</p>
         <p>{{item.unitPrice}}đ</p>
         <p>Volume: <b>{{item.volumeValue}} (L)</b></p>
 
@@ -84,21 +85,6 @@
     </div>
 </div>
 
-<div>
-    <h5>Ship by</h5>
-    <div class="form-group">
-        <form action="" [formGroup]="shipperForm">
-            <select formControlName="shipper" name="" id="" class="form-control" (change)="onShipperChange()">
-                <option value="">Select a shipper</option>
-                <option value="{{shipper.id}}" *ngFor="let shipper of shipperService?.shipperList">
-                    {{shipper.fullName}}
-                </option>
-            </select>
-        </form>
-    </div>
-    <p style="font-size: 13px; font-weight: 500;">Shipper Code: <span *ngIf="shipperForm.value.shipper"
-            class="tag tag-shipper">SP0{{shipperForm.value.shipper}}</span></p>
-</div>
 
 <form action="" [formGroup]="statusForm">
     <div class="form-group">

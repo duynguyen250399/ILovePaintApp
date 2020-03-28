@@ -21,17 +21,21 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ColorManagerComponent } from './admin-page/color-manager/color-manager.component';
+import { UserCheckoutComponent } from './user-page/user-checkout/user-checkout.component';
+import { ProductCategoryComponent } from './user-page/product-category/product-category.component';
 
 
 const routes: Routes = [
   {
     path: '', component: UserPageComponent, children: [
       { path: '', component: ProductListComponent },
+      {path: 'categories/:id', component: ProductCategoryComponent},
       { path: 'contact', component: ContactComponent },
       { path: 'about', component: AboutUsComponent },
       { path: 'product-order/:id', component: ProductOrderComponent },
       { path: 'my-cart', component: ShoppingCartComponent },
       { path: 'checkout', component: CheckoutComponent },
+      {path: 'user-checkout', component: UserCheckoutComponent},
       { path: 'order-success', component: OrderSuccessComponent },
       { path: 'user-registration', component: UserRegistrationComponent },
       { path: 'user-login', component: UserLoginComponent },
