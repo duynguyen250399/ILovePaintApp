@@ -23,6 +23,7 @@
     "@angular/router": "~8.2.14",
     "@auth0/angular-jwt": "github:auth0/angular2-jwt",
     "hammerjs": "^2.0.8",
+    "ngx-color-picker": "^9.0.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "uuid": "^7.0.2",

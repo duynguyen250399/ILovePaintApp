@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { ColorPickerModule } from "ngx-color-picker";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,6 +57,8 @@ import { CommentService } from './services/comment.service';
 import { FooterComponent } from './user-page/footer/footer.component';
 import { ColorManagerComponent } from './admin-page/color-manager/color-manager.component';
 import { ColorService } from './services/color.service';
+import { AddColorDialogComponent } from './admin-page/color-manager/add-color-dialog/add-color-dialog.component';
+import { ColorCatalogComponent } from './user-page/color-catalog/color-catalog.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +96,9 @@ import { ColorService } from './services/color.service';
     CommentFormComponent,
     UserCommentComponent,
     FooterComponent,
-    ColorManagerComponent
+    ColorManagerComponent,
+    AddColorDialogComponent,
+    ColorCatalogComponent
   ],
   entryComponents: [
     AddProductDialogComponent,
@@ -104,7 +109,9 @@ import { ColorService } from './services/color.service';
     EditProviderDialogComponent,
     OrderDetailsDialogComponent,
     ConfirmDialogComponent,
-    AddVolumeDialogComponent
+    AddVolumeDialogComponent,
+    AddColorDialogComponent,
+    ColorCatalogComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +120,8 @@ import { ColorService } from './services/color.service';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    ColorPickerModule
   ],
   providers: [ProductService, ProviderService, CategoryService,
     ImageService, OrderService, ShipperService,

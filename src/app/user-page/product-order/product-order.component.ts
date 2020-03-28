@@ -11,6 +11,8 @@ import { formatNumber } from 'src/helpers/helper';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { OrderItem } from 'src/app/models/order-item.model';
 import { CommentService } from 'src/app/services/comment.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { ColorCatalogComponent } from '../color-catalog/color-catalog.component';
 
 @Component({
   selector: 'app-product-order',
@@ -22,6 +24,7 @@ export class ProductOrderComponent implements OnInit {
   constructor(private productService: ProductService,
     private orderService: OrderService,
     private commentService: CommentService,
+    private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute) { }
   public product: Product;
@@ -32,6 +35,9 @@ export class ProductOrderComponent implements OnInit {
   public currentProductVolume: ProductVolume;
 
   public comments;
+  
+  public colorId;
+  public colorCode;
 
   ngOnInit() {
 
@@ -92,6 +98,24 @@ export class ProductOrderComponent implements OnInit {
     this.commentService.chunkSize = this.commentService.chunkSize + 5;
     let productId = this.route.snapshot.paramMap.get('id');
     this.commentService.loadComments(productId);
+  }
+
+  openColorCatalog(){
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '80%';
+    dialogConfig.data = this.product.id;
+    let dialogRef = this.dialog.open(ColorCatalogComponent, dialogConfig);
+
+    dialogRef.afterClosed()
+    .subscribe(
+      res =>{
+        if(res){
+          this.colorId = res.id;
+          this.colorCode = res.colorCode;
+        }
+        
+      }
+    )
   }
 
 }

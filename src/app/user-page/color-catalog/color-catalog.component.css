@@ -1,0 +1,15 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+}
+
+.grid-item{
+    padding: 50px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.grid-item:hover{
+    opacity: 0.8;
+}

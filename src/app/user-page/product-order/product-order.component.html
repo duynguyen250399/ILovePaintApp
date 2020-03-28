@@ -9,13 +9,7 @@
                 <th>Name</th>
                 <td>{{product?.name}}</td>
             </tr>          
-            <tr>
-                <th>Status</th>
-                <td [class.text-danger]="product?.productVolumes[0].quantity == 0"
-                    [class.text-success]="product?.productVolumes[0].quantity > 0">
-                    {{product?.productVolumes[0].quantity > 0 ? "Available" : "Unavailable"}}
-                </td>
-            </tr>
+            
             <tr>
                 <th>Category</th>
                 <td>{{product?.category ? product?.category.name : "Unknown"}}</td>
@@ -24,9 +18,24 @@
                 <th>Provider</th>
                 <td>{{product?.provider ? product?.provider.name : "Unknown"}}</td>
             </tr>
+
+            <tr *ngIf="product.productVolumes.length > 0">
+                <th>Status</th>
+                <td [class.text-danger]="product?.productVolumes[0].quantity == 0"
+                    [class.text-success]="product?.productVolumes[0].quantity > 0">
+                    {{product?.productVolumes[0].quantity > 0 ? "Available" : "Unavailable"}}
+                </td>
+            </tr>
         </table>
 
-        <div style="font-size: 32px; font-weight: 500;" class="d-block text-center text-danger my-5">
+        <div class="my-3">
+            <h4>Choose Color</h4>
+            <div [style.background-color]="colorCode" (click)="openColorCatalog()" style="padding: 50px; cursor: pointer;" class="border text-center color-chooser">
+                <i class="fas fa-palette text-muted" style="font-size: 40px;" *ngIf="!colorId"></i>
+            </div>
+        </div>
+
+        <div *ngIf="product.productVolumes.length > 0" style="font-size: 32px; font-weight: 500;" class="d-block text-center text-danger my-5">
             {{formatedPrice}} đ
         </div>
 
@@ -46,13 +55,15 @@
             <div class="col">
                 <small class="font-weight-bold text-secondary d-block">Volume (L)</small>
                 <form action="">
+                    
                     <select (change)="onVolumeChange($event)" class="volume-input" name="" id="">
+                        <option value="" *ngIf="product.productVolumes.length == 0">Select volume</option>
                         <option value="{{pv.id}}" *ngFor="let pv of product?.productVolumes">{{pv.volumeValue}}</option>
                     </select>
                 </form>
             </div>       
         </div>
-        <button (click)="addToCart()" class="btn btn-block btn-danger btn-lg">Add to Cart
+        <button [disabled]="product.productVolumes.length == 0" (click)="addToCart()" class="btn btn-block btn-danger btn-lg">Add to Cart
             <i class="fas fa-shopping-cart"></i>
         </button>
 

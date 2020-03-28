@@ -8,3 +8,11 @@
 th{
     font-weight: 500;
 }
+
+.color-chooser{
+    transition: 0.2s;
+}
+
+.color-chooser:hover{
+    opacity: 0.7;
+}
