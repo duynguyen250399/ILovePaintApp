@@ -24,6 +24,10 @@ export class AuthInterceptorService implements HttpInterceptor{
             localStorage.removeItem('jwt');           
             return of(error);
           }
+          else if(error.status == 403){
+            this.router.navigate(['forbidden']);
+            return of(error);
+          }
           throw error;
         }
       )

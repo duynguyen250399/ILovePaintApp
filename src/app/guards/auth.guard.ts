@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
 
         if(allowedRoles){
           let rolesMatched = this.userService.rolesMatch(allowedRoles);
-          console.log(rolesMatched)
+          
           if(rolesMatched){
             return true;
           }

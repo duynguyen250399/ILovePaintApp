@@ -25,10 +25,12 @@ export class UserCheckoutComponent implements OnInit {
       this.router.navigate(['/']);
     }
 
+
     let token = localStorage.getItem('jwt');
     if(!token){
       this.router.navigate(['my-cart']);
     }
+    
 
     this.userService.getUserProfile()
     .subscribe(

@@ -31,4 +31,12 @@ export class ColorService {
   addColor(color: Color){
     return this.http.post(DataConfig.baseUrl + '/colors', color);
   }
+
+  updateColor(color: Color){
+    return this.http.put(DataConfig.baseUrl + '/colors', color);
+  }
+
+  deleteColor(id){
+    return this.http.delete(DataConfig.baseUrl + '/colors/' + id);
+  }
 }

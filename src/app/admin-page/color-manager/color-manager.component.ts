@@ -4,6 +4,7 @@ import { ColorService } from 'src/app/services/color.service';
 import { Color } from 'src/app/models/color.model';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { AddColorDialogComponent } from './add-color-dialog/add-color-dialog.component';
+import { ColorDetailsDialogComponent } from './color-details-dialog/color-details-dialog.component';
 
 @Component({
   selector: 'app-color-manager',
@@ -38,6 +39,13 @@ export class ColorManagerComponent implements OnInit {
     dialogConfig.width = '60%';
     dialogConfig.data = this.productID;
     this.dialog.open(AddColorDialogComponent, dialogConfig);
+  }
+
+  openColorDetailsDialog(color){
+    let dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '60%';
+    dialogConfig.data = color;
+    this.dialog.open(ColorDetailsDialogComponent, dialogConfig);
   }
 
 }

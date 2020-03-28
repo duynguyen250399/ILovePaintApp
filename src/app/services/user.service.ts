@@ -23,12 +23,13 @@ export class UserService {
     let token = localStorage.getItem('jwt');
 
     if (token) {
-      let headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-      this.http.get(DataConfig.baseUrl + '/users/profile', { headers: headers })
+      // let headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+      this.http.get(DataConfig.baseUrl + '/users/profile')
         .subscribe(
           res => {
-            console.log(res);
+            
             this.currentUserProfile = res as UserProfile;
+            console.log(this.currentUserProfile);
           },
           err => {
             this.currentUserProfile = null;

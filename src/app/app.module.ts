@@ -61,6 +61,7 @@ import { AddColorDialogComponent } from './admin-page/color-manager/add-color-di
 import { ColorCatalogComponent } from './user-page/color-catalog/color-catalog.component';
 import { UserCheckoutComponent } from './user-page/user-checkout/user-checkout.component';
 import { ProductCategoryComponent } from './user-page/product-category/product-category.component';
+import { ColorDetailsDialogComponent } from './admin-page/color-manager/color-details-dialog/color-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -102,7 +103,8 @@ import { ProductCategoryComponent } from './user-page/product-category/product-c
     AddColorDialogComponent,
     ColorCatalogComponent,
     UserCheckoutComponent,
-    ProductCategoryComponent
+    ProductCategoryComponent,
+    ColorDetailsDialogComponent
   ],
   entryComponents: [
     AddProductDialogComponent,
@@ -115,7 +117,8 @@ import { ProductCategoryComponent } from './user-page/product-category/product-c
     ConfirmDialogComponent,
     AddVolumeDialogComponent,
     AddColorDialogComponent,
-    ColorCatalogComponent
+    ColorCatalogComponent,
+    ColorDetailsDialogComponent
   ],
   imports: [
     BrowserModule,
