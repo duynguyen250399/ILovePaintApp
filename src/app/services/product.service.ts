@@ -87,15 +87,8 @@ export class ProductService {
       );
   }
 
-  updateProduct(formData: FormData) {
-
-    this.http.put(DataConfig.baseUrl + '/products', formData)
-      .subscribe(
-        data => {
-          this.refreshProductList();      
-        },
-        error => console.log(error)
-      )
+  updateProduct(productId, formData: FormData) {
+    return this.http.put(DataConfig.baseUrl + '/products/' + productId, formData);    
   }
 
   getProductVolume(productId, volumeId){

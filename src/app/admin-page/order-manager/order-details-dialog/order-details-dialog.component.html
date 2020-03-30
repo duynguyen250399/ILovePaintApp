@@ -1,6 +1,6 @@
 <div class="row" *ngFor="let item of data?.orderItems">
     <div class="col-3">
-        <img [src]="url + '/images/product/' + item.productID" alt="{{item?.product.name}}" class="w-100">
+        <img [src]="url + '/products/images/' + item.productID" alt="{{item?.product.name}}" class="w-100">
     </div>
     <div class="col-5">
         <p class="mt-5" style="font-weight: 500;">{{item?.product.name}}</p>

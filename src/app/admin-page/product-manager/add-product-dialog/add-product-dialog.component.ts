@@ -82,15 +82,11 @@ export class AddProductDialogComponent implements OnInit {
   addProduct() {
 
     let formData = new FormData();
-    formData.append('name', this.addProductForm.get('name').value);
+    formData.append('productName', this.addProductForm.get('name').value);
     formData.append('description', this.addProductForm.get('description').value);
-    formData.append('providerId', this.addProductForm.get('provider').value);
-    formData.append('categoryId', this.addProductForm.get('category').value);
-    if (this.productImage) {
-      this.imageName = Date.now().toString() + '-iLovePaint-' + uuid.v4() + '-' + this.productImage.name;
-      this.uploadPath = '/uploads/images/products/'+ this.imageName;
-      formData.append('image', this.uploadPath);
-    }
+    formData.append('providerID', this.addProductForm.get('provider').value);
+    formData.append('categoryID', this.addProductForm.get('category').value);
+    formData.append('image', this.productImage);
 
     this.productService.createProduct(formData)
       .subscribe(
@@ -101,14 +97,6 @@ export class AddProductDialogComponent implements OnInit {
         },
         error => console.log(error)
       )
-
-    if (this.productImage) {
-      let imageFormData = new FormData();
-      imageFormData.append('file', this.productImage, this.productImage.name)
-      this.imageService.uploadProductImage(imageFormData, this.imageName);
-    }
-
-
   }
 
   validProviderCategory() {

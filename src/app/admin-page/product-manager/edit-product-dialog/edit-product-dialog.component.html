@@ -72,8 +72,9 @@
                     </textarea>
             </div>
 
-            <button [disabled]="editProductForm.invalid" (click)="updateProduct()" mat-dialog-close class="btn btn-block btn-primary">
-                <i class="fas fa-database"></i> Save</button>
+            <button [disabled]="editProductForm.invalid" (click)="updateProduct()" class="btn btn-block btn-primary">
+                <i class="fas fa-database"></i> Save 
+            <span *ngIf="loading" class="spinner-border spinner-border-sm text-light"></span></button>
         </form>
 
     </div>

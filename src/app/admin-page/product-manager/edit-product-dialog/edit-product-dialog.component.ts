@@ -6,11 +6,9 @@ import { ProviderService } from 'src/app/services/provider.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
-import { MAT_DIALOG_DATA, MatDialogConfig, MatDialog } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogConfig, MatDialog, MatDialogRef } from '@angular/material';
 import { ImageService } from 'src/app/services/image.service';
-import * as uuid from 'uuid';
 import { AddVolumeDialogComponent } from '../add-volume-dialog/add-volume-dialog.component';
-import { ProductVolume } from 'src/app/models/product-volume.model';
 import { ProductVolumeService } from 'src/app/services/product-volume.service';
 import { ValidationPatterns } from 'src/helpers/helper';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
@@ -41,9 +39,11 @@ export class EditProductDialogComponent implements OnInit {
     private imageService: ImageService,
     private snackBarService: SnackBarService,
     private dialog: MatDialog,
+    public dialogRef: MatDialogRef<EditProductDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   public editProductForm: FormGroup
+  public loading = false;
 
   ngOnInit() {
     console.log(this.data)
@@ -51,15 +51,9 @@ export class EditProductDialogComponent implements OnInit {
     this.editProductForm = this.fb.group({
       id: [this.data.id],
       name: [this.data.name, Validators.required],
-      quantity: [(this.data.productVolumes.length > 0) ? this.data.productVolumes[0].quantity : '', [
-        Validators.required,
-        Validators.pattern(ValidationPatterns.positiveNumberRegex)
-      ]],
+      quantity: [(this.data.productVolumes.length > 0) ? this.data.productVolumes[0].quantity : ''],
       volume: [''],
-      price: [(this.data.productVolumes.length > 0) ? this.data.productVolumes[0].price : '', [
-        Validators.required,
-        Validators.pattern(ValidationPatterns.positiveNumberWithOneDotRegex)
-      ]],
+      price: [(this.data.productVolumes.length > 0) ? this.data.productVolumes[0].price : ''],
       providerId: [(this.data.provider) ? this.data.provider.id : null],
       categoryId: [(this.data.category) ? this.data.category.id : null],
       description: [this.data.description]
@@ -72,56 +66,30 @@ export class EditProductDialogComponent implements OnInit {
   }
 
   updateProduct() {
-
-    let formData = new FormData();
-    formData.append('id', this.editProductForm.get('id').value);
-    formData.append('name', this.editProductForm.get('name').value);
+    this.loading = true;
+    let formData = new FormData();  
+    formData.append('productName', this.editProductForm.get('name').value);
     formData.append('description', this.editProductForm.get('description').value);
-    formData.append('providerId', this.editProductForm.get('providerId').value);
-    formData.append('categoryId', this.editProductForm.get('categoryId').value);
+    formData.append('providerID', this.editProductForm.get('providerId').value);
+    formData.append('categoryID', this.editProductForm.get('categoryId').value);
+    formData.append('image', this.productImage);
 
-    if (this.productImage && this.imageChange) {
-      this.imageName = Date.now().toString() + '-iLovePaint-' + uuid.v4() + '-' + this.productImage.name;
-
-      this.uploadPath = '/uploads/images/products/' + this.imageName;
-
-      formData.append('image', this.uploadPath);
-    }
-
-
-    this.productService.updateProduct(formData);
-
-    if (this.editProductForm.get('volume').value) {
-      // Update product volume: price, volume value and quantity
-      let productVolume: ProductVolume = this.data.productVolumes
-        .filter(pv => pv.id == this.editProductForm.get('volume').value)[0];
-
-      let newProductVolume: ProductVolume = {
-        id: this.editProductForm.get('volume').value,
-        price: this.editProductForm.get('price').value,
-        quantity: this.editProductForm.get('quantity').value,
-        volumeValue: productVolume.volumeValue,
-        productID: this.editProductForm.get('id').value,
-        status: (this.editProductForm.get('quantity').value > 0) ? 1 : 0
-      };
-
-      this.productVolumeService.updateProductVolume(newProductVolume)
-        .subscribe(
-          res => {
-            console.log(res);
-          },
-          err => console.log(err)
-        )
-    }
-
-    // update product image
-    if (this.productImage && this.imageChange) {
-      let imageFormData = new FormData();
-      imageFormData.append('file', this.productImage, this.productImage.name);
-      this.imageService.updateImage(imageFormData, this.editProductForm.get('id').value, this.imageName);
-    }
-
-    this.snackBarService.showSnackBar('Product edited', 'CLOSE');
+    let productId = this.editProductForm.get('id').value;
+    this.productService.updateProduct(productId, formData)
+    .subscribe(
+      res =>{
+        console.log('product updated:', res);
+        this.snackBarService.showSnackBar('Product edited', 'CLOSE');
+        this.loading = false;
+        this.productService.refreshProductList();
+        this.dialogRef.close();
+      },
+      err =>{
+        console.log(err);
+        this.loading = false;
+      }
+    )
+    
 
   }
 
