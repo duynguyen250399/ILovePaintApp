@@ -1,0 +1,10 @@
+.close-btn{
+    float: right;
+    cursor: pointer;
+}
+
+.close-btn:hover{
+    color: rgb(255, 0, 0) !important;
+}
+
+

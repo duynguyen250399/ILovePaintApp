@@ -3,8 +3,7 @@ export interface UserProfile{
     email: string;
     phoneNumber: string;
     address: string;
-    rewardPoints: number;
-    birthdate?: Date;
+    rewardPoints?: number;
     image?: string;
     gender?: boolean;
 }

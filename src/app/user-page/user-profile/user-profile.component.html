@@ -1,56 +1,58 @@
 <div *ngIf="userService.currentUserProfile">
-    <div class="wrapper">
+    <div class="wrapper">        
         <div class="">
             <div class="row">
                 <div class="col-3 bg-primary p-5 text-light">
                     <h3 class="text-center">PROFILE</h3>
-    
+
                 </div>
                 <div class="col-6 p-3">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <button (click)="openEditProfileDialog()" class="btn btn-primary btn-block">Edit Profile</button>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-6">
                             <div>
                                 <img class="w-100" [src]="avatar" alt="{{profile.fullName}}">
                             </div>
-                            <input type="file" #imageInput class="d-none">
-                            <button (click)="imageInput.click()" class="btn btn-success btn-block">Change Avatar</button>
-                        </div>
+                            
+                        </div>             
                         <div class="col-6 text-right">
                             <span class="role">{{role}}</span>
                         </div>
                     </div>
                     <form action="" class="my-3">
+
                         <div class="form-group">
                             <label for="">Full Name</label>
-                            <input type="text" class="form-control" [(ngModel)]="profile.fullName" name="fullName">
+                            <input readonly type="text" class="form-control" [value]="profile.fullName" name="fullName">
                         </div>
                         <div class="form-group">
                             <label for="">Gender</label>
-                            <select class="form-control" [(ngModel)]="profile.gender" name="gender">
+                            <select disabled class="form-control" [value]="profile.gender" name="gender">
                                 <option value="false">Male</option>
                                 <option value="true">Female</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="">Email</label>
-                            <input type="text" class="form-control" [(ngModel)]="profile.email" name="email">
+                            <input readonly type="text" class="form-control" [value]="profile.email" name="email">
                         </div>
                         <div class="form-group">
                             <label for="">Phone Number</label>
-                            <input type="text" class="form-control" [(ngModel)]="profile.phoneNumber" name="phoneNumber">
+                            <input readonly type="text" class="form-control" [value]="profile.phoneNumber"
+                                name="phoneNumber">
                         </div>
                         <div class="form-group">
                             <label for="">Address</label>
-                            <input type="text" class="form-control" [(ngModel)]="profile.address" name="address">
+                            <textarea style="resize: none;" readonly type="text" class="form-control" [value]="profile.address" name="address"
+                                rows="3" cols="5"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="">Birthdate</label>
-                            <input type="text" class="form-control" value="{{profile.birthdate | date:'longDate'}}" name="birthdate">
-                        </div>
-    
-                        <button class="btn btn-block btn-success">Save</button>
+                     
                     </form>
-    
+
                 </div>
                 <div class="col-3 bg-primary text-light">
                     <div class="row py-3">

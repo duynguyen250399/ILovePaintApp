@@ -23,7 +23,7 @@ export class UserService {
     let token = localStorage.getItem('jwt');
 
     if (token) {
-      // let headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+     
       this.http.get(DataConfig.baseUrl + '/users/profile')
         .subscribe(
           res => {
@@ -51,6 +51,10 @@ export class UserService {
     else{
       return null;
     }
+  }
+
+  updateUserProfile(userProfileModel: FormData){
+    return this.http.put(DataConfig.baseUrl + '/users', userProfileModel);
   }
 
   logout() {
