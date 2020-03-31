@@ -11,5 +11,7 @@
     </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-dialog-close (click) ="updateCategory()" class="d-block w-100" mat-raised-button color="primary">Submit</button>
+    <button (click) ="updateCategory()" class="d-block w-100" mat-raised-button color="primary">Submit 
+        <span class="spinner-border spinner-border-sm text-light" *ngIf="loading"></span>
+    </button>
 </mat-dialog-actions>

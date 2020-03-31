@@ -5,6 +5,7 @@
             <div class="form-group">
                 <label for="">Name</label>
                 <input name="colorName" [(ngModel)]="colorName" type="text" class="form-control">
+                <small class="text-danger" *ngIf="!isValidColorName()">Color name must be a 4-digit code</small>
             </div>
             <div class="form-group">
                 <label for="">Color Code</label>
@@ -18,7 +19,7 @@
 
     <div class="row my-3">
         <div class="col-6">
-            <button mat-dialog-close (click)="onSave()" class="btn btn-success btn-block">Save</button>
+            <button [disabled]="!isValidForm()" mat-dialog-close (click)="onSave()" class="btn btn-success btn-block">Save</button>
         </div>
         <div class="col-6">
             <button mat-dialog-close (click)="onDelete()" class="btn btn-danger btn-block">Delete</button>

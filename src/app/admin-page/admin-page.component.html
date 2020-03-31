@@ -29,23 +29,28 @@
                 Manage Products
             </a>
             <a (click)="changeListItemState(1)" [class.list-item-active]="listItemState === 1"
+                routerLink="/admin/import-product" mat-list-item>
+                <mat-icon class="mx-3">post_add</mat-icon>
+                Import Products
+            </a>
+            <a (click)="changeListItemState(2)" [class.list-item-active]="listItemState === 2"
                 routerLink="/admin/category" mat-list-item>
                 <mat-icon class="mx-3">category</mat-icon>
                 Manage Categories
             </a>
-            <a (click)="changeListItemState(2)" [class.list-item-active]="listItemState === 2"
+            <a (click)="changeListItemState(3)" [class.list-item-active]="listItemState === 3"
                 routerLink="/admin/provider" mat-list-item>
                 <mat-icon class="mx-3">contact_phone</mat-icon>
                 Manage Providers
             </a>
-            <a (click)="changeListItemState(3)" [class.list-item-active]="listItemState === 3" routerLink="/admin/order"
+            <a (click)="changeListItemState(4)" [class.list-item-active]="listItemState === 4" routerLink="/admin/order"
                 mat-list-item>
                 <mat-icon class="mx-3">store</mat-icon>
 
                 <span matBadge="{{orderService.orderList.length}}" matBadgeOverlap="false"
                     matBadgeColor="warn">Orders</span>
             </a>
-            <a (click)="changeListItemState(4)" [class.list-item-active]="listItemState === 4" routerLink="/admin/color"
+            <a (click)="changeListItemState(5)" [class.list-item-active]="listItemState === 5" routerLink="/admin/color"
                 mat-list-item>
                 <mat-icon class="mx-3">assignment</mat-icon>
 

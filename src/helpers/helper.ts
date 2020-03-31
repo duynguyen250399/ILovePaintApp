@@ -30,6 +30,7 @@ export class ValidationPatterns {
     public static phoneNumberRegex: RegExp = /^[0-9]{10}$/;
     public static passwordRegex: RegExp = /^[A-Z][\w\W]+$/;
     public static usernameRegex: RegExp = /^[a-z][a-z0-9]+$/;
+    public static colorNameRegex: RegExp = /^\d{4}$/;
 }
 
 export function formatNumber(num) {

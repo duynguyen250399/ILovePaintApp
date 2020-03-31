@@ -8,7 +8,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
 import { MAT_DIALOG_DATA, MatDialogConfig, MatDialog, MatDialogRef } from '@angular/material';
 import { ImageService } from 'src/app/services/image.service';
-import { AddVolumeDialogComponent } from '../add-volume-dialog/add-volume-dialog.component';
+import { AddVolumeDialogComponent } from '../../import-product/add-volume-dialog/add-volume-dialog.component';
 import { ProductVolumeService } from 'src/app/services/product-volume.service';
 import { ValidationPatterns } from 'src/helpers/helper';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
@@ -77,16 +77,15 @@ export class EditProductDialogComponent implements OnInit {
     let productId = this.editProductForm.get('id').value;
     this.productService.updateProduct(productId, formData)
     .subscribe(
-      res =>{
-        console.log('product updated:', res);
-        this.snackBarService.showSnackBar('Product edited', 'CLOSE');
-        this.loading = false;
+      res =>{    
         this.productService.refreshProductList();
+        this.loading = false;
+        this.snackBarService.showSnackBar('Product edited', 'CLOSE');
         this.dialogRef.close();
+        location.reload();
       },
       err =>{
-        console.log(err);
-        this.loading = false;
+        console.log(err);    
       }
     )
     
@@ -105,25 +104,4 @@ export class EditProductDialogComponent implements OnInit {
     this.imageChange = true;
   }
 
-  onVolumeChange(event) {
-    let volumeId = event.target.value;
-    if (!volumeId) {
-      return;
-    }
-
-    let productVolume = this.data.productVolumes.filter(pv => pv.id == volumeId)[0];
-
-    this.editProductForm.get('price').setValue(productVolume.price);
-    this.editProductForm.get('quantity').setValue(productVolume.quantity);
-  }
-
-  openAddVolumeDialog(productId) {
-    let dialogConfig = new MatDialogConfig();
-
-    dialogConfig.width = '50%';
-    dialogConfig.data = productId;
-
-    let dialogRef = this.dialog.open(AddVolumeDialogComponent, dialogConfig);
-
-  }
 }

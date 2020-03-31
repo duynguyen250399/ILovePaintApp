@@ -40,13 +40,7 @@ export class ProviderService {
   }
 
   addProvider(provider){
-    this.http.post(DataConfig.baseUrl + '/providers', provider)
-    .subscribe(
-      data =>{
-        this.refreshProviderList();
-      },
-      error => console.log(error)
-    )
+    return this.http.post(DataConfig.baseUrl + '/providers', provider);  
   }
 
   deleteProvider(id){
@@ -58,13 +52,7 @@ export class ProviderService {
   }
 
   updateProvider(provider : ProviderModel){
-    this.http.put(DataConfig.baseUrl + '/providers', provider)
-    .subscribe(
-      data =>{
-        this.refreshProviderList();
-      },
-      error => console.log(error)
-    )
+    return this.http.put(DataConfig.baseUrl + '/providers', provider); 
   }
 
   updateState() {

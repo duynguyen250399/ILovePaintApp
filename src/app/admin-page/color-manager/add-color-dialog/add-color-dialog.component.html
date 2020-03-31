@@ -5,10 +5,13 @@
             <div class="form-group">
                 <label for="">Color name</label>
                 <input name="colorName" [(ngModel)]="colorName" type="text" class="form-control">
+                <small class="text-danger" *ngIf="!isValidColorName()">Color name must be a 4-digit code</small>
             </div>
             <div class="form-group">
                 <label for="">Color code</label>
-                <input style="cursor: pointer;" readonly type="text" class="form-control" [(colorPicker)] = "color" [value]="color">
+                <input style="cursor: pointer;" readonly type="text"
+                    class="form-control" [(colorPicker)]="color" [value]="color">
+               
             </div>
             <small *ngIf="msg" class="text-danger my-2">{{msg}}</small>
         </div>
@@ -18,7 +21,7 @@
         </div>
     </div>
 
-    
+
 
     <button [disabled]="!isValidForm()" (click)="addColor()" class="btn btn-block btn-success my-3">Save</button>
 </div>

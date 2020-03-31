@@ -4,6 +4,7 @@ import { ProviderModel } from 'src/app/models/provider.model';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ValidationPatterns } from 'src/helpers/helper';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-add-provider-dialog',
@@ -14,7 +15,10 @@ export class AddProviderDialogComponent implements OnInit {
 
   constructor(private providerService: ProviderService,
     private snackBarService: SnackBarService,
+    private dialogRef: MatDialogRef<AddProviderDialogComponent>,
     private fb: FormBuilder) { }
+    
+    public loading = false;
 
   public addProviderForm = this.fb.group({
     name: ['', [
@@ -50,6 +54,7 @@ export class AddProviderDialogComponent implements OnInit {
   }
 
   addProvider(){
+    this.loading = true;
     let provider: ProviderModel = {
       name: this.addProviderForm.value.name,
       phone: this.addProviderForm.value.phone,
@@ -58,8 +63,20 @@ export class AddProviderDialogComponent implements OnInit {
     }
 
     if(provider){
-      this.providerService.addProvider(provider);
-      this.snackBarService.showSnackBar('Provider added', 'CLOSE');
+      this.providerService.addProvider(provider)
+      .subscribe(
+        res => {          
+          this.providerService.refreshProviderList();
+          this.loading = false;         
+          this.snackBarService.showSnackBar('Provider added', 'CLOSE');         
+          this.dialogRef.close();
+        },
+        err =>{
+          this.loading = false;
+          console.log(err);
+        }
+      )
+      
     }
   }
 

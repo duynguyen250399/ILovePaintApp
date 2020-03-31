@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { getPayload } from 'src/helpers/helper';
 
 @Component({
   selector: 'app-user-login',
@@ -54,7 +55,15 @@ export class UserLoginComponent implements OnInit {
           localStorage.setItem('jwt', res.token);
           this.userService.loadUserProfile();
           this.loading = false;
-          this.router.navigate(['/']);
+
+          let role = getPayload().role;
+          if(role == 'Admin'){
+            this.router.navigate(['admin']);
+          }
+          else{
+            this.router.navigate(['/']);
+          }
+          
         },
         err => {
           this.loading = false;

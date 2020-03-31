@@ -5,7 +5,6 @@
 }
 
 .grid-item{
-    padding: 50px;
     transition: 0.2s;
     cursor: pointer;
 }

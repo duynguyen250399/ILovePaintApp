@@ -16,7 +16,8 @@
                 </ul>
             </div>
         </div>
-        <button [disabled]="addCategoryForm.invalid" mat-dialog-close (click)="addCategory()" class="d-block w-100"
-            mat-raised-button color="primary">Submit</button>
+        <button [disabled]="addCategoryForm.invalid" (click)="addCategory()" class="d-block w-100"
+            mat-raised-button color="primary">Submit 
+        <span class="spinner-border spinner-border-sm text-light" *ngIf="loading"></span></button>
     </form>
 </div>

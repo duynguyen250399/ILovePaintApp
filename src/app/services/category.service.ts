@@ -73,13 +73,7 @@ export class CategoryService {
   }
 
   addCategory(category){
-    this.http.post(DataConfig.baseUrl + '/categories', category)
-    .subscribe(
-      data =>{
-        this.refreshCategoryList();
-      },
-      error => console.log(error)
-    )
+    return this.http.post(DataConfig.baseUrl + '/categories', category);   
   }
 
   deleteCategory(id){
@@ -94,10 +88,6 @@ export class CategoryService {
   }
 
   updateCategory(category){
-    this.http.put(DataConfig.baseUrl + '/categories', category)
-    .subscribe(
-      data => this.refreshCategoryList(),
-      error => console.log(error)
-    )
+    return this.http.put(DataConfig.baseUrl + '/categories', category);
   }
 }

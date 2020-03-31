@@ -39,7 +39,7 @@ import { ProductVolumeService } from './services/product-volume.service';
 import { EmailService } from './services/email.service';
 import { DialogService } from './services/dialog.service';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
-import { AddVolumeDialogComponent } from './admin-page/product-manager/add-volume-dialog/add-volume-dialog.component';
+import { AddVolumeDialogComponent } from './admin-page/import-product/add-volume-dialog/add-volume-dialog.component';
 import { OrderSuccessComponent } from './user-page/order-success/order-success.component';
 import { SnackBarService } from './services/snack-bar.service';
 import { UserRegistrationComponent } from './user-page/user-registration/user-registration.component';
@@ -63,6 +63,7 @@ import { UserCheckoutComponent } from './user-page/user-checkout/user-checkout.c
 import { ProductCategoryComponent } from './user-page/product-category/product-category.component';
 import { ColorDetailsDialogComponent } from './admin-page/color-manager/color-details-dialog/color-details-dialog.component';
 import { EditProfileDialogComponent } from './user-page/edit-profile-dialog/edit-profile-dialog.component';
+import { ImportProductComponent } from './admin-page/import-product/import-product.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +107,8 @@ import { EditProfileDialogComponent } from './user-page/edit-profile-dialog/edit
     UserCheckoutComponent,
     ProductCategoryComponent,
     ColorDetailsDialogComponent,
-    EditProfileDialogComponent
+    EditProfileDialogComponent,
+    ImportProductComponent
   ],
   entryComponents: [
     AddProductDialogComponent,

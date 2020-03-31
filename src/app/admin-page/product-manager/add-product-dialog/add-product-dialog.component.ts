@@ -35,6 +35,8 @@ export class AddProductDialogComponent implements OnInit {
     private snackBarService: SnackBarService,
     public dialogRef: MatDialogRef<AddProductDialogComponent>) { }
 
+    public loading = false;
+
   get nameControl(): FormControl {
     return this.addProductForm.controls.name as FormControl;
   }
@@ -80,7 +82,7 @@ export class AddProductDialogComponent implements OnInit {
   }
 
   addProduct() {
-
+    this.loading = true;
     let formData = new FormData();
     formData.append('productName', this.addProductForm.get('name').value);
     formData.append('description', this.addProductForm.get('description').value);
@@ -92,8 +94,9 @@ export class AddProductDialogComponent implements OnInit {
       .subscribe(
         data => {
           this.productService.refreshProductList();
-          console.log('product added');
+          this.loading = false;
           this.snackBarService.showSnackBar('Product added', 'CLOSE');
+          this.dialogRef.close();
         },
         error => console.log(error)
       )

@@ -1,0 +1,19 @@
+.info {
+    line-height: 2em;
+    list-style: none;
+    margin: 5px 0;
+}
+
+.info li b {
+    font-weight: 500;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 10px;
+}
+
+.grid-item{
+    padding: 50px;
+}

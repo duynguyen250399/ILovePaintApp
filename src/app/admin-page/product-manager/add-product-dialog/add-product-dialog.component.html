@@ -56,9 +56,10 @@
                     </textarea>
                 </div>
 
-                <button [disabled]="addProductForm.invalid || !validProviderCategory()" mat-dialog-close
+                <button [disabled]="addProductForm.invalid || !validProviderCategory()"
                     class="btn btn-block btn-primary" (click)="addProduct()">
-                    <i class="fas fa-database"></i> Submit</button>
+                    <i class="fas fa-database"></i> Submit 
+                <span class="spinner-border spinner-border-sm text-light" *ngIf="loading"></span></button>
             </form>
 
         </div>

@@ -23,6 +23,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { ColorManagerComponent } from './admin-page/color-manager/color-manager.component';
 import { UserCheckoutComponent } from './user-page/user-checkout/user-checkout.component';
 import { ProductCategoryComponent } from './user-page/product-category/product-category.component';
+import { ImportProductComponent } from './admin-page/import-product/import-product.component';
 
 
 const routes: Routes = [
@@ -50,7 +51,8 @@ const routes: Routes = [
       { path: 'category', component: CategoryManagerComponent },
       { path: 'provider', component: ProviderManagerComponent },
       { path: 'order', component: OrderManagerComponent },
-      {path: 'color', component: ColorManagerComponent}
+      {path: 'color', component: ColorManagerComponent},
+      {path: 'import-product', component: ImportProductComponent}
     ]
   },
   { path: 'forbidden', component: ForbiddenComponent },
