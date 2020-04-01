@@ -1,6 +1,6 @@
 <div class="p-3">
     <h3 class="text-center mb-3">Choose a color you like!</h3>
-    <div class="p-3 border grid-container">
+    <div class="p-3 border grid-container" *ngIf="colors && colors.length > 0">
         <div class="grid-item" *ngFor="let c of colors">
             <div [mat-dialog-close]="c" [style.background-color]="c.colorCode" style="padding:50px">
             </div>
@@ -9,5 +9,8 @@
             </div>
         </div>
 
+    </div>
+    <div class="p-3 border text-danger text-center" *ngIf="!colors || colors.length == 0">
+        Sorry, we do not have any color so far
     </div>
 </div>

@@ -12,3 +12,9 @@
     font-size: 14px;
     background-color: white;
 }
+
+.user-btn{
+    border: none;
+    font-size: 30px;
+    background: none;
+}

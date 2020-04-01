@@ -5,5 +5,5 @@ export interface UserProfile{
     address: string;
     rewardPoints?: number;
     image?: string;
-    gender?: boolean;
+    gender?: any;
 }

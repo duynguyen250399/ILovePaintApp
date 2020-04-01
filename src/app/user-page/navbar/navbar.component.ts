@@ -87,5 +87,10 @@ export class NavbarComponent implements OnInit {
     this.searchValue = '';
   }
 
+  logout(e){
+    e.preventDefault();
+    this.userService.logout();
+  }
+
 
 }

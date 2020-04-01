@@ -29,7 +29,7 @@ export class ColorManagerComponent implements OnInit {
       this.colorService.loadColors(this.productID);     
     }
     else{
-      this.colors = [];
+      this.colorService.colors = [];
     }
     
   }
@@ -44,7 +44,7 @@ export class ColorManagerComponent implements OnInit {
   openColorDetailsDialog(color){
     let dialogConfig = new MatDialogConfig();
     dialogConfig.width = '60%';
-    dialogConfig.data = color;
+    dialogConfig.data = {color: color, colorList: this.colorService.colors};
     this.dialog.open(ColorDetailsDialogComponent, dialogConfig);
   }
 

@@ -25,9 +25,11 @@ export class EditProfileDialogComponent implements OnInit {
   ngOnInit() {
     this.avatar = this.data.image ? this.data.image : '../../../assets/images/image_default.png';
     this.profile = this.data;
+    console.log(this.profile.gender);
   }
 
   onSave() {
+    console.log(this.profile.gender);
     this.loading = true;
     let formData = new FormData();
     let userID = getPayload().nameid;
@@ -35,7 +37,7 @@ export class EditProfileDialogComponent implements OnInit {
     formData.append('fullName', this.profile.fullName);
     formData.append('address', this.profile.address);
     formData.append('phoneNumber', this.profile.phoneNumber);
-    formData.append('gender', this.profile.gender == true ? 'true' : 'false');
+    formData.append('gender', this.profile.gender == 'true' ? 'true' : 'false');
     let avatar = (this.avatarFile && this.fileChanged) ? this.avatarFile : null;
     formData.append('avatar', avatar);
 
