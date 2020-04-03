@@ -32,6 +32,7 @@ export class EditCategoryDialogComponent implements OnInit {
   updateCategory(){
     this.loading = true;
     let category: Category = this.editCategoryForm.value as Category;
+    category.name = category.name.trim();
     this.categoryService.updateCategory(category)
     .subscribe(
       res => {

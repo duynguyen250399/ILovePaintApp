@@ -5,7 +5,7 @@
         </div>
         <div class="col-5">
             <p class="mt-5">{{item.product.name}} <b>{{item.product.productVolumes[0].volumeValue}}(L)</b></p>
-            <p><span [style.color]="item.colorCode">{{item.colorName}}</span> (<b>{{item.colorCode}}</b>)</p>
+            <p><b>Color: </b><span [style.color]="item.colorCode">{{item.colorName}}</span></p>
             <p>{{item.product.productVolumes[0].price}}đ</p>         
         </div>
         <div class="col-4">

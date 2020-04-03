@@ -35,6 +35,10 @@ export class EditProviderDialogComponent implements OnInit {
   updateProvider() {
     this.loading = true;
     let provider = this.editProviderForm.value as ProviderModel; 
+    provider.name = provider.name.trim();
+    provider.address = provider.address.trim();
+    provider.phone = provider.phone.trim();
+    provider.email = provider.email.trim();
     this.providerService.updateProvider(provider)
     .subscribe(
       res =>{

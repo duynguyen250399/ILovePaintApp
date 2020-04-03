@@ -8,17 +8,18 @@
     <!-- Search products -->
     <div class="form-group form-inline search-product">
         <form action="">
-            <input #searchInput (focus)="onSearchBarFocus()" name="searchValue" [(ngModel)]="searchValue"
+            <input #searchInput (focus)="onSearchBarFocus()" (blur)="onSearchBarBlur()"           
+            name="searchValue" [(ngModel)]="searchValue"
                 (keyup)="onSearchProduct($event)" type="text" class="form-control" placeholder="Search product">
         </form>
         <button class="btn btn-primary" style="cursor: default; outline: none !important;"><i
                 class="fas fa-search"></i></button>
 
         <!-- Search Results -->
-        <ul class="w-100 text-center" *ngIf="(!searchResult || searchResult.length == 0) && searchInput.value">
+        <ul class="w-100 text-center" *ngIf="(!searchResult || searchResult.length == 0) && searchInput.value && showSearchResult">
             <li class="my-3">No results</li>
         </ul>
-        <ul class="w-100" *ngIf="searchResult && searchResult.length > 0">
+        <ul class="w-100" *ngIf="searchResult.length > 0 && searchInput.value && showSearchResult">
             <i (click)="closeSearchResultList()" class="far fa-window-close float-right text-danger"
                 style="cursor: pointer;"></i>
             <li *ngFor="let p of searchResult" class="my-3">

@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
   public maxSearchResult = 4;
   public totalSearchResult: number;
   public searchValue: string;
+  public showSearchResult = false;
 
   ngOnInit() {
     this.categoryService.getCategoryList()
@@ -35,13 +36,16 @@ export class NavbarComponent implements OnInit {
   }
 
   onSearchProduct(event) {
+    this.showSearchResult = true;
     let searchValue: string = event.target.value;
 
     if (!this.productService.productList) {
       return;
     }
 
-    searchValue = nonAccentVietnamese(searchValue.toLowerCase().trim());
+    searchValue = searchValue.trim().toLowerCase();
+
+    searchValue = nonAccentVietnamese(searchValue);
 
     if (!searchValue) {
       this.searchResult = [];
@@ -78,13 +82,21 @@ export class NavbarComponent implements OnInit {
   
   onSearchBarFocus(){
     if(this.searchValue){
+      this.showSearchResult = true;
       this.processSearchResult(this.searchValue);
     }
+  }
+
+  onSearchBarBlur(){
+    setTimeout(() => {
+      this.showSearchResult = false;
+    }, 200)
   }
 
   closeSearchResultList(){
     this.searchResult = [];
     this.searchValue = '';
+    this.showSearchResult = false;
   }
 
   logout(e){

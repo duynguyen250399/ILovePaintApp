@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-4">
             <div>
-                <img class="w-100 border p-3" [src]="avatar" alt="{{data.fullName}}">
+                <img class="w-100 border p-3" [src]="avatar" alt="{{data?.fullName}}">
             </div>
             <input (change)="onImageSelected($event)" type="file" #imageInput class="d-none">
             <button (click)="imageInput.click()" class="btn btn-success btn-block">Change
@@ -16,11 +16,12 @@
         </div>
     </div>
 
-    <form action="" class="my-3">       
+    <form action="" class="my-3">
         <div class="form-group">
             <label for="">Full Name</label>
-            <input [(ngModel)]="profile.fullName" type="text" class="form-control" [value]="data.fullName"
+            <input [(ngModel)]="profile.fullName" type="text" class="form-control" [value]="data?.fullName"
                 name="fullName">
+            <small class="text-danger" *ngIf="!isValidFullName()">Invalid Name</small>
         </div>
         <div class="form-group">
             <label for="">Gender</label>
@@ -28,19 +29,21 @@
                 <option value="false">Male</option>
                 <option value="true">Female</option>
             </select>
-        </div>      
+        </div>
         <div class="form-group">
             <label for="">Phone Number</label>
             <input [(ngModel)]="profile.phoneNumber" type="text" class="form-control" [value]="data.phoneNumber"
                 name="phoneNumber">
+            <small class="text-danger" *ngIf="!isValidPhoneNumber()">Invalid Phone Number</small>
         </div>
         <div class="form-group">
             <label for="">Address</label>
             <textarea [(ngModel)]="profile.address" style="resize: none;" type="text" class="form-control"
                 [value]="data.address" name="address" rows="3" cols="5"></textarea>
+            <small class="text-danger" *ngIf="!isValidAddress()">Invalid Address</small>
         </div>
-      
-        <button (click)="onSave()" class="btn btn-block btn-success">Save
+
+        <button [disabled]="!isValid()" (click)="onSave()" class="btn btn-block btn-success">Save
             <span *ngIf="loading" class="spinner-border spinner-border-sm text-light"></span>
         </button>
     </form>

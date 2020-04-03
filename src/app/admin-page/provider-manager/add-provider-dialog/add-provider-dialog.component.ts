@@ -56,10 +56,10 @@ export class AddProviderDialogComponent implements OnInit {
   addProvider(){
     this.loading = true;
     let provider: ProviderModel = {
-      name: this.addProviderForm.value.name,
-      phone: this.addProviderForm.value.phone,
-      email: this.addProviderForm.value.email,
-      address: this.addProviderForm.value.address
+      name: this.addProviderForm.value.name.trim(),
+      phone: this.addProviderForm.value.phone.trim(),
+      email: this.addProviderForm.value.email.trim(),
+      address: this.addProviderForm.value.address.trim()
     }
 
     if(provider){

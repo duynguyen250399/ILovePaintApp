@@ -68,8 +68,8 @@ export class EditProductDialogComponent implements OnInit {
   updateProduct() {
     this.loading = true;
     let formData = new FormData();  
-    formData.append('productName', this.editProductForm.get('name').value);
-    formData.append('description', this.editProductForm.get('description').value);
+    formData.append('productName', this.editProductForm.get('name').value.trim());
+    formData.append('description', this.editProductForm.get('description').value.trim());
     formData.append('providerID', this.editProductForm.get('providerId').value);
     formData.append('categoryID', this.editProductForm.get('categoryId').value);
     formData.append('image', this.productImage);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../services/order.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -8,7 +9,8 @@ import { OrderService } from '../services/order.service';
 })
 export class AdminPageComponent implements OnInit {
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService,
+    private userService: UserService) { }
 
   public listItemState = -1;
 

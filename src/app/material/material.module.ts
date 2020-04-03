@@ -22,7 +22,8 @@ const MaterialComponents = [
   MatSnackBarModule,
   MatTooltipModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatMenuModule
 ]
 
 @NgModule({

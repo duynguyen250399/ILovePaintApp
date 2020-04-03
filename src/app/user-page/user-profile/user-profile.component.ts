@@ -34,8 +34,7 @@ export class UserProfileComponent implements OnInit {
 
     this.userService.getUserProfile()
       .subscribe(
-        res => {
-          console.log(res)
+        res => {       
           this.profile = res as UserProfile;
           this.avatar = this.profile.image ? this.profile.image : '../../../assets/images/image_default.png';
 

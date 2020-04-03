@@ -26,10 +26,8 @@ export class UserService {
      
       this.http.get(DataConfig.baseUrl + '/users/profile')
         .subscribe(
-          res => {
-            
-            this.currentUserProfile = res as UserProfile;
-            console.log(this.currentUserProfile);
+          res => {            
+            this.currentUserProfile = res as UserProfile;         
           },
           err => {
             this.currentUserProfile = null;
@@ -71,9 +69,7 @@ export class UserService {
 
     let payloadToken = token.split('.')[1];
     let payload = JSON.parse(window.atob(payloadToken));
-    console.log('roles', roles)
-    console.log('role', payload.role)
-
+    
     for (let i = 0; i < roles.length; i++) {
       if (payload.role != roles[i]) {
         return false;

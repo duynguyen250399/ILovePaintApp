@@ -84,8 +84,8 @@ export class AddProductDialogComponent implements OnInit {
   addProduct() {
     this.loading = true;
     let formData = new FormData();
-    formData.append('productName', this.addProductForm.get('name').value);
-    formData.append('description', this.addProductForm.get('description').value);
+    formData.append('productName', this.addProductForm.get('name').value.trim());
+    formData.append('description', this.addProductForm.get('description').value.trim());
     formData.append('providerID', this.addProductForm.get('provider').value);
     formData.append('categoryID', this.addProductForm.get('category').value);
     formData.append('image', this.productImage);

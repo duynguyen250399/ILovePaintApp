@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UserService } from 'src/app/services/user.service';
-import { getPayload } from 'src/helpers/helper';
+import { getPayload, ValidationPatterns } from 'src/helpers/helper';
 import { UserProfile } from 'src/app/models/user-profile.model';
 
 @Component({
@@ -24,18 +24,44 @@ export class EditProfileDialogComponent implements OnInit {
 
   ngOnInit() {
     this.avatar = this.data.image ? this.data.image : '../../../assets/images/image_default.png';
-    this.profile = this.data;
-    console.log(this.profile.gender);
+    this.userService.getUserProfile()
+    .subscribe(
+      res => {
+        this.profile = res as UserProfile;
+      },
+      err =>{
+        console.log(err);
+      }
+    )
   }
 
+  // data validation
+  isValidFullName(){
+    return this.profile.fullName.trim().length > 3 
+    && this.profile.fullName.match(ValidationPatterns.noSpecialCharsWithVietnameseRegex);
+  }
+
+  isValidAddress(){
+    return this.profile.address.trim();
+  }
+
+  isValidPhoneNumber(){
+    return this.profile.phoneNumber.trim() 
+    && this.profile.phoneNumber.match(ValidationPatterns.phoneNumberRegex);
+  }
+
+  isValid(){
+    return this.isValidFullName() && this.isValidAddress() && this.isValidPhoneNumber();
+  }
+  
+
   onSave() {
-    console.log(this.profile.gender);
     this.loading = true;
     let formData = new FormData();
     let userID = getPayload().nameid;
     formData.append('userID', userID);
-    formData.append('fullName', this.profile.fullName);
-    formData.append('address', this.profile.address);
+    formData.append('fullName', this.profile.fullName.trim());
+    formData.append('address', this.profile.address.trim());
     formData.append('phoneNumber', this.profile.phoneNumber);
     formData.append('gender', this.profile.gender == 'true' ? 'true' : 'false');
     let avatar = (this.avatarFile && this.fileChanged) ? this.avatarFile : null;
@@ -65,7 +91,6 @@ export class EditProfileDialogComponent implements OnInit {
       this.avatar = event.target.result;
     }
     this.fileChanged = true;
-    console.log(this.fileChanged);
   }
 
   closeDialog(){

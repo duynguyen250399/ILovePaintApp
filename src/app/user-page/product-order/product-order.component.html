@@ -46,7 +46,7 @@
                     <div class="input-group-prepend">
                         <button (click)="decreaseQuantity()" class="btn btn-danger">-</button>
                     </div>
-                    <input [(ngModel)]="quantity" class="quantity-input form-control text-center" type="text" placeholder="Quantity" value="1">
+                    <input [(ngModel)]="quantity" class="quantity-input form-control text-center" type="text" placeholder="Quantity" value="1" readonly>
                     <div class="input-group-append">
                         <button (click)="increaseQuantity()" class="btn btn-success">+</button>
                     </div>
@@ -64,7 +64,7 @@
             </div>       
         </div>
         <small class="text-danger" *ngIf="colorErr">{{colorErr}}</small>
-        <button [disabled]="product.productVolumes.length == 0" (click)="addToCart()" class="btn btn-block btn-danger btn-lg">Add to Cart
+        <button [disabled]="product.productVolumes.length == 0 || product.colors?.length == 0" (click)="addToCart()" class="btn btn-block btn-danger btn-lg">Add to Cart
             <i class="fas fa-shopping-cart"></i>
         </button>
 

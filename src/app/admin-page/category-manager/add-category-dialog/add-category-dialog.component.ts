@@ -39,7 +39,7 @@ export class AddCategoryDialogComponent implements OnInit {
     this.loading = true;
     if(this.addCategoryForm.value.name){
       let category : Category = {
-        name: this.addCategoryForm.value.name
+        name: this.addCategoryForm.value.name.trim()
       }
       this.categoryService.addCategory(category)
       .subscribe(
