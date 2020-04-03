@@ -74,6 +74,7 @@ export class AddProviderDialogComponent implements OnInit {
         err =>{
           this.loading = false;
           console.log(err);
+          this.snackBarService.showSnackBar('Error!', 'CLOSE');
         }
       )
       

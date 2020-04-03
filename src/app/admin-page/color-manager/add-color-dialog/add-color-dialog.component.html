@@ -23,5 +23,7 @@
 
 
 
-    <button [disabled]="!isValidForm()" (click)="addColor()" class="btn btn-block btn-success my-3">Save</button>
+    <button [disabled]="!isValidForm()" (click)="addColor()" class="btn btn-block btn-success my-3">Save 
+        <span class="spinner-border spinner-border-sm text-light" *ngIf="loading"></span>
+    </button>
 </div>

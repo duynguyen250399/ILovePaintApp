@@ -40,12 +40,16 @@
                         <div class="form-group">
                             <label for="">Quantity</label>
                             <input type="text" class="form-control" name="quantity" [(ngModel)]="productVolume.quantity">
+                            <small class="text-danger" *ngIf="!isValidQuantity()">Invalid quantity</small>
                         </div>
                         <div class="form-group">
                             <label for="">Price (VND)</label>
                             <input type="text" class="form-control" [(ngModel)]="productVolume.price" name="price">
+                            <small class="text-danger" *ngIf="!isValidPrice()">Invalid price</small>
                         </div>
-                        <button (click)="onVolumeSave()" class="btn btn-success btn-block my-3">Save</button>
+                        <button [disabled]="!isValid()" (click)="onVolumeSave()" class="btn btn-success btn-block my-3">Save 
+                            <span class="spinner-border spinner-border-sm text-light" *ngIf="loading"></span>
+                        </button>
                     </form>
 
                     <h4>Color catalog</h4>

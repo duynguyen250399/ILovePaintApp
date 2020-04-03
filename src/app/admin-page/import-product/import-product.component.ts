@@ -8,6 +8,7 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { AddVolumeDialogComponent } from './add-volume-dialog/add-volume-dialog.component';
 import { ProductVolumeService } from 'src/app/services/product-volume.service';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { ValidationPatterns } from 'src/helpers/helper';
 
 @Component({
   selector: 'app-import-product',
@@ -23,10 +24,26 @@ export class ImportProductComponent implements OnInit {
 
   public product: Product;
   public productVolume: ProductVolume;
+  public loading = false;
 
 
   ngOnInit() {
     this.productService.refreshProductList();
+  }
+
+  // validation
+  isValidQuantity(){
+    return this.productVolume.quantity 
+    && this.productVolume.quantity.toString().match(ValidationPatterns.positiveNumberRegex);
+  }
+
+  isValidPrice(){
+    return this.productVolume.price 
+    && this.productVolume.price.toString().match(ValidationPatterns.positiveNumberWithOneDotRegex);
+  }
+
+  isValid(){
+    return this.isValidPrice() && this.isValidQuantity();
   }
 
   onSelectProduct(e) {
@@ -69,15 +86,21 @@ export class ImportProductComponent implements OnInit {
   }
 
   onVolumeSave() {
+    
     if (this.productVolume) {
+      this.loading = true;
       this.productVolumeService.updateProductVolume(this.productVolume)
       .subscribe(
-        res =>{        
+        res =>{                
+          this.productService.refreshProductList();
           this.snackBarService.showSnackBar('Product Volume updated', 'CLOSE');
-          location.reload();
+          this.loading = false;
+          location.reload();   
         },
         err =>{
+          this.loading = false;
           console.log(err);
+          this.snackBarService.showSnackBar('Error!', 'CLOSE');
         }
       )
     }

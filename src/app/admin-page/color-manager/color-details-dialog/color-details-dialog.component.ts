@@ -20,13 +20,14 @@ export class ColorDetailsDialogComponent implements OnInit {
   public color: string;
   public colorName: string;
   public editErr: string = '';
+  public loading = false;
 
   ngOnInit() {
     this.color = this.data.color.colorCode;
     this.colorName = this.data.color.name;
   }
 
-  onSave() {
+  onSave() {    
     let canUpdate = true;
     if (this.colorName) {
       let color: Color = {
@@ -55,15 +56,18 @@ export class ColorDetailsDialogComponent implements OnInit {
       }
 
       if (canUpdate) {
+        this.loading = true;
         this.colorService.updateColor(color)
           .subscribe(
             res => {
               this.editErr = '';
               this.colorService.loadColors(this.data.color.productID);
               this.snackBarService.showSnackBar('Color updated', 'CLOSE');
+              this.loading = false;
               this.dialogRef.close();
             },
             err => {
+              this.loading = false;
               console.log(err);
               this.editErr = err.error.message;
             }

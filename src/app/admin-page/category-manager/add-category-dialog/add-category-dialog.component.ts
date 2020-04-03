@@ -51,6 +51,8 @@ export class AddCategoryDialogComponent implements OnInit {
         },
         err =>{
           console.log(err);
+          this.loading = false;
+          this.snackBarService.showSnackBar('Error!', 'CLOSE');
         }
       )
       

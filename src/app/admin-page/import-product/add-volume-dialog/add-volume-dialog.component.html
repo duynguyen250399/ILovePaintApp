@@ -41,5 +41,7 @@
         </div>
     </div>
 
-    <button (click)="onSave()" [disabled]="addVolumeForm.invalid" class="btn btn-success btn-block">Save</button>
+    <button (click)="onSave()" [disabled]="addVolumeForm.invalid" class="btn btn-success btn-block">Save 
+        <span class="spinner-border spinner-border-sm text-light" *ngIf="loading"></span>
+    </button>
 </form>

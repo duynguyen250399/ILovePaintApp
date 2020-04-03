@@ -98,7 +98,11 @@ export class AddProductDialogComponent implements OnInit {
           this.snackBarService.showSnackBar('Product added', 'CLOSE');
           this.dialogRef.close();
         },
-        error => console.log(error)
+        error => {
+          this.loading = false;
+          console.log(error);
+          this.snackBarService.showSnackBar('Error!', 'CLOSE');
+        }
       )
   }
 

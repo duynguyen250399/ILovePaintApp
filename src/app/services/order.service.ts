@@ -88,12 +88,6 @@ export class OrderService {
   }
 
   removeOrder(id) {
-    this.http.delete(DataConfig.baseUrl + '/order/' + id)
-      .subscribe(
-        res => {
-          this.loadOrderList();
-        },
-        err => console.log(err)
-      )
+    return this.http.delete(DataConfig.baseUrl + '/order/' + id);     
   }
 }

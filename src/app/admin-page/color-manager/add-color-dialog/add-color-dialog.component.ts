@@ -22,6 +22,7 @@ export class AddColorDialogComponent implements OnInit {
   public msg: string;
   public color: string = '';
   public colorName: string = '';
+  public loading = false;
 
   ngOnInit() {
     
@@ -37,6 +38,7 @@ export class AddColorDialogComponent implements OnInit {
 
 
   addColor(){
+    this.loading = true;
     let productId = this.data;
     let color: Color = {
       colorCode: this.color,
@@ -47,13 +49,14 @@ export class AddColorDialogComponent implements OnInit {
     this.colorService.addColor(color)
     .subscribe(
       res => {
-        this.msg = '';
-        console.log(res);
+        this.msg = '';  
         this.colorService.loadColors(this.data);
         this.snackBarService.showSnackBar('Color added', 'CLOSE');
+        this.loading = false;
         this.dialogRef.close();
       },
       err => {
+        this.loading = false;
         console.log(err);
         this.msg = err.error.message;
       }

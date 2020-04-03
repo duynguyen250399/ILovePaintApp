@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ValidationPatterns } from 'src/helpers/helper';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ProductVolume } from 'src/app/models/product-volume.model';
 import { ProductVolumeService } from 'src/app/services/product-volume.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-add-volume-dialog',
@@ -14,10 +15,13 @@ export class AddVolumeDialogComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private productVolumeService: ProductVolumeService,
+    private snackBarService: SnackBarService,
+    public dialogRef: MatDialogRef<AddVolumeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   public addVolumeForm: FormGroup;
   public err: string;
+  public loading = false;
 
   get volumeControl(){
     return this.addVolumeForm.get('volume');
@@ -50,6 +54,7 @@ export class AddVolumeDialogComponent implements OnInit {
   }
 
   onSave(){
+    this.loading = true;
     let productVolume: ProductVolume = {
       productID: this.addVolumeForm.get('productId').value,
       price: this.priceControl.value,
@@ -61,10 +66,13 @@ export class AddVolumeDialogComponent implements OnInit {
     this.productVolumeService.addProductVolume(productVolume)
     .subscribe(
       res => {
-        console.log(res);
+        this.loading = false;
+        this.snackBarService.showSnackBar('Product Volume added', 'CLOSE');
+        this.dialogRef.close();
         location.reload();
       },
       err => {
+        this.loading = false;
         this.err = err.error.message;
         console.log(err)
       }

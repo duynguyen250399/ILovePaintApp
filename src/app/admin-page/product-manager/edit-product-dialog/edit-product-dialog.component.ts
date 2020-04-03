@@ -85,7 +85,9 @@ export class EditProductDialogComponent implements OnInit {
         location.reload();
       },
       err =>{
-        console.log(err);    
+        this.loading = false;
+        console.log(err);   
+        this.snackBarService.showSnackBar('Error!', 'CLOSE'); 
       }
     )
     

@@ -5,6 +5,7 @@ import { OrderDetailsDialogComponent } from './order-details-dialog/order-detail
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Order } from 'src/app/models/order.model';
 import { DialogService } from 'src/app/services/dialog.service';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-order-manager',
@@ -14,6 +15,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 export class OrderManagerComponent implements OnInit {
 
   constructor(private orderService: OrderService,
+    private snackBarService: SnackBarService,
     private fb: FormBuilder,
     private dialogService: DialogService,
     public dialog: MatDialog) { }
@@ -43,7 +45,7 @@ export class OrderManagerComponent implements OnInit {
     if (event.target.checked) {
       this.filterOrders(event.target.value);
     }
-    // this.orderService.orderList.forEach(o => console.log(o.status))
+    
   }
 
   filterOrders(status) {
@@ -69,8 +71,17 @@ export class OrderManagerComponent implements OnInit {
     .afterClosed()
     .subscribe(res =>{
       if(res){
-        this.orderService.removeOrder(id);
-        location.reload();
+        this.orderService.removeOrder(id)
+        .subscribe(
+          res =>{
+            this.orderService.loadOrderList();
+            this.snackBarService.showSnackBar('Order removed', 'CLOSE');     
+          },
+          err =>{
+            console.log(err);
+            this.snackBarService.showSnackBar('Error!', 'CLOSE');
+          }
+        )    
       }
      
     })

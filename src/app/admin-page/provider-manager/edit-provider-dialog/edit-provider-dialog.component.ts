@@ -48,7 +48,9 @@ export class EditProviderDialogComponent implements OnInit {
         this.dialogRef.close();
       },
       err =>{
+        this.loading = false;
         console.log(err);   
+        this.snackBarService.showSnackBar('Error!', 'CLOSE');
       }
     )
     

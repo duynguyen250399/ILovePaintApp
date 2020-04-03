@@ -25,7 +25,9 @@
     <div class="row my-3">
 
         <div class="col-6">
-            <button [disabled]="!isValidForm()" (click)="onSave()" class="btn btn-success btn-block">Save</button>
+            <button [disabled]="!isValidForm()" (click)="onSave()" class="btn btn-success btn-block">Save 
+                <span class="spinner-border spinner-border-sm text-light" *ngIf="loading"></span>
+            </button>
         </div>
         <div class="col-6">
             <button (click)="onDelete()" class="btn btn-danger btn-block">Delete</button>
