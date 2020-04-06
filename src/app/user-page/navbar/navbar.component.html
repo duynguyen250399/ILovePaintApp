@@ -1,22 +1,23 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">iLovePaint</a>
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Search products -->
-    <div class="form-group form-inline search-product">
-        <form action="">
-            <input #searchInput (focus)="onSearchBarFocus()" (blur)="onSearchBarBlur()"           
-            name="searchValue" [(ngModel)]="searchValue"
-                (keyup)="onSearchProduct($event)" type="text" class="form-control" placeholder="Search product">
+    
+    <div class="search-product w-75">
+        <form action="" class="form-line">
+            <input #searchInput (focus)="onSearchBarFocus()" (blur)="onSearchBarBlur()" name="searchValue"
+                [(ngModel)]="searchValue" (keyup)="onSearchProduct($event)" type="text" class="form-control"
+                placeholder="Search product">
         </form>
-        <button class="btn btn-primary" style="cursor: default; outline: none !important;"><i
-                class="fas fa-search"></i></button>
 
-        <!-- Search Results -->
-        <ul class="w-100 text-center" *ngIf="(!searchResult || searchResult.length == 0) && searchInput.value && showSearchResult">
+     
+        <ul class="w-100 text-center"
+            *ngIf="(!searchResult || searchResult.length == 0) && searchInput.value && showSearchResult">
             <li class="my-3">No results</li>
         </ul>
         <ul class="w-100" *ngIf="searchResult.length > 0 && searchInput.value && showSearchResult">
@@ -42,8 +43,8 @@
         </ul>
     </div>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mx-auto">
+    <div class="collapse navbar-collapse col" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">       
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home</a>
             </li>
@@ -74,18 +75,18 @@
                 <a href="user-registration" class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign Up</a>
             </div>
             <div *ngIf="userService.currentUserProfile" class="dropdown d-inline mx-5">
-                <button class="user-btn" type="button" id="dropdownMenuButton"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="user-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user-circle"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <h6 class="dropdown-header">{{userService.currentUserProfile.fullName}}</h6>                 
+                    <h6 class="dropdown-header">{{userService.currentUserProfile.fullName}}</h6>
                     <a href="/profile" class="dropdown-item">Profile</a>
                     <div class="dropdown-divider"></div>
-                    <a (click)="logout($event)" class="dropdown-item" href="#">Logout</a>                   
+                    <a (click)="logout($event)" class="dropdown-item" href="#">Logout</a>
                 </div>
             </div>
-            
+
 
         </div>
     </div>

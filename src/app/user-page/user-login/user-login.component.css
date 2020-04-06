@@ -3,10 +3,22 @@
     -moz-box-shadow: 3px 6px 33px -9px rgba(0,0,0,0.75);
     box-shadow: 3px 6px 33px -9px rgba(0,0,0,0.75);
 
-    width: 40%;
+    width: 50%;
     margin: 20px auto;
 }
 
 .login-form-inner{
     padding: 30px;
+}
+
+@media screen and (max-width: 854px){
+    .user-login-form{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 468px){
+    .user-login-form{
+        width: 100%;
+    }
 }
